@@ -1,8 +1,31 @@
 # 本地运行手册
 
-## P1-01 页面与 API 骨架
+## 容器启动（P1-02 起）
 
-当前只有首页、静态资源、存活检查与 API 文档。无需数据库即可验证骨架。Docker/MySQL/Redis 将在 P1 后续任务接入；下面的 Windows 虚拟环境仅用于当前 HTTP 骨架验证，不代表模型容器兼容性已验证。
+Windows 上先启动 Docker Desktop 并使用 Linux 引擎。所有命令在仓库根目录运行：
+
+```powershell
+python scripts/init_env.py
+docker compose config --quiet
+docker compose up -d --build --wait
+docker compose ps
+```
+
+初始化脚本仅在 `.env` 不存在时生成随机密钥，不覆盖已有文件，不输出密码。`.env.example` 列出可配置字段。不要分享完整 `docker compose config` 输出，它包含解析后的秘密；使用 `--quiet` 检查配置。
+
+页面为 `http://127.0.0.1:8000/`，MySQL 仅在 `127.0.0.1:3307` 对开发工具开放，库名 face_attendance、用户名 attendance，密码来自本机 `.env`。Redis 不发布主机端口。现有宿主机 MySQL 不受影响。
+
+```powershell
+docker compose logs --tail 50 api
+docker compose stop
+docker compose start
+```
+
+停止时保留命名卷，不使用删除卷的命令。数据库和照片必须成套备份。P1-03 接入迁移后启动将先迁移再启动 API。
+
+## P1-01 历史骨架验证
+
+P1-01 曾通过下面的 Windows 虚拟环境验证纯 HTTP 骨架。P1-02 起应用要求完整环境配置，请优先使用上面的容器启动方式；旧命令不能代替当前启动流程，也不代表模型容器兼容性已验证。
 
 在 PowerShell 中运行：
 

@@ -7,11 +7,13 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.schemas.health import LiveResponse
+from app.config import Settings
 
 WEB_DIR = Path(__file__).resolve().parent.parent / "web"
 
 
 def create_app() -> FastAPI:
+    settings = Settings.from_env()
     app = FastAPI(
         title="人脸签到系统",
         version="0.1.0",
@@ -20,6 +22,7 @@ def create_app() -> FastAPI:
         redoc_url=None,
         openapi_url="/api/openapi.json",
     )
+    app.state.settings = settings
 
     @app.get("/api/health/live", response_model=LiveResponse, tags=["health"])
     def live() -> LiveResponse:

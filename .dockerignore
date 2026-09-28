@@ -1,0 +1,12 @@
+.git
+.venv
+.env
+.env.*
+data
+storage
+models
+private-samples
+.tmp
+__pycache__
+.pytest_cache
+docs
