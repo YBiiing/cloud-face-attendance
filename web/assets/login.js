@@ -1,6 +1,6 @@
 import {api,session,protectedWrite,showMessage} from './api.js';
 const form=document.querySelector('#login-form'),message=document.querySelector('#message'),account=document.querySelector('#account');
-function display(me) { form.hidden=true;account.hidden=false;document.querySelector('#account-name').textContent=`${me.user.name}，已登录`; }
+function display(me) { form.hidden=true;account.hidden=false;document.querySelector('#account-name').textContent=`${me.user.name}，已登录`;document.querySelector('#manage-sessions').hidden=me.user.role!=='ADMIN'; }
 session().then(display).catch(error=>{if(error.status!==401) showMessage(message,error.message,true);});
 form.addEventListener('submit',async event=>{
   event.preventDefault();const button=form.querySelector('button');button.disabled=true;
