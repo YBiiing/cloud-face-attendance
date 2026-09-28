@@ -85,7 +85,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get('/{page}.html', include_in_schema=False)
     def page(page: str):
         from fastapi import HTTPException
-        if page not in {'register', 'login'}:
+        if page not in {'register', 'login', 'faces'}:
             raise HTTPException(status_code=404)
         return FileResponse(WEB_DIR / (page + '.html'))
 
