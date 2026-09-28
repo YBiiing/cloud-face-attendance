@@ -15,7 +15,8 @@ from app.schemas.health import LiveResponse
 from app.config import Settings
 from app.database import make_engine, make_session_factory
 from app.observability import install_handlers
-from app.api import auth, classes, tasks
+from app.api import auth, classes, tasks, registration
+from app.upload_limits import UploadLimitMiddleware
 
 WEB_DIR = Path(__file__).resolve().parent.parent / "web"
 
@@ -45,14 +46,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         lifespan=lifespan,
     )
     app.state.settings = settings
+    app.add_middleware(UploadLimitMiddleware)
     install_handlers(app)
     app.include_router(auth.router)
     app.include_router(classes.router)
     app.include_router(tasks.router)
+    app.include_router(registration.router)
 
     @app.get("/api/health/ready", tags=["health"])
     def ready():
-        checks = {"mysql": "unavailable", "redis": "unavailable", "model_worker": "not_configured"}
+        checks = {"mysql": "unavailable", "redis": "unavailable", "model_worker": "unavailable"}
         try:
             with app.state.engine.connect() as connection:
                 connection.execute(text("SELECT 1"))
@@ -62,10 +65,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         try:
             if app.state.redis.ping():
                 checks["redis"] = "ok"
+                if any(app.state.redis.scan_iter('worker:model:*', count=50)):
+                    checks['model_worker']='ok'
         except Exception:
             pass
-        # Recognition readiness becomes available when the worker is implemented.
-        return JSONResponse({"status": "not_ready", "checks": checks}, status_code=503)
+        healthy=all(value=='ok' for value in checks.values())
+        return JSONResponse({"status": "ready" if healthy else "not_ready", "checks": checks}, status_code=200 if healthy else 503)
 
     @app.get("/api/health/live", response_model=LiveResponse, tags=["health"])
     def live() -> LiveResponse:

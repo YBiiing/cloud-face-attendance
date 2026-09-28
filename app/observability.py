@@ -6,6 +6,7 @@ from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
 from app.errors import AppError
+from app.face.types import FaceError
 
 logger = logging.getLogger("attendance.requests")
 
@@ -16,6 +17,12 @@ def error_response(request, code, message, status):
 
 
 def install_handlers(app):
+    @app.exception_handler(FaceError)
+    async def invalid_image(request, exc):
+        messages={'IMAGE_TOO_LARGE':'照片超过大小限制','UNSUPPORTED_IMAGE':'请上传 JPEG 或 PNG 照片','INVALID_IMAGE':'图片损坏或无法读取'}
+        status={'IMAGE_TOO_LARGE':413,'UNSUPPORTED_IMAGE':415}.get(exc.code,422)
+        return error_response(request,exc.code,messages.get(exc.code,'照片不符合要求'),status)
+
     @app.exception_handler(AppError)
     async def business_error(request, exc):
         return error_response(request, exc.code, exc.message, exc.status)

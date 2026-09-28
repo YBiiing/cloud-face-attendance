@@ -19,8 +19,10 @@ def test_health_and_public_files(client):
     assert live.status_code == 200
     assert len(live.headers['x-request-id']) == 32
     ready = client.get('/api/health/ready')
-    assert ready.status_code == 503
-    assert ready.json()['checks'] == {'mysql': 'ok', 'redis': 'ok', 'model_worker': 'not_configured'}
+    checks=ready.json()['checks']
+    assert checks['mysql']=='ok' and checks['redis']=='ok'
+    assert checks['model_worker'] in {'ok','unavailable'}
+    assert ready.status_code == (200 if checks['model_worker']=='ok' else 503)
     for path in ['/.env', '/docs/design.md', '/api/checkins', '/assets/../app/main.py']:
         response = client.get(path)
         assert response.status_code == 404

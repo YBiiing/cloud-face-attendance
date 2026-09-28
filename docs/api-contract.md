@@ -31,6 +31,7 @@ OpenAPI 只展示已经实现的接口。服务入口遵循 [FastAPI 官方说�
 | GET /classes | 公开 | 分页 | 200，items 仅含有效班级 id/name |
 | POST /classes | 管理员 | name | 201，id/name/status |
 | POST /auth/register | 公开 | name/student_no/class_id/password/photo；Idempotency-Key 请求头 | 202，任务凭证；录入成功才激活 |
+| POST /auth/register/{task_id}/retry | 原任务凭证 | photo；Idempotency-Key 与 X-Task-Token 请求头 | 202，新任务；仅可重试本人的失败注册 |
 | POST /auth/login | 公开 | student_no/password | 200，user 与 csrf_token，并设置 Cookie |
 | POST /auth/logout | 登录 | 无业务字段 | 204，撤销会话 |
 | GET /me | 登录 | 无 | 200，user 与当前 csrf_token；禁止缓存 |

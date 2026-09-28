@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import hashlib
 from pathlib import Path
 from uuid import uuid4
+from starlette.concurrency import run_in_threadpool
 
 from app.face.images import MAX_BYTES, decode_image
 from app.face.types import FaceError
@@ -22,7 +23,7 @@ async def receive_photo(upload, storage_root: Path) -> StoredUpload:
                 raise FaceError('IMAGE_TOO_LARGE')
     finally:
         await upload.close()
-    decode_image(bytes(data))
+    await run_in_threadpool(decode_image, bytes(data))
     root = storage_root / 'uploads'
     root.mkdir(parents=True, exist_ok=True)
     name = uuid4().hex + '.image'
