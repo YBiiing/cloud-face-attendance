@@ -21,7 +21,14 @@ docker compose stop
 docker compose start
 ```
 
-停止时保留命名卷，不使用删除卷的命令。数据库和照片必须成套备份。P1-03 接入迁移后启动将先迁移再启动 API。
+停止时保留命名卷，不使用删除卷的命令。数据库和照片必须成套备份。启动时先执行 migrate 服务，成功后启动 API。模型与迁移检查：
+
+```powershell
+docker compose exec -T api alembic check
+docker compose exec -T api python -m scripts.check_database
+```
+
+数据库检查脚本的临时写入全部回滚。新增数据库结构必须新增迁移，不修改已经应用的迁移。当前应用与迁移共用仅限本项目数据库的开发账号，生产环境另行分权。
 
 ## P1-01 历史骨架验证
 

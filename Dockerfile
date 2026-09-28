@@ -5,6 +5,9 @@ COPY requirements.in .
 RUN pip install --no-cache-dir -r requirements.in
 COPY app ./app
 COPY web ./web
+COPY migrations ./migrations
+COPY alembic.ini .
+COPY scripts ./scripts
 RUN useradd --create-home appuser && mkdir -p /srv/storage /srv/models && chown -R appuser:appuser /srv/storage /srv/models
 USER appuser
 EXPOSE 8000

@@ -31,7 +31,8 @@ services:
       retries: 10
   api:
     build: .
-    environment:
+    image: cloud-face-attendance-app:local
+    environment: &app_environment
       APP_ENV: local
       APP_SECRET: ${APP_SECRET:?Set APP_SECRET in .env}
       MYSQL_HOST: mysql
@@ -53,11 +54,21 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health/live', timeout=3)"]
       interval: 10s
       timeout: 5s
       retries: 5
+  migrate:
+    image: cloud-face-attendance-app:local
+    build: .
+    environment: *app_environment
+    command: ["alembic", "upgrade", "head"]
+    depends_on:
+      mysql:
+        condition: service_healthy
 volumes:
   mysql_data:
   redis_data:
