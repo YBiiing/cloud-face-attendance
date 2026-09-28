@@ -29,8 +29,11 @@ def main():
                     while chunk := source.read(1024 * 1024):
                         output.write(chunk)
         archive.unlink()
-    manifest = {"source": URL, "license": "non-commercial research only",
-                "sha256": {name: hashlib.file_digest((target / name).open('rb'), 'sha256').hexdigest() for name in FILES}}
+    digests = {}
+    for name in FILES:
+        with (target / name).open('rb') as source:
+            digests[name] = hashlib.file_digest(source, 'sha256').hexdigest()
+    manifest = {"source": URL, "license": "non-commercial research only", "sha256": digests}
     (target / "manifest.json").write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(manifest, indent=2))
 
