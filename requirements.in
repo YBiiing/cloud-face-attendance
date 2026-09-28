@@ -1,0 +1,3 @@
+# P1 HTTP skeleton; model dependencies will be validated in P2.
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
