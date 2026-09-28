@@ -5,6 +5,7 @@ from uuid import uuid4
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
+from app.errors import AppError
 
 logger = logging.getLogger("attendance.requests")
 
@@ -15,6 +16,10 @@ def error_response(request, code, message, status):
 
 
 def install_handlers(app):
+    @app.exception_handler(AppError)
+    async def business_error(request, exc):
+        return error_response(request, exc.code, exc.message, exc.status)
+
     @app.middleware("http")
     async def trace_request(request, call_next):
         request.state.request_id = uuid4().hex
