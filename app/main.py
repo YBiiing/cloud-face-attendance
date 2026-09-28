@@ -81,6 +81,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def index() -> FileResponse:
         return FileResponse(WEB_DIR / "index.html")
 
+    @app.get('/{page}.html', include_in_schema=False)
+    def page(page: str):
+        from fastapi import HTTPException
+        if page not in {'register', 'login'}:
+            raise HTTPException(status_code=404)
+        return FileResponse(WEB_DIR / (page + '.html'))
+
     # Only public assets are mounted; photos and configuration must stay private.
     app.mount("/assets", StaticFiles(directory=WEB_DIR / "assets"), name="assets")
     return app
