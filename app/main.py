@@ -15,7 +15,7 @@ from app.schemas.health import LiveResponse
 from app.config import Settings
 from app.database import make_engine, make_session_factory
 from app.observability import install_handlers
-from app.api import auth, classes, tasks, registration, faces
+from app.api import auth, classes, tasks, registration, faces, sessions
 from app.upload_limits import UploadLimitMiddleware
 
 WEB_DIR = Path(__file__).resolve().parent.parent / "web"
@@ -53,6 +53,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(tasks.router)
     app.include_router(registration.router)
     app.include_router(faces.router)
+    app.include_router(sessions.router)
 
     @app.get("/api/health/ready", tags=["health"])
     def ready():
