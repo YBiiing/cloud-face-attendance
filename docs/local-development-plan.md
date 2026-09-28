@@ -150,7 +150,7 @@ P2 的模型运行与输入处理先完成。若暂缺经本人同意的验收�
 
 ### P2-03 人脸检测与特征提取
 
-- **状态与依赖**：未开始；依赖 P2-01、P2-02。
+- **状态与依赖**：代码与基础验证完成，真实人脸样本验收待补；依赖 P2-01、P2-02。见 `docs/verification/p2-03.md`。
 - **开发内容**：定义 `extract(image) -> embedding + quality + model_version` 适配接口；检测人脸数量，要求恰好一张，检查最小脸尺寸与基础清晰度，按关键点对齐并提取向量。检查向量维度、有限值和范数，统一 L2 归一化。
 - **错误语义**：区分 NO_FACE、MULTIPLE_FACES、LOW_QUALITY、INVALID_IMAGE 与 MODEL_UNAVAILABLE。模型故障属于系统失败，不能显示为“未录入人员”。注册与签到共用同一预处理链。
 - **产出位置**：`app/face/engine.py`、`app/face/types.py`、提取脚本和对应输入校验测试。
