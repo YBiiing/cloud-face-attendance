@@ -62,3 +62,9 @@ docker compose -p face-attendance-test -f compose.yaml -f compose.test.yaml stop
 必须同时使用项目名和覆盖文件；不要手动指向开发库。测试使用独立卷、face_attendance_test 数据库，不发布网络端口。常规测试只回滚本次数据。
 
 `/api/health/live` 检查 API；`/api/health/ready` 检查依赖。模型 worker 未接入时 ready 返回 503 并明确 not_configured。响应 X-Request-ID 可关联日志；日志仅记录路由名、方法、状态与耗时，不记录请求体、查询参数或凭据。
+
+## 模型准备
+
+运行 `docker compose run --rm --no-deps api python -m scripts.prepare_models` 下载官方研究模型，再运行 `docker compose run --rm --no-deps api python -m scripts.check_model` 检查。权重仅存模型卷，运行服务时不下载。若容器无法联网，可在宿主机运行 `python -m scripts.prepare_models`，再用 `docker compose cp models/buffalo_l api:/srv/models/` 复制到项目模型卷。下载需要网络与磁盘空间，失败后重试准备命令。
+
+requirements.lock 来自 Linux Python 3.11 首轮真实安装，Docker 按锁文件安装；更新依赖须重新验证与生成锁文件。模型仅限非商业研究，原始照片与权重不提交。
