@@ -1,13 +1,10 @@
-from datetime import datetime, timezone
+from datetime import datetime
 
 from sqlalchemy import ForeignKey, String, Enum
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base, UTCDateTime
-
-
-def utc_now():
-    return datetime.now(timezone.utc)
+from app.clock import utc_now
 
 
 class ClassRoom(Base):

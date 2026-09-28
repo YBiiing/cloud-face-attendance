@@ -50,3 +50,15 @@ python -m venv .venv
 ## Git 节奏
 
 按用户要求，每个小任务完成并验证后单独 commit；每个阶段完成并验收后 push 一次。计划与设计基线单独提交。未完成的验收项如实记录，不为提交而标记通过。
+
+## 隔离测试
+
+```powershell
+docker compose -p face-attendance-test -f compose.yaml -f compose.test.yaml build tests migrate
+docker compose -p face-attendance-test -f compose.yaml -f compose.test.yaml run --rm tests
+docker compose -p face-attendance-test -f compose.yaml -f compose.test.yaml stop
+```
+
+必须同时使用项目名和覆盖文件；不要手动指向开发库。测试使用独立卷、face_attendance_test 数据库，不发布网络端口。常规测试只回滚本次数据。
+
+`/api/health/live` 检查 API；`/api/health/ready` 检查依赖。模型 worker 未接入时 ready 返回 503 并明确 not_configured。响应 X-Request-ID 可关联日志；日志仅记录路由名、方法、状态与耗时，不记录请求体、查询参数或凭据。

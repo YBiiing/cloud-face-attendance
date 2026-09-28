@@ -1,0 +1,40 @@
+services:
+  mysql:
+    environment:
+      MYSQL_DATABASE: face_attendance_test
+    ports: !reset []
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$$MYSQL_PASSWORD\" mysql -h 127.0.0.1 -u attendance -D face_attendance_test -e 'SELECT 1' >/dev/null 2>&1"]
+  api:
+    profiles: ["test-api"]
+    environment:
+      APP_ENV: test
+      MYSQL_DATABASE: face_attendance_test
+    ports: !reset []
+  migrate:
+    environment: &test_environment
+      APP_ENV: test
+      MYSQL_DATABASE: face_attendance_test
+      MYSQL_HOST: mysql
+      MYSQL_PORT: "3306"
+      MYSQL_USER: attendance
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD}
+      APP_SECRET: ${APP_SECRET:?Set APP_SECRET}
+      REDIS_URL: redis://redis:6379/0
+      STORAGE_DIR: /srv/storage
+      MODEL_DIR: /srv/models
+      COOKIE_SECURE: "false"
+  tests:
+    build:
+      context: .
+      target: testing
+    image: cloud-face-attendance-test:local
+    environment: *test_environment
+    volumes:
+      - photos:/srv/storage
+      - models:/srv/models
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy

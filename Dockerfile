@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11-slim AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /srv/app
 COPY requirements.in .
@@ -11,4 +11,13 @@ COPY scripts ./scripts
 RUN useradd --create-home appuser && mkdir -p /srv/storage /srv/models && chown -R appuser:appuser /srv/storage /srv/models
 USER appuser
 EXPOSE 8000
-CMD ["python", "-m", "uvicorn", "app.main:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "uvicorn", "app.main:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
+
+FROM runtime AS testing
+USER root
+COPY requirements-dev.in .
+RUN pip install --no-cache-dir -r requirements-dev.in
+COPY tests ./tests
+COPY pytest.ini .
+USER appuser
+CMD ["python", "-m", "pytest", "-q", "-p", "no:cacheprovider"]

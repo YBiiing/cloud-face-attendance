@@ -10,8 +10,9 @@
 
 ## 开发进度
 
-已完成 P1-01：FastAPI 应用骨架、首页、存活检查与接口契约。注册和签到业务尚未实现。每小任务验证后 commit，每阶段完成后 push；云部署最后进行。
+已完成 P1：应用骨架、隔离容器、MySQL 迁移、测试环境和诊断接口。注册和签到业务尚未实现。每小任务验证后 commit，每阶段完成后 push；云部署最后进行。
 
 - [运行手册](docs/local-runbook.md)
 - [接口契约](docs/api-contract.md)
 - [P1-01 验证记录](docs/verification/p1-01.md)
+- [P1 阶段验收](docs/verification/p1-04.md)

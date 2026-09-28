@@ -30,7 +30,9 @@ services:
       timeout: 3s
       retries: 10
   api:
-    build: .
+    build:
+      context: .
+      target: runtime
     image: cloud-face-attendance-app:local
     environment: &app_environment
       APP_ENV: local
@@ -63,7 +65,9 @@ services:
       retries: 5
   migrate:
     image: cloud-face-attendance-app:local
-    build: .
+    build:
+      context: .
+      target: runtime
     environment: *app_environment
     command: ["alembic", "upgrade", "head"]
     depends_on:
