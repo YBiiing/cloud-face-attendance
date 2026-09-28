@@ -63,6 +63,30 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  worker:
+    image: cloud-face-attendance-app:local
+    environment: *app_environment
+    command: ["celery", "-A", "app.jobs.celery_app", "worker", "--loglevel=WARNING", "--concurrency=1"]
+    volumes:
+      - photos:/srv/storage
+      - models:/srv/models
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+  scheduler:
+    image: cloud-face-attendance-app:local
+    environment: *app_environment
+    command: ["python", "-m", "app.jobs.scheduler"]
+    volumes:
+      - photos:/srv/storage
+      - models:/srv/models
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
   migrate:
     image: cloud-face-attendance-app:local
     build:

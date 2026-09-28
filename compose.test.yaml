@@ -38,3 +38,9 @@ services:
         condition: service_completed_successfully
       redis:
         condition: service_healthy
+      worker:
+        condition: service_started
+  worker:
+    environment: *test_environment
+  scheduler:
+    environment: *test_environment
