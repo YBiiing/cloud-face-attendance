@@ -12,6 +12,7 @@ class RecognitionTask(Base):
     type: Mapped[str]=mapped_column(String(20))
     status: Mapped[str]=mapped_column(String(20),default='PENDING',index=True)
     owner_user_id: Mapped[int|None]=mapped_column(ForeignKey('users.id'),index=True)
+    session_id: Mapped[int|None]=mapped_column(ForeignKey('attendance_sessions.id'),index=True)
     scope: Mapped[str]=mapped_column(String(80))
     request_key: Mapped[str]=mapped_column(String(64))
     request_digest: Mapped[str]=mapped_column(String(64))

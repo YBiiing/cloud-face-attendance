@@ -23,7 +23,7 @@ def test_health_and_public_files(client):
     assert checks['mysql']=='ok' and checks['redis']=='ok'
     assert checks['model_worker'] in {'ok','unavailable'}
     assert ready.status_code == (200 if checks['model_worker']=='ok' else 503)
-    for path in ['/.env', '/docs/design.md', '/api/checkins', '/assets/../app/main.py']:
+    for path in ['/.env', '/docs/design.md', '/api/not-implemented', '/assets/../app/main.py']:
         response = client.get(path)
         assert response.status_code == 404
         assert response.json()['error']['request_id'] == response.headers['x-request-id']
