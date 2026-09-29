@@ -15,7 +15,7 @@ from app.schemas.health import LiveResponse
 from app.config import Settings
 from app.database import make_engine, make_session_factory
 from app.observability import install_handlers
-from app.api import auth, classes, tasks, registration, faces, sessions, checkins
+from app.api import auth, classes, tasks, registration, faces, sessions, checkins, records
 from app.upload_limits import UploadLimitMiddleware
 
 WEB_DIR = Path(__file__).resolve().parent.parent / "web"
@@ -39,7 +39,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app = FastAPI(
         title="人脸签到系统",
         version="0.1.0",
-        description="当前仅实现页面与存活检查。业务接口按开发计划逐步接入。",
+        description="本地课程人脸签到：注册录入、照片管理、匿名场次签到与受保护的记录查询。",
         docs_url="/api/docs",
         redoc_url=None,
         openapi_url="/api/openapi.json",
@@ -55,6 +55,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(faces.router)
     app.include_router(sessions.router)
     app.include_router(checkins.router)
+    app.include_router(records.router)
 
     @app.get("/api/health/ready", tags=["health"])
     def ready():
@@ -87,7 +88,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get('/{page}.html', include_in_schema=False)
     def page(page: str):
         from fastapi import HTTPException
-        if page not in {'register', 'login', 'faces', 'sessions', 'checkin'}:
+        if page not in {'register', 'login', 'faces', 'sessions', 'checkin', 'records'}:
             raise HTTPException(status_code=404)
         return FileResponse(WEB_DIR / (page + '.html'))
 
