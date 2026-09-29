@@ -6,6 +6,7 @@ from app.services.attendance import finish_checkin
 from app.face.matcher import Match
 from tests.integration.test_auth import accounts, sign_in
 from tests.integration.test_attendance import attendance, running_task
+from scripts.week3_snapshot import snapshot
 
 
 def test_records_privacy_pagination_and_pending_summary(client, attendance, settings):
@@ -43,6 +44,14 @@ def test_records_privacy_pagination_and_pending_summary(client, attendance, sett
     summary = client.get('/api/records', params={'session_id': sid}).json()['summary']
     assert summary['finalized'] and summary['pending_tasks'] == 0
     assert summary['expected'] == summary['attended']+summary['absent']
+    with factory() as db:
+        evidence = snapshot(db, sid)
+        assert evidence['expected'] == 2 and evidence['attended'] == 1 and evidence['absent'] == 1
+        assert evidence['finalized'] and evidence['pending_tasks'] == 0
+        assert evidence['task_counts'] == {'SUCCEEDED': 1, 'REJECTED': 1}
+        assert len(evidence['records']) == 1 and len(evidence['recent_tasks']) == 2
+        assert 'token' not in str(evidence) and 'embedding' not in str(evidence)
+        assert snapshot(db, 2147483647) == {'session_found': False}
     assert client.get('/api/records', params={'session_id': 2147483647}).status_code == 404
     client.post('/api/auth/logout', headers=headers)
     assert client.get('/api/records', params={'session_id': sid}).status_code == 401

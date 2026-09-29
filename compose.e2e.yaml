@@ -1,0 +1,6 @@
+# Optional isolated browser-test endpoint. Always use with compose.test.yaml
+# and -p face-attendance-test; no production data or external exposure.
+services:
+  api:
+    ports: !override
+      - "127.0.0.1:8001:8000"
