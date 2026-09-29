@@ -11,7 +11,8 @@ async function load(){
     link.href=row.checkin_path;link.textContent='打开签到入口';
     const address=document.createElement('input');address.readOnly=true;address.value=new URL(row.checkin_path,location.origin).href;address.setAttribute('aria-label','签到链接，选中后可复制');address.onclick=()=>address.select();
     close.textContent='提前结束';close.disabled=row.status==='CLOSED';close.onclick=async()=>{if(!confirm('立即结束本场签到？新的上传将被拒绝。'))return;try{await protectedWrite(`/sessions/${row.id}/close`,{method:'POST'});await load();}catch(error){showMessage(message,error.message,true);}};
-    card.append(title,info,link,address,close);list.append(card);
+    const records=document.createElement('a');records.href='/records.html?session_id='+row.id;records.textContent='查看名单与签到记录';
+    card.append(title,info,link,address,records,close);list.append(card);
   }
   document.querySelector('#page-info').textContent=`第 ${page} 页，共 ${data.total} 场`;document.querySelector('#previous').disabled=page===1;document.querySelector('#next').disabled=page*10>=data.total;
 }
