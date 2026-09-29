@@ -12,6 +12,9 @@ from app.services.uploads import stored_path
 from app.face.images import decode_image
 from app.services.enrollment import finish_enrollment
 from app.jobs.model_runtime import get_engine
+from app.jobs.checkin import recognize_checkin
+from app.services.capacity import release
+from redis import Redis
 
 
 @worker_ready.connect
@@ -44,10 +47,13 @@ def process(task_id):
                 task=session.scalar(select(RecognitionTask).where(RecognitionTask.id==task_id).with_for_update())
                 if task.status=='RUNNING' and task.attempt_id==attempt and task.expires_at>clock.utc_now():
                     task.status='SUCCEEDED';task.result_code='WORKER_OK';task.finished_at=clock.utc_now()
-        elif kind in {'ENROLL','FACE'}:
+        elif kind in {'ENROLL','FACE','CHECKIN'}:
             image=decode_image(stored_path(Settings.from_env().storage_dir,image_path).read_bytes())
             feature=get_engine().extract(image)
-            finish_enrollment(factory,task_id,attempt,feature)
+            if kind=='CHECKIN':
+                recognize_checkin(factory,task_id,attempt,feature,Settings.from_env())
+            else:
+                finish_enrollment(factory,task_id,attempt,feature)
         else:
             # Business task handlers are introduced by P3-03 and P5-02.
             raise RuntimeError('Unsupported task type')
@@ -58,4 +64,13 @@ def process(task_id):
                 task.status='REJECTED' if isinstance(error,FaceError) else 'FAILED'
                 task.result_code=error.code if isinstance(error,FaceError) else 'PROCESSING_FAILED'
                 task.finished_at=clock.utc_now()
-    finally: engine.dispose()
+    finally:
+        try:
+            with factory() as session:
+                task=session.get(RecognitionTask,task_id)
+                terminal=task and task.type=='CHECKIN' and task.status in {'SUCCEEDED','REJECTED','FAILED'}
+            if terminal:
+                redis=Redis.from_url(Settings.from_env().redis_url,socket_connect_timeout=2,socket_timeout=2)
+                try:release(redis,task_id)
+                finally:redis.close()
+        finally:engine.dispose()

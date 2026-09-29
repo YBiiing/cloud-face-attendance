@@ -18,6 +18,8 @@ class Settings:
     storage_dir: Path
     model_dir: Path
     cookie_secure: bool
+    match_threshold: float = 0.5
+    match_margin: float = 0.05
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -41,8 +43,15 @@ class Settings:
                 raise ValueError
         except ValueError:
             raise RuntimeError("Invalid MYSQL_PORT") from None
+        try:
+            threshold = float(os.getenv('MATCH_THRESHOLD', '0.5'))
+            margin = float(os.getenv('MATCH_MARGIN', '0.05'))
+            if not 0 <= threshold <= 1 or not 0 <= margin <= 2:
+                raise ValueError
+        except ValueError:
+            raise RuntimeError('Invalid matching thresholds') from None
         return cls(environment, os.environ["MYSQL_HOST"], port,
                    os.environ["MYSQL_DATABASE"], os.environ["MYSQL_USER"],
                    os.environ["MYSQL_PASSWORD"], os.environ["APP_SECRET"],
                    os.environ["REDIS_URL"], Path(os.getenv("STORAGE_DIR", "storage")),
-                   Path(os.getenv("MODEL_DIR", "models")), secure == "true")
+                   Path(os.getenv("MODEL_DIR", "models")), secure == "true", threshold, margin)
