@@ -52,14 +52,14 @@ async def add_face(request:Request,actor=Depends(current_user),session=Depends(d
         check_owner(actor,owner)
         user=session.get(User,owner)
         if not user or user.status!='ACTIVE': raise AppError('NOT_FOUND','人员不存在或未激活',404)
-        if replace_id:
-            old=session.get(FaceSample,replace_id)
-            if not old or old.user_id!=owner or old.status!='ACTIVE': raise AppError('NOT_FOUND','被替换照片不存在',404)
         uploaded=await receive_photo(form['photo'],settings.storage_dir)
         scope='faces:'+str(actor.id)
         digest=request_digest(settings.app_secret,{'owner':owner,'replace_id':replace_id,'photo':uploaded.digest})
         existing=find_replay(session,scope,key,digest)
         if existing:return accepted(existing,settings.app_secret,key)
+        if replace_id:
+            old=session.get(FaceSample,replace_id)
+            if not old or old.user_id!=owner or old.status!='ACTIVE': raise AppError('NOT_FOUND','被替换照片不存在',404)
         task=new_task(settings.app_secret,scope,key,digest,'FACE',owner,uploaded.path,{'replace_id':replace_id})
         session.add(task);session.commit();retained=True;dispatch(task.id)
         return accepted(task,settings.app_secret,key)

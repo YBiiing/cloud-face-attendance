@@ -6,7 +6,7 @@ let owner=null,page=1,total=0,replaceId=null,key=requestKey(),busy=false;
 previewPhoto(form.elements.photo,document.querySelector('#preview'));
 form.addEventListener('input',()=>key=requestKey());
 function cancelReplace(){replaceId=null;key=requestKey();document.querySelector('#upload-title').textContent='新增标准照';document.querySelector('#cancel-replace').hidden=true;}
-document.querySelector('#cancel-replace').onclick=cancelReplace;
+document.querySelector('#cancel-replace').onclick=()=>{if(!busy)cancelReplace();};
 async function load(){
   const data=await api(`/faces?user_id=${owner}&page=${page}&page_size=10`);total=data.total;list.replaceChildren();
   for(const face of data.items){
@@ -32,13 +32,15 @@ try{
   await load();
 }catch(error){form.hidden=true;showMessage(message,error.status===401?'请先登录后管理照片':error.message,true);}
 form.addEventListener('submit',async event=>{
-  event.preventDefault();if(busy)return;busy=true;people.disabled=true;const button=form.querySelector('button');button.disabled=true;
+  event.preventDefault();if(busy)return;
+  const body=new FormData(form),file=form.elements.photo.files[0];busy=true;people.disabled=true;
+  for(const field of form.elements)field.disabled=true;
   try{
-    const file=form.elements.photo.files[0];if(file.size>8*1024*1024)throw new Error('照片超过 8 MiB');
-    const body=new FormData(form);body.append('user_id',owner);if(replaceId)body.append('replace_id',replaceId);
+    if(!file||file.size>8*1024*1024)throw new Error('请选择不超过 8 MiB 的照片');
+    body.append('user_id',owner);if(replaceId)body.append('replace_id',replaceId);
     const task=await protectedWrite('/faces',{method:'POST',body,headers:{'Idempotency-Key':key}});
     const result=await pollTask(task,r=>showMessage(message,r.status==='PENDING'?'等待处理……':'正在处理……'),controller.signal);
     showMessage(message,resultMessages[result.result_code]||'操作未完成',result.status!=='SUCCEEDED');
     if(result.status==='SUCCEEDED'){form.reset();document.querySelector('#preview').hidden=true;cancelReplace();await load();}
-  }catch(error){showMessage(message,error.message,true);}finally{busy=false;people.disabled=false;button.disabled=false;}
+  }catch(error){showMessage(message,error.message,true);}finally{busy=false;people.disabled=false;for(const field of form.elements)field.disabled=false;}
 });

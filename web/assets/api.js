@@ -4,10 +4,20 @@ export class ApiError extends Error {
 export async function api(path, options={}) {
   const headers=new Headers(options.headers || {});
   if (options.body && !(options.body instanceof FormData)) headers.set('Content-Type','application/json');
-  const response=await fetch('/api'+path,{...options,headers,credentials:'same-origin'});
-  const data=response.status===204 ? null : await response.json();
-  if (!response.ok) throw new ApiError(data?.error?.message || '请求失败，请稍后重试',response.status,data?.error?.code);
-  return data;
+  const controller=new AbortController(),abort=()=>controller.abort();
+  if(options.signal?.aborted)abort();
+  options.signal?.addEventListener('abort',abort,{once:true});
+  const timer=setTimeout(abort,30000);
+  try {
+    const response=await fetch('/api'+path,{...options,headers,credentials:'same-origin',signal:controller.signal});
+    const data=response.status===204 ? null : await response.json().catch(()=>null);
+    if (!response.ok) throw new ApiError(data?.error?.message || '服务暂时不可用，请稍后重试',response.status,data?.error?.code);
+    if(response.status!==204 && data===null)throw new ApiError('服务器返回格式异常，请重试',response.status);
+    return data;
+  }catch(error){
+    if(error.name==='AbortError'&&!options.signal?.aborted)throw new ApiError('请求超时，请保留页面后重试',0,'NETWORK_TIMEOUT');
+    throw error;
+  }finally{clearTimeout(timer);options.signal?.removeEventListener('abort',abort);}
 }
 export async function session() { return await api('/me'); }
 export async function protectedWrite(path,options={}) {
