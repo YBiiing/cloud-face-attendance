@@ -17,6 +17,7 @@ from app.jobs import worker
 from app.api import registration, faces
 from app.services.uploads import stored_path
 from tests.integration.test_auth import accounts
+from scripts.week2_snapshot import snapshot
 
 
 def test_register_login_replace_replay_logout(client, settings, accounts, monkeypatch):
@@ -52,6 +53,11 @@ def test_register_login_replace_replay_logout(client, settings, accounts, monkey
         csrf = {'X-CSRF-Token': login.json()['csrf_token']}
         with factory() as db:
             assert db.scalar(select(func.count()).select_from(LoginSession).where(LoginSession.user_id == owner)) == 1
+            evidence = snapshot(db, student_no)
+            assert evidence['user']['status'] == 'ACTIVE'
+            assert evidence['active_login_sessions'] == 1
+            assert evidence['photos'][0]['embedding_bytes'] == 2048
+            assert 'password' not in str(evidence) and 'task_token' not in str(evidence)
         assert client.get('/api/faces').json()['total'] == 1
         headers = {**csrf, 'Idempotency-Key': str(uuid4())}
         result = client.post('/api/faces', data={'replace_id': str(old_id)}, files=files, headers=headers)
@@ -69,6 +75,8 @@ def test_register_login_replace_replay_logout(client, settings, accounts, monkey
         assert client.get('/api/faces').status_code == 401
         with factory() as db:
             assert db.scalar(select(func.count()).select_from(LoginSession).where(LoginSession.user_id == owner)) == 0
+            assert snapshot(db, student_no)['active_login_sessions'] == 0
+            assert snapshot(db, uuid4().hex) == {'account_found': False}
     finally:
         with factory.begin() as db:
             if owner is None:

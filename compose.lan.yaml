@@ -1,0 +1,5 @@
+# Only the API is exposed to the selected LAN address. MySQL stays on loopback.
+services:
+  api:
+    ports: !override
+      - "${LAN_BIND_IP:?Set LAN_BIND_IP to your computer LAN IPv4}:${API_HOST_PORT:-8000}:8000"

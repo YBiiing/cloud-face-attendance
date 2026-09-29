@@ -1,5 +1,7 @@
 # 本地运行手册
 
+第二次作业的完整启动、手机访问与截图顺序见 [第二次作业演示说明](week2-submission.md)。
+
 ## 容器启动（P1-02 起）
 
 Windows 上先启动 Docker Desktop 并使用 Linux 引擎。所有命令在仓库根目录运行：
@@ -55,13 +57,14 @@ python -m venv .venv
 
 ```powershell
 docker compose -p face-attendance-test -f compose.yaml -f compose.test.yaml build tests migrate
+docker compose -p face-attendance-test -f compose.yaml -f compose.test.yaml run --rm --no-deps tests python -m scripts.prepare_models
 docker compose -p face-attendance-test -f compose.yaml -f compose.test.yaml run --rm tests
 docker compose -p face-attendance-test -f compose.yaml -f compose.test.yaml stop
 ```
 
 必须同时使用项目名和覆盖文件；不要手动指向开发库。测试使用独立卷、face_attendance_test 数据库，不发布网络端口。常规测试只回滚本次数据。
 
-`/api/health/live` 检查 API；`/api/health/ready` 检查依赖。模型 worker 未接入时 ready 返回 503 并明确 not_configured。响应 X-Request-ID 可关联日志；日志仅记录路由名、方法、状态与耗时，不记录请求体、查询参数或凭据。
+`/api/health/live` 检查 API；`/api/health/ready` 检查依赖。模型 worker 尚未就绪或心跳过期时 ready 返回 503，并将 model_worker 标记为 unavailable。响应 X-Request-ID 可关联日志；日志仅记录路由名、方法、状态与耗时，不记录请求体、查询参数或凭据。
 
 ## 模型准备
 
