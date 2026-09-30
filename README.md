@@ -21,6 +21,8 @@
 P1 基础环境和 P4 场次管理已完成；P2 模型、P3 注册登录与照片库已实现，真人照片成功录入和效果验收待补。P5 匿名签到与记录编码完成，真人实测待补。每小任务验证后 commit，每阶段验收后 push；云部署最后进行。
 
 - [运行手册](docs/local-runbook.md)
+- [本地维护与备份恢复](docs/local-maintenance.md)
+- [P6 本地自动化验证](docs/verification/p6-local.md)：43 项测试通过，故障恢复、照片清理及隔离恢复已验证；真人和手机验收待补。
 - [接口契约](docs/api-contract.md)
 - [P1-01 验证记录](docs/verification/p1-01.md)
 - [P1 阶段验收](docs/verification/p1-04.md)

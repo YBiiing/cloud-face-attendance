@@ -1,0 +1,82 @@
+{
+  "profile": "isolated real ONNX blank-image NO_FACE; not human throughput",
+  "image_bytes": 2566,
+  "worker_processes": 1,
+  "inference_threads": 1,
+  "model": "buffalo_l CPU",
+  "logical_cpus": 32,
+  "python": "3.11.16",
+  "percentile_method": "nearest rank",
+  "valid_face_gallery_size": 0,
+  "rate_limits_enabled": true,
+  "rounds": [
+    {
+      "concurrency": 1,
+      "requests": 1,
+      "seconds": 0.224,
+      "http_counts": {
+        "202": 1
+      },
+      "terminal_counts": {
+        "NO_FACE": 1
+      },
+      "accepted_latency_p50_ms": 100.44,
+      "accepted_latency_p95_ms": 100.44,
+      "end_to_end_p50_ms": 224.06,
+      "end_to_end_p95_ms": 224.06,
+      "completed_rejections_per_second": 4.45
+    },
+    {
+      "concurrency": 5,
+      "requests": 5,
+      "seconds": 0.572,
+      "http_counts": {
+        "202": 5
+      },
+      "terminal_counts": {
+        "NO_FACE": 5
+      },
+      "accepted_latency_p50_ms": 83.45,
+      "accepted_latency_p95_ms": 84.1,
+      "end_to_end_p50_ms": 335.04,
+      "end_to_end_p95_ms": 569.73,
+      "completed_rejections_per_second": 8.74
+    },
+    {
+      "concurrency": 10,
+      "requests": 10,
+      "seconds": 0.974,
+      "http_counts": {
+        "202": 10
+      },
+      "terminal_counts": {
+        "NO_FACE": 10
+      },
+      "accepted_latency_p50_ms": 111.91,
+      "accepted_latency_p95_ms": 133.33,
+      "end_to_end_p50_ms": 564.83,
+      "end_to_end_p95_ms": 969.96,
+      "completed_rejections_per_second": 10.27
+    },
+    {
+      "concurrency": 20,
+      "requests": 20,
+      "seconds": 1.359,
+      "http_counts": {
+        "202": 14,
+        "429": 6
+      },
+      "terminal_counts": {
+        "NO_FACE": 14,
+        "HTTP_REJECTED": 6
+      },
+      "accepted_latency_p50_ms": 139.71,
+      "accepted_latency_p95_ms": 252.79,
+      "end_to_end_p50_ms": 764.39,
+      "end_to_end_p95_ms": 1351.73,
+      "completed_rejections_per_second": 10.3
+    }
+  ],
+  "queue_p95_ms": 971.6,
+  "processing_p95_ms": 79.6
+}

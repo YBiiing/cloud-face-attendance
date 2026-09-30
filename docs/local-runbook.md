@@ -68,6 +68,8 @@ docker compose -p face-attendance-test -f compose.yaml -f compose.test.yaml stop
 
 ## 模型准备
 
+照片清理、备份恢复和故障验证见 [本地维护手册](local-maintenance.md)，本轮结果见 [P6 验证记录](verification/p6-local.md)。
+
 运行 `docker compose run --rm --no-deps api python -m scripts.prepare_models` 下载官方研究模型，再运行 `docker compose run --rm --no-deps api python -m scripts.check_model` 检查。权重仅存模型卷，运行服务时不下载。若容器无法联网，可在宿主机运行 `python -m scripts.prepare_models`，再用 `docker compose cp models/buffalo_l api:/srv/models/` 复制到项目模型卷。下载需要网络与磁盘空间，失败后重试准备命令。
 
 requirements.lock 来自 Linux Python 3.11 首轮真实安装，Docker 按锁文件安装；更新依赖须重新验证与生成锁文件。模型仅限非商业研究，原始照片与权重不提交。
