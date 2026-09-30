@@ -1,6 +1,7 @@
 from datetime import timedelta
 from uuid import uuid4
 from sqlalchemy import select
+from sqlalchemy.exc import OperationalError
 from app import clock
 from app.config import Settings
 from app.database import make_engine,make_session_factory
@@ -36,7 +37,7 @@ def process(task_id):
             task=session.scalar(select(RecognitionTask).where(RecognitionTask.id==task_id).with_for_update())
             if not task or task.status!='PENDING': return
             now=clock.utc_now()
-            if task.expires_at<=now:
+            if task.expires_at<=now or task.attempts>=3:
                 task.status='FAILED';task.result_code='TASK_TIMEOUT';task.finished_at=now
                 return
             task.status='RUNNING';task.attempt_id=attempt;task.attempts+=1
@@ -57,6 +58,10 @@ def process(task_id):
         else:
             # Business task handlers are introduced by P3-03 and P5-02.
             raise RuntimeError('Unsupported task type')
+    except OperationalError:
+        # MySQL may be unavailable after inference or at commit. Keep the durable
+        # attempt for lease recovery; never guess whether a commit succeeded.
+        raise
     except Exception as error:
         with factory.begin() as session:
             task=session.scalar(select(RecognitionTask).where(RecognitionTask.id==task_id).with_for_update())

@@ -2,8 +2,10 @@ from sqlalchemy import select
 from app import clock
 from app.models import AttendanceRecord, AttendanceSession, SessionMember, RecognitionTask, FaceLibraryState, User
 from app.services.time_policy import eligible_time
+from app.services.retry import retry_transaction
 
 
+@retry_transaction
 def finish_checkin(factory, task_id, attempt, gallery_version, match, rejection, model_version):
     """Return False only if the caller must reload the gallery and rematch.
 

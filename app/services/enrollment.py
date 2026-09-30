@@ -4,8 +4,10 @@ from app.models import User
 from app.models.tasks import RecognitionTask
 from app.models.faces import FaceSample,FaceLibraryState
 from app.face.types import FaceError
+from app.services.retry import retry_transaction
 
 
+@retry_transaction
 def finish_enrollment(factory,task_id,attempt,feature):
     with factory.begin() as session:
         state=session.scalar(select(FaceLibraryState).where(FaceLibraryState.id==1).with_for_update())
