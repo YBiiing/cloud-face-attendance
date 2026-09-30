@@ -9,6 +9,7 @@ data/
 storage/
 /models/
 private-samples/
+private-backups/
 .tmp/
 *.log
 .coverage
