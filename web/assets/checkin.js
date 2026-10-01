@@ -29,7 +29,16 @@ async function load(){
 }
 async function follow(task){
   pending=task;sessionStorage.setItem(storageKey,JSON.stringify(task));resume.hidden=false;update();
-  const result=await pollTask(task,r=>showMessage(message,r.status==='PENDING'?'已收到照片，正在排队……':'正在识别人脸并核对名单……'),controller.signal);
+  let result;
+  try{
+    result=await pollTask(task,r=>showMessage(message,r.status==='PENDING'?'已收到照片，正在排队……':'正在识别人脸并核对名单……'),controller.signal);
+  }catch(error){
+    if(error.status===404){
+      pending=null;resume.hidden=true;sessionStorage.removeItem(storageKey);key=requestKey();update();
+      throw new Error('保存的签到任务已失效，请重新上传；是否签到成功可登录后查看记录。');
+    }
+    throw error;
+  }
   pending=null;resume.hidden=true;
   showMessage(message,resultMessages[result.result_code]||'处理未完成，请稍后重试',result.status!=='SUCCEEDED');
   key=requestKey();update();

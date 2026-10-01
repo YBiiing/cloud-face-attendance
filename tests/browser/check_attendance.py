@@ -18,9 +18,11 @@ def main():
         with sync_playwright() as p:
             browser = p.chromium.launch(channel='msedge', headless=True)
             page = browser.new_page(viewport={'width': 390, 'height': 844})
+            # Accelerate only polling backoff in this fixture browser.
+            page.add_init_script("const originalTimeout=window.setTimeout;window.setTimeout=(fn,ms,...args)=>originalTimeout(fn,ms>=1000&&ms<=8000?20:ms,...args);")
             errors = []; page.on('pageerror', lambda error: errors.append(str(error)))
             now = datetime.now(timezone.utc)
-            state = {'posts': 0, 'closed': False, 'logged_in': True, 'interrupted': False}
+            state = {'posts': 0, 'closed': False, 'logged_in': True, 'interrupted': 0}
             outcomes = {'task-1': 'CHECKED_IN', 'task-2': 'UNKNOWN_PERSON', 'task-3': 'ALREADY_CHECKED_IN'}
             def api(route):
                 url = urlsplit(route.request.url); path = url.path; status = 200
@@ -34,9 +36,9 @@ def main():
                     state['posts'] += 1
                     result = {'task_id': f"task-{state['posts']}", 'task_token': 'fixture-token'}; status = 202
                 elif path.startswith('/api/tasks/'):
-                    if state['posts'] == 3 and not state['interrupted']:
-                        state['interrupted'] = True
-                        status, result = 404, {'error': {'message': '测试连接中断'}}
+                    if state['posts'] == 3 and state['interrupted'] < 5:
+                        state['interrupted'] += 1
+                        status, result = 503, {'error': {'message': '测试连接中断'}}
                     else:
                         code = outcomes[path.rsplit('/', 1)[1]]
                         result = {'status': 'REJECTED' if code == 'UNKNOWN_PERSON' else 'SUCCEEDED', 'result_code': code}

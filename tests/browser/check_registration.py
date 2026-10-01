@@ -26,6 +26,8 @@ def main():
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(channel='msedge', headless=True)
             page = browser.new_page(viewport={'width': 390, 'height': 844})
+            # Accelerate only polling backoff in this fixture browser.
+            page.add_init_script("const originalTimeout=window.setTimeout;window.setTimeout=(fn,ms,...args)=>originalTimeout(fn,ms>=1000&&ms<=8000?20:ms,...args);")
             errors = []
             page.on('pageerror', lambda error: errors.append(str(error)))
             task = {'task_id': 'test-task', 'task_token': 'test-token'}
@@ -42,8 +44,8 @@ def main():
                     assert 'name="student_no"' in route.request.post_data
                 elif path == '/tasks/test-task':
                     state['polls'] += 1
-                    if state['polls'] == 1:
-                        status, result = 404, {'error': {'message': '测试查询中断'}}
+                    if state['polls'] <= 5:
+                        status, result = 503, {'error': {'message': '测试查询中断'}}
                     else:
                         result = {'status': 'REJECTED', 'result_code': 'NO_FACE'}
                 else:
