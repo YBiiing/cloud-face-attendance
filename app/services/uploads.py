@@ -24,6 +24,11 @@ async def receive_photo(upload, storage_root: Path) -> StoredUpload:
     finally:
         await upload.close()
     await run_in_threadpool(decode_image, bytes(data))
+    return await run_in_threadpool(store_bytes, bytes(data), storage_root)
+
+
+def store_bytes(data: bytes, storage_root: Path) -> StoredUpload:
+    """Disk writes and hashing must not block the upload event loop."""
     root = storage_root / 'uploads'
     root.mkdir(parents=True, exist_ok=True)
     name = uuid4().hex + '.image'

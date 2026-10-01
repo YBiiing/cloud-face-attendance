@@ -1,5 +1,6 @@
 from fastapi import APIRouter,Depends,Request,Query
 from fastapi.responses import FileResponse,Response
+from starlette.concurrency import run_in_threadpool
 from sqlalchemy import select,func
 from sqlalchemy.exc import IntegrityError
 from app import clock
@@ -41,40 +42,47 @@ def image(face_id:int,request:Request,actor=Depends(current_user),session=Depend
 
 
 @router.post('',status_code=202)
-async def add_face(request:Request,actor=Depends(current_user),session=Depends(db_session)):
-    rate_limit(request,'face-upload')
+async def add_face(request:Request,actor=Depends(current_user)):
+    await run_in_threadpool(rate_limit,request,'face-upload')
     key=validate_key(request.headers.get('idempotency-key'))
     form=await photo_form(request,{'photo','replace_id','user_id'})
-    uploaded=None;retained=False;reservation=None;settings=request.app.state.settings
     try:
         try:
             owner=int(form.get('user_id',actor.id));replace_id=int(form['replace_id']) if form.get('replace_id') else None
             if owner<1 or (replace_id is not None and replace_id<1): raise ValueError
         except (ValueError,TypeError): raise AppError('INVALID_REQUEST','人员或照片编号不合法',422) from None
         check_owner(actor,owner)
-        user=session.get(User,owner)
-        if not user or user.status!='ACTIVE': raise AppError('NOT_FOUND','人员不存在或未激活',404)
-        uploaded=await receive_photo(form['photo'],settings.storage_dir)
-        scope='faces:'+str(actor.id)
-        digest=request_digest(settings.app_secret,{'owner':owner,'replace_id':replace_id,'photo':uploaded.digest})
-        existing=find_replay(session,scope,key,digest)
-        if existing:return accepted(existing,settings.app_secret,key)
-        if replace_id:
-            old=session.get(FaceSample,replace_id)
-            if not old or old.user_id!=owner or old.status!='ACTIVE': raise AppError('NOT_FOUND','被替换照片不存在',404)
-        task=new_task(settings.app_secret,scope,key,digest,'FACE',owner,uploaded.path,{'replace_id':replace_id})
-        reserve(request.app.state.redis,task.id,task.expires_at);reservation=task.id
-        # Preserve the photo once COMMIT starts: a lost acknowledgement is not a rollback.
-        session.add(task);session.flush();retained=True;session.commit();dispatch(task.id)
-        return accepted(task,settings.app_secret,key)
-    except IntegrityError:
-        session.rollback();existing=find_replay(session,scope,key,digest)
-        if existing:return accepted(existing,settings.app_secret,key)
-        raise AppError('CONFLICT','照片更新冲突，请刷新后重试',409) from None
+        uploaded=await receive_photo(form['photo'],request.app.state.settings.storage_dir)
+        return await run_in_threadpool(face_transaction,request,actor.id,owner,replace_id,uploaded,key)
     finally:
         await form.close()
-        if uploaded and not retained:stored_path(settings.storage_dir,uploaded.path).unlink(missing_ok=True)
-        if reservation and not retained:release(request.app.state.redis,reservation)
+
+
+def face_transaction(request,actor_id,owner,replace_id,uploaded,key):
+    settings=request.app.state.settings;retained=False;reservation=None
+    with request.app.state.sessions() as session:
+        try:
+            scope='faces:'+str(actor_id)
+            digest=request_digest(settings.app_secret,{'owner':owner,'replace_id':replace_id,'photo':uploaded.digest})
+            user=session.get(User,owner)
+            if not user or user.status!='ACTIVE': raise AppError('NOT_FOUND','人员不存在或未激活',404)
+            existing=find_replay(session,scope,key,digest)
+            if existing:return accepted(existing,settings.app_secret,key)
+            if replace_id:
+                old=session.get(FaceSample,replace_id)
+                if not old or old.user_id!=owner or old.status!='ACTIVE': raise AppError('NOT_FOUND','被替换照片不存在',404)
+            task=new_task(settings.app_secret,scope,key,digest,'FACE',owner,uploaded.path,{'replace_id':replace_id})
+            reserve(request.app.state.redis,task.id,task.expires_at);reservation=task.id
+            # Preserve the photo once COMMIT starts: a lost acknowledgement is not a rollback.
+            session.add(task);session.flush();retained=True;session.commit();dispatch(task.id)
+            return accepted(task,settings.app_secret,key)
+        except IntegrityError:
+            session.rollback();existing=find_replay(session,scope,key,digest)
+            if existing:return accepted(existing,settings.app_secret,key)
+            raise AppError('CONFLICT','照片更新冲突，请刷新后重试',409) from None
+        finally:
+            if uploaded and not retained:stored_path(settings.storage_dir,uploaded.path).unlink(missing_ok=True)
+            if reservation and not retained:release(request.app.state.redis,reservation)
 
 
 @router.delete('/{face_id}',status_code=204)
