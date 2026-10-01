@@ -14,6 +14,8 @@ from app.services.forms import photo_form
 from app.services.uploads import receive_photo,stored_path
 from app.services.tasks import validate_key,request_digest,find_replay,new_task,accepted,dispatch
 
+from app.services.capacity import reserve,release
+
 router=APIRouter(prefix='/api/auth',tags=['registration'])
 
 
@@ -30,7 +32,7 @@ async def register(request:Request,session=Depends(db_session)):
     check_origin(request);rate_limit(request,'registration',10)
     key=validate_key(request.headers.get('idempotency-key'))
     form=await photo_form(request,{'name','student_no','password','class_id','photo'})
-    uploaded=None;retained=False
+    uploaded=None;retained=False;reservation=None
     settings=request.app.state.settings
     try:
         try: data=RegistrationInput.model_validate({k:v for k,v in form.items() if k!='photo'})
@@ -47,6 +49,7 @@ async def register(request:Request,session=Depends(db_session)):
         user=User(student_no=data.student_no,name=data.name,class_id=data.class_id,password_hash=password_hash,status='PENDING')
         session.add(user);session.flush()
         task=new_task(settings.app_secret,'register',key,digest,'ENROLL',user.id,uploaded.path)
+        reserve(request.app.state.redis,task.id,task.expires_at);reservation=task.id
         # Preserve the photo once COMMIT starts: a lost acknowledgement is not a rollback.
         session.add(task);session.flush();retained=True;session.commit()
         dispatch(task.id)
@@ -59,6 +62,7 @@ async def register(request:Request,session=Depends(db_session)):
     finally:
         await form.close()
         if uploaded and not retained: stored_path(settings.storage_dir,uploaded.path).unlink(missing_ok=True)
+        if reservation and not retained:release(request.app.state.redis,reservation)
 
 
 @router.post('/register/{task_id}/retry',status_code=202)
@@ -68,7 +72,7 @@ async def retry_registration(task_id:str,request:Request,session=Depends(db_sess
     old=session.get(RecognitionTask,task_id)
     if not old or old.type!='ENROLL' or not hmac.compare_digest(old.token_hash,token_hash(request.headers.get('x-task-token',''))):
         raise AppError('NOT_FOUND','原注册任务凭证无效',404)
-    form=await photo_form(request,{'photo'});uploaded=None;retained=False
+    form=await photo_form(request,{'photo'});uploaded=None;retained=False;reservation=None
     settings=request.app.state.settings
     try:
         uploaded=await receive_photo(form['photo'],settings.storage_dir)
@@ -86,9 +90,11 @@ async def retry_registration(task_id:str,request:Request,session=Depends(db_sess
         if old.status not in {'REJECTED','FAILED'} or user.status!='PENDING' or active:
             raise AppError('RETRY_UNAVAILABLE','当前注册不能重试，请查看原任务结果',409)
         task=new_task(settings.app_secret,scope,key,digest,'ENROLL',user.id,uploaded.path)
+        reserve(request.app.state.redis,task.id,task.expires_at);reservation=task.id
         # Preserve the photo once COMMIT starts: a lost acknowledgement is not a rollback.
         session.add(task);session.flush();retained=True;session.commit();dispatch(task.id)
         return accepted(task,settings.app_secret,key)
     finally:
         await form.close()
         if uploaded and not retained: stored_path(settings.storage_dir,uploaded.path).unlink(missing_ok=True)
+        if reservation and not retained:release(request.app.state.redis,reservation)

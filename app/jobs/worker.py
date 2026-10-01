@@ -73,7 +73,7 @@ def process(task_id):
         try:
             with factory() as session:
                 task=session.get(RecognitionTask,task_id)
-                terminal=task and task.type=='CHECKIN' and task.status in {'SUCCEEDED','REJECTED','FAILED'}
+                terminal=task and task.status in {'SUCCEEDED','REJECTED','FAILED'}
             if terminal:
                 redis=Redis.from_url(Settings.from_env().redis_url,socket_connect_timeout=2,socket_timeout=2)
                 try:release(redis,task_id)

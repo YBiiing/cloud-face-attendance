@@ -10,6 +10,8 @@ from app.services.forms import photo_form
 from app.services.uploads import receive_photo,stored_path
 from app.services.tasks import validate_key,request_digest,find_replay,new_task,accepted,dispatch
 
+from app.services.capacity import reserve,release
+
 router=APIRouter(prefix='/api/faces',tags=['faces'])
 
 
@@ -43,7 +45,7 @@ async def add_face(request:Request,actor=Depends(current_user),session=Depends(d
     rate_limit(request,'face-upload')
     key=validate_key(request.headers.get('idempotency-key'))
     form=await photo_form(request,{'photo','replace_id','user_id'})
-    uploaded=None;retained=False;settings=request.app.state.settings
+    uploaded=None;retained=False;reservation=None;settings=request.app.state.settings
     try:
         try:
             owner=int(form.get('user_id',actor.id));replace_id=int(form['replace_id']) if form.get('replace_id') else None
@@ -61,6 +63,7 @@ async def add_face(request:Request,actor=Depends(current_user),session=Depends(d
             old=session.get(FaceSample,replace_id)
             if not old or old.user_id!=owner or old.status!='ACTIVE': raise AppError('NOT_FOUND','被替换照片不存在',404)
         task=new_task(settings.app_secret,scope,key,digest,'FACE',owner,uploaded.path,{'replace_id':replace_id})
+        reserve(request.app.state.redis,task.id,task.expires_at);reservation=task.id
         # Preserve the photo once COMMIT starts: a lost acknowledgement is not a rollback.
         session.add(task);session.flush();retained=True;session.commit();dispatch(task.id)
         return accepted(task,settings.app_secret,key)
@@ -71,6 +74,7 @@ async def add_face(request:Request,actor=Depends(current_user),session=Depends(d
     finally:
         await form.close()
         if uploaded and not retained:stored_path(settings.storage_dir,uploaded.path).unlink(missing_ok=True)
+        if reservation and not retained:release(request.app.state.redis,reservation)
 
 
 @router.delete('/{face_id}',status_code=204)
