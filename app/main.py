@@ -40,9 +40,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         title="人脸签到系统",
         version="0.1.0",
         description="本地课程人脸签到：注册录入、照片管理、匿名场次签到与受保护的记录查询。",
-        docs_url="/api/docs",
+        docs_url=None,
         redoc_url=None,
-        openapi_url="/api/openapi.json",
+        openapi_url=None,
         lifespan=lifespan,
     )
     app.state.settings = settings

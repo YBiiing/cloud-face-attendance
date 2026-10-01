@@ -45,7 +45,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8000
 ```
 
-访问 `http://127.0.0.1:8000/`，接口文档为 `/api/docs`，存活检查为 `/api/health/live`。按 Ctrl+C 停止；不删除数据。依赖完整锁定在模型兼容验证后完成，当前 requirements.in 为骨架依赖范围。
+访问 `http://127.0.0.1:8000/`，存活检查为 `/api/health/live`。公开的 Swagger 与 OpenAPI 地址已关闭，开发时查阅仓库中的 `docs/api-contract.md`。按 Ctrl+C 停止；不删除数据。依赖版本见 requirements.lock。
 
 静态目录只公开 web/assets，不公开照片、模型或配置。`live` 仅报告 API 存活，不能用于证明识别功能可用。
 

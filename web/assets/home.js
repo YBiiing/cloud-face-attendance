@@ -7,7 +7,7 @@ async function checkService() {
     if (!response.ok) throw new Error("Service unavailable");
     const result = await response.json();
     if (result.status !== "ok") throw new Error("Unexpected response");
-    status.textContent = "API 连接正常";
+    status.textContent = "网站连接正常";
   } catch {
     status.textContent = "暂时无法连接服务，请稍后刷新页面。";
   } finally {
