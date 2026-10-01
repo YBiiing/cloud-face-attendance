@@ -94,7 +94,7 @@ def restore_bundle(factory, storage, source, settings):
     root.mkdir(parents=True,exist_ok=True)
     if any(path.is_file() or path.is_symlink() for path in root.rglob('*')):
         raise ValueError('Restore target storage must be empty')
-    created=[]
+    created=[];commit_started=False
     with zipfile.ZipFile(source) as archive:
         entries=archive.infolist()
         if len({item.filename for item in entries})!=len(entries):raise ValueError('Duplicate archive entries')
@@ -135,9 +135,13 @@ def restore_bundle(factory, storage, source, settings):
                     with path.open('xb') as output:
                         created.append(path)
                         output.write(payload)
+                db.flush()
+                # Once COMMIT begins its outcome may be unknown to this client.
+                commit_started=True
             return {'restored_rows':sum(map(len,decoded.values())),'restored_photos':len(created)}
         except Exception:
-            for path in created:path.unlink(missing_ok=True)
+            if not commit_started:
+                for path in created:path.unlink(missing_ok=True)
             raise
 
 

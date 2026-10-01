@@ -37,7 +37,8 @@ async def submit(request:Request,session=Depends(db_session)):
         task=new_task(settings.app_secret,'checkin',key,digest,'CHECKIN',image_path=uploaded.path,received_at=received_at)
         task.session_id=row.id
         reserve(request.app.state.redis,task.id,task.expires_at);reservation=task.id
-        session.add(task);session.commit();retained=True;dispatch(task.id)
+        # Preserve the photo once COMMIT starts: a lost acknowledgement is not a rollback.
+        session.add(task);session.flush();retained=True;session.commit();dispatch(task.id)
         return accepted(task,settings.app_secret,key)
     except IntegrityError:
         session.rollback();existing=find_replay(session,'checkin',key,digest)

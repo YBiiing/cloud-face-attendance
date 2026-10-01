@@ -47,7 +47,8 @@ async def register(request:Request,session=Depends(db_session)):
         user=User(student_no=data.student_no,name=data.name,class_id=data.class_id,password_hash=password_hash,status='PENDING')
         session.add(user);session.flush()
         task=new_task(settings.app_secret,'register',key,digest,'ENROLL',user.id,uploaded.path)
-        session.add(task);session.commit();retained=True
+        # Preserve the photo once COMMIT starts: a lost acknowledgement is not a rollback.
+        session.add(task);session.flush();retained=True;session.commit()
         dispatch(task.id)
         return accepted(task,settings.app_secret,key)
     except IntegrityError:
@@ -85,7 +86,8 @@ async def retry_registration(task_id:str,request:Request,session=Depends(db_sess
         if old.status not in {'REJECTED','FAILED'} or user.status!='PENDING' or active:
             raise AppError('RETRY_UNAVAILABLE','当前注册不能重试，请查看原任务结果',409)
         task=new_task(settings.app_secret,scope,key,digest,'ENROLL',user.id,uploaded.path)
-        session.add(task);session.commit();retained=True;dispatch(task.id)
+        # Preserve the photo once COMMIT starts: a lost acknowledgement is not a rollback.
+        session.add(task);session.flush();retained=True;session.commit();dispatch(task.id)
         return accepted(task,settings.app_secret,key)
     finally:
         await form.close()

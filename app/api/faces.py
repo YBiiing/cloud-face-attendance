@@ -61,7 +61,8 @@ async def add_face(request:Request,actor=Depends(current_user),session=Depends(d
             old=session.get(FaceSample,replace_id)
             if not old or old.user_id!=owner or old.status!='ACTIVE': raise AppError('NOT_FOUND','被替换照片不存在',404)
         task=new_task(settings.app_secret,scope,key,digest,'FACE',owner,uploaded.path,{'replace_id':replace_id})
-        session.add(task);session.commit();retained=True;dispatch(task.id)
+        # Preserve the photo once COMMIT starts: a lost acknowledgement is not a rollback.
+        session.add(task);session.flush();retained=True;session.commit();dispatch(task.id)
         return accepted(task,settings.app_secret,key)
     except IntegrityError:
         session.rollback();existing=find_replay(session,scope,key,digest)
