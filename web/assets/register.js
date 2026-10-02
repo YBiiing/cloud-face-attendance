@@ -17,16 +17,16 @@ function handleError(error){
   if(error.status===404){
     pendingTask=null;retryTask=null;resume.hidden=true;key=requestKey();
     sessionStorage.removeItem('registration-task');button.textContent='注册并录入';
-    showMessage(message,'保存的注册任务已失效，请重新填写；若学号已注册，请尝试登录或联系管理员处理录入。',true);
+    showMessage(message,'保存的注册任务已失效，请重新填写；若学号已注册，请尝试登录或联系老师处理录入。',true);
   }else{
-    showMessage(message,error.code==='ACCOUNT_EXISTS'?'该学号已注册，请尝试登录；尚未完成录入且凭证丢失时，请联系管理员。':error.message||'网络异常，请保留页面并重试',true);
+    showMessage(message,error.code==='ACCOUNT_EXISTS'?'该学号已注册，请尝试登录；尚未完成录入且凭证丢失时，请联系老师。':error.message||'网络异常，请保留页面并重试',true);
   }
 }
 async function loadClasses(){
   const select=form.elements.class_id;select.replaceChildren(new Option('请选择班级',''));
   let page=1;
   try {while(true){const data=await api(`/classes?page=${page}&page_size=100`);for(const c of data.items)select.add(new Option(c.name,c.id));if(page*100>=data.total)break;page++;}
-    if(select.options.length===1)showMessage(message,'暂无班级，请先联系管理员创建班级。',true);
+    if(select.options.length===1)showMessage(message,'暂无班级，请先联系老师创建班级。',true);
   }catch(error){showMessage(message,error.message,true);}
 }
 loadClasses();

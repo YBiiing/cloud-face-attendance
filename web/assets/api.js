@@ -33,9 +33,16 @@ export function requestKey() {
 }
 export function previewPhoto(input,image) {
   let previous=null;
+  const picker=input.closest('.photo-picker'),camera=picker?.querySelector('[data-camera-input]');
+  if(camera){
+    picker.querySelector('[data-camera]').onclick=()=>{camera.value='';camera.click();};
+    camera.onchange=()=>{if(!camera.files.length)return;const transfer=new DataTransfer();transfer.items.add(camera.files[0]);input.files=transfer.files;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));};
+  }
   input.addEventListener('change',()=>{
     if(previous) URL.revokeObjectURL(previous);
     image.hidden=!input.files.length;
     if(input.files.length) { previous=URL.createObjectURL(input.files[0]);image.src=previous; }
+    if(picker)picker.querySelector('[data-photo-name]').textContent=input.files.length?`已选择：${input.files[0].name}`:'尚未选择照片';
   });
+  input.form?.addEventListener('reset',()=>{if(previous){URL.revokeObjectURL(previous);previous=null;}image.hidden=true;if(picker)picker.querySelector('[data-photo-name]').textContent='尚未选择照片';});
 }

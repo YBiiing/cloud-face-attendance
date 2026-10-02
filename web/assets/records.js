@@ -1,3 +1,4 @@
+import {workspace} from './workspace.js';
 import {api,session,showMessage} from './api.js';
 const select=document.querySelector('#session'),list=document.querySelector('#record-list'),summary=document.querySelector('#summary'),message=document.querySelector('#message');
 let page=1,busy=false,total=0;
@@ -32,7 +33,7 @@ async function action(fn){
   finally{busy=false;select.disabled=false;document.querySelector('#refresh').disabled=false;}
 }
 async function initialize(){
-  clear();const me=await session();
+  clear();const me=await workspace();if(!me)return;
   document.querySelector('#access-hint').textContent=me.user.role==='ADMIN'?'选择场次查看全班名单与统计；全部记录显示已签到人员。':'仅显示本人的成功签到记录。';
   const current=select.value||new URLSearchParams(location.search).get('session_id')||'';
   select.replaceChildren(new Option('全部成功签到记录',''));

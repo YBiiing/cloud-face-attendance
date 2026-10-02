@@ -1,3 +1,4 @@
+import {workspace} from './workspace.js';
 import {api,session,protectedWrite,showMessage,requestKey,previewPhoto} from './api.js';
 import {pollTask,resultMessages} from './tasks.js';
 const message=document.querySelector('#message'),form=document.querySelector('#face-form'),list=document.querySelector('#photo-list'),people=document.querySelector('#people');
@@ -52,7 +53,7 @@ async function navigate(delta){if(busy||pending)return;page+=delta;try{await loa
 document.querySelector('#previous').onclick=()=>navigate(-1);document.querySelector('#next').onclick=()=>navigate(1);
 people.onchange=async()=>{if(busy||pending)return;owner=Number(people.value);page=1;cancelReplace();try{await load();}catch(error){showMessage(message,error.message,true);}};
 try{
-  const me=await session();owner=me.user.id;storageKey='face-task:'+owner;
+  const me=await workspace('STUDENT');if(!me)throw new Error('正在进入工作台……');form.hidden=false;owner=me.user.id;storageKey='face-task:'+owner;
   if(me.user.role==='ADMIN'){
     document.querySelector('#people-label').hidden=false;let p=1;
     while(true){const data=await api(`/users?page=${p}&page_size=100`);for(const user of data.items){if(user.status==='ACTIVE')people.add(new Option(`${user.name}（${user.student_no}）`,user.id));}if(p*100>=data.total)break;p++;}

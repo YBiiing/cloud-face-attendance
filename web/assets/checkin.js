@@ -20,7 +20,7 @@ function update(){
   }
 }
 async function load(){
-  if(!code)throw new Error('请使用管理员提供的课程签到链接');
+  if(!code)throw new Error('请使用老师提供的课程签到链接');
   row=await api('/sessions/'+encodeURIComponent(code),{signal:controller.signal});
   offset=Date.parse(row.server_time)-Date.now();
   document.querySelector('#title').textContent=row.title;

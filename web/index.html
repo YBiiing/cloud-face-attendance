@@ -1,24 +1,2 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>课程人脸签到</title>
-  <link rel="stylesheet" href="/assets/styles.css">
-  <script src="/assets/home.js" defer></script>
-</head>
-<body>
-  <main>
-    <p class="eyebrow">课程人脸签到</p>
-    <h1>每一次课程，单独签到。</h1>
-    <p>学生打开课程签到链接，拍照后查看结果。管理员可创建班级签到并查看记录。</p>
-    <section aria-labelledby="status-title">
-      <h2 id="status-title">使用说明</h2>
-      <p>首次使用请注册并录入人脸。签到请使用管理员提供的场次链接，查看记录需要登录。</p>
-      <p id="service-status" role="status">正在检查服务连接……</p>
-      <p class="hint">签到是否成功，请以提交照片后的处理结果为准。</p>
-    </section>
-    <nav><a href="/register.html">注册录入</a><a href="/login.html">登录</a><a href="/records.html">签到记录</a></nav>
-  </main>
-</body>
-</html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>课程签到</title><link rel="stylesheet" href="/assets/styles.css"><script type="module" src="/assets/home.js"></script></head>
+<body><main class="auth-page"><p class="eyebrow">课程人脸签到</p><h1>上课签到，简单一步。</h1><p>登录后查看你的课程签到，拍照或从相册选图即可完成身份识别。</p><div id="guest-actions" hidden><a class="button-link" href="/login.html">登录账户</a><a class="button-link secondary" href="/register.html">首次使用 · 注册录入</a><section><h2>如何开始</h2><ol><li>注册学号，选择班级并录入本人照片。</li><li>登录后，在“待签到”中选择正在进行的课程。</li><li>提交照片，等待签到成功的结果。</li></ol><p class="hint">已有场次链接时，也可以直接打开链接完成签到，无需登录。</p></section></div><p id="service-status" role="status">正在检查登录状态……</p></main></body></html>
