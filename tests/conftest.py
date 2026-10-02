@@ -1,4 +1,6 @@
 import pytest
+from ipaddress import IPv4Address
+from uuid import uuid4
 from fastapi.testclient import TestClient
 from app.config import Settings
 from app.main import create_app
@@ -15,7 +17,10 @@ def settings():
 
 @pytest.fixture
 def client(settings):
-    with TestClient(create_app(settings)) as client:
+    # Independent scenarios must not share rate-limit budgets. Within a test,
+    # requests still use the same source address and all normal limits apply.
+    address=str(IPv4Address(0x0A000000 | (uuid4().int & 0x00FFFFFF)))
+    with TestClient(create_app(settings),client=(address,50000)) as client:
         yield client
 
 

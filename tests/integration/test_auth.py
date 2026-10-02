@@ -49,6 +49,7 @@ def test_sessions_roles_csrf_logout(client, accounts):
 def test_invalid_login_origin_and_expired_session(client,accounts):
     data={'student_no':accounts['admin'],'password':'wrong-password'}
     assert client.post('/api/auth/login',json=data).status_code==401
+
     data['password']=accounts['password']
     assert client.post('/api/auth/login',json=data,headers={'Origin':'https://evil.example'}).status_code==403
     assert client.post('/api/auth/login',json={**data,'role':'ADMIN'}).status_code==422
@@ -59,3 +60,11 @@ def test_invalid_login_origin_and_expired_session(client,accounts):
     assert client.get('/api/me').status_code==401
     with accounts['factory'].begin() as s: s.get(User,accounts['ids'][0]).status='DISABLED'
     assert client.post('/api/auth/login',json=data).status_code==401
+
+
+def test_login_rate_limit_remains_enforced(client):
+    data={'student_no':uuid4().hex,'password':'abc123'}
+    for _ in range(20):
+        assert client.post('/api/auth/login',json=data).status_code==401
+    response=client.post('/api/auth/login',json=data)
+    assert response.status_code==429 and response.json()['error']['code']=='RATE_LIMITED'

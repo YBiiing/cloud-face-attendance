@@ -24,6 +24,7 @@ P1 基础环境和 P4 场次管理已完成；P2 模型、P3 注册登录与照�
 - [本地维护与备份恢复](docs/local-maintenance.md)
 - [P6 本地自动化验证](docs/verification/p6-local.md)：43 项测试通过，故障恢复、照片清理及隔离恢复已验证；真人和手机验收待补。
 - [前后端审查修复验证](docs/verification/review-fixes-2026-10-01.md)：6 项问题已修复，完整回归 58 项通过，3 个浏览器脚本通过。
+- [学生与老师使用流程调整](docs/verification/hci-improvements-2026-10-02.md)：学生查看自己的待签到场次、按角色进入工作台、老师创建/列表分离、拍照与相册双入口、密码最低 6 位，附移动端布局截图。
 - [接口契约](docs/api-contract.md)
 - [P1-01 验证记录](docs/verification/p1-01.md)
 - [P1 阶段验收](docs/verification/p1-04.md)
