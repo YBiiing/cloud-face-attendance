@@ -1,5 +1,6 @@
 """Role-based mobile flows with explicit fixture APIs, not biometric evidence."""
 import json
+import argparse
 from datetime import datetime,timedelta,timezone
 from functools import partial
 from http.server import ThreadingHTTPServer
@@ -10,14 +11,14 @@ from playwright.sync_api import sync_playwright,expect
 from check_registration import QuietHandler
 
 
-def main():
-    root=Path(__file__).resolve().parents[2];output=root/'docs/verification/hci-2026-10-02';output.mkdir(parents=True,exist_ok=True)
+def main(width=390,height=844,output_dir=None):
+    root=Path(__file__).resolve().parents[2];output=Path(output_dir) if output_dir else root/'docs/verification/hci-2026-10-02';output.mkdir(parents=True,exist_ok=True)
     server=ThreadingHTTPServer(('127.0.0.1',0),partial(QuietHandler,directory=str(root/'web')))
     thread=Thread(target=server.serve_forever,daemon=True);thread.start()
     try:
         with sync_playwright() as p:
             browser=p.chromium.launch(channel='msedge',headless=True)
-            page=browser.new_page(viewport={'width':390,'height':844});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+            page=browser.new_page(viewport={'width':width,'height':height},is_mobile=True,has_touch=True,device_scale_factor=1);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
             now=datetime.now(timezone.utc);state={'role':None,'attended':False,'created':False,'posts':0}
             rows=[{'id':1,'title':'自动化测试 · 云计算','class_name':'测试班级','status':'OPEN','attendance_status':'PENDING',
                    'starts_at':(now-timedelta(minutes=1)).isoformat(),'ends_at':(now+timedelta(minutes=10)).isoformat(),
@@ -51,6 +52,14 @@ def main():
             page.route('**/api/**',api);base=f'http://127.0.0.1:{server.server_port}'
             def screenshot(name):
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+                assert page.locator('input:not([type=checkbox]):not([type=file]),select').evaluate_all('(nodes)=>nodes.every(n=>parseFloat(getComputedStyle(n).fontSize)>=16)')
+                nav=page.locator('[data-workspace-nav]')
+                if nav.count() and nav.locator('a').count() and width<768:
+                    assert nav.evaluate('(n)=>getComputedStyle(n).position')=='fixed'
+                    assert nav.locator('a').evaluate_all('(nodes)=>nodes.every(n=>n.getBoundingClientRect().height>=44)')
+                    page.evaluate('window.scrollTo(0,document.documentElement.scrollHeight)')
+                    assert page.locator('main').evaluate('(n)=>parseFloat(getComputedStyle(n).paddingBottom)')>=100
+                    page.evaluate('window.scrollTo(0,0)')
                 page.screenshot(path=str(output/name),full_page=True)
             def login(account):
                 page.locator('[name=student_no]').fill(account);page.locator('[name=password]').fill('abc123')
@@ -78,6 +87,10 @@ def main():
             page.goto(base+'/faces.html');expect(page).to_have_url(base+'/dashboard.html');assert page.locator('input[type=file]').count()==0
             page.get_by_role('link',name='创建签到',exact=True).click();expect(page.locator('#session-form')).to_be_visible()
             assert page.locator('#session-list').count()==0;screenshot('teacher-create.png')
+            page.locator('[name=title]').focus()
+            if width<768:expect(page.locator('[data-workspace-nav]')).to_be_hidden()
+            page.locator('[name=title]').blur()
+            if width<768:expect(page.locator('[data-workspace-nav]')).to_be_visible()
             page.locator('[name=title]').fill('自动化测试课程');page.locator('[name=class_id]').select_option('1')
             page.get_by_role('button',name='发布签到',exact=True).click();expect(page).to_have_url(base+'/sessions.html?created=1')
             expect(page.locator('#message')).to_contain_text('签到已发布');assert state['created']
@@ -89,4 +102,6 @@ def main():
     finally:server.shutdown();server.server_close();thread.join()
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--width',type=int,default=390);parser.add_argument('--height',type=int,default=844);parser.add_argument('--output',type=Path)
+    args=parser.parse_args();main(args.width,args.height,args.output)
