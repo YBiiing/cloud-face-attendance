@@ -68,7 +68,7 @@ def current_user(request: Request, session=Depends(db_session)) -> User:
 
 
 def admin_user(user=Depends(current_user)):
-    if user.role != 'ADMIN': raise AppError('FORBIDDEN', '仅管理员可操作', 403)
+    if user.role != 'ADMIN': raise AppError('FORBIDDEN', '仅老师可操作', 403)
     return user
 
 

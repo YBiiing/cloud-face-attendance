@@ -1,12 +1,12 @@
 from datetime import timezone
-from typing import Annotated
+from typing import Annotated,Literal
 from fastapi import APIRouter,Depends,Query
 from pydantic import BaseModel,ConfigDict,Field,AwareDatetime,StringConstraints
 from sqlalchemy import select,func
 from app import clock
-from app.models import ClassRoom
+from app.models import ClassRoom,AttendanceRecord
 from app.models.attendance_sessions import AttendanceSession,SessionMember
-from app.security import db_session,admin_user
+from app.security import db_session,admin_user,current_user
 from app.errors import AppError
 from app.services.attendance_sessions import create_session
 from app.services.time_policy import effective_end,session_status
@@ -45,6 +45,29 @@ def list_sessions(class_id:int|None=Query(None,gt=0),page:int=Query(1,ge=1),page
         count=session.scalar(select(func.count()).select_from(SessionMember).where(SessionMember.session_id==row.id))
         items.append({**management_data(row),'expected_count':count})
     return {'items':items,'total':total,'page':page,'page_size':page_size}
+
+
+@router.get('/mine')
+def my_sessions(view:Literal['pending','all']='pending',page:int=Query(1,ge=1),page_size:int=Query(20,ge=1,le=100),actor=Depends(current_user),session=Depends(db_session)):
+    if actor.role!='STUDENT':raise AppError('FORBIDDEN','此页面仅供学生查看自己的签到场次',403)
+    now=clock.utc_now()
+    query=(select(AttendanceSession,ClassRoom.name,AttendanceRecord.id)
+        .join(SessionMember,SessionMember.session_id==AttendanceSession.id)
+        .join(ClassRoom,ClassRoom.id==AttendanceSession.class_id)
+        .outerjoin(AttendanceRecord,(AttendanceRecord.session_id==AttendanceSession.id)&(AttendanceRecord.user_id==actor.id))
+        .where(SessionMember.user_id==actor.id))
+    if view=='pending':
+        query=query.where(AttendanceRecord.id.is_(None),AttendanceSession.ends_at>now,
+                          (AttendanceSession.closed_at.is_(None))|(AttendanceSession.closed_at>now))
+    total=session.scalar(select(func.count()).select_from(query.subquery()))
+    rows=session.execute(query.order_by(AttendanceSession.starts_at.desc(),AttendanceSession.id.desc())
+                         .offset((page-1)*page_size).limit(page_size)).all()
+    items=[]
+    for row,class_name,record_id in rows:
+        status=session_status(row,now)
+        items.append({**management_data(row),'class_name':class_name,'effective_end':effective_end(row),
+                      'attendance_status':'ATTENDED' if record_id is not None else ('MISSED' if status=='CLOSED' else 'PENDING')})
+    return {'items':items,'total':total,'page':page,'page_size':page_size,'server_time':now}
 
 
 @router.get('/{code}')

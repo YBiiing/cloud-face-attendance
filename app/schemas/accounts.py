@@ -3,7 +3,7 @@ from typing import Annotated
 
 Name = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=50)]
 StudentNumber = Annotated[str, StringConstraints(strip_whitespace=True, pattern=r'^[A-Za-z0-9]{1,32}$')]
-Password = Annotated[str, StringConstraints(min_length=10, max_length=128)]
+Password = Annotated[str, StringConstraints(min_length=6, max_length=128)]
 
 
 class LoginInput(BaseModel):
