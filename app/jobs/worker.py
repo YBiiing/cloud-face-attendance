@@ -54,7 +54,7 @@ def process(task_id):
             if kind=='CHECKIN':
                 recognize_checkin(factory,task_id,attempt,feature,Settings.from_env())
             else:
-                finish_enrollment(factory,task_id,attempt,feature)
+                finish_enrollment(factory,task_id,attempt,feature,Settings.from_env().match_threshold)
         else:
             # Business task handlers are introduced by P3-03 and P5-02.
             raise RuntimeError('Unsupported task type')

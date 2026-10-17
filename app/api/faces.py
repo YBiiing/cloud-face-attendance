@@ -43,7 +43,7 @@ def image(face_id:int,request:Request,actor=Depends(current_user),session=Depend
 
 @router.post('',status_code=202)
 async def add_face(request:Request,actor=Depends(current_user)):
-    await run_in_threadpool(rate_limit,request,'face-upload')
+    await run_in_threadpool(rate_limit,request,'face-upload',20,60,'user:'+str(actor.id))
     key=validate_key(request.headers.get('idempotency-key'))
     form=await photo_form(request,{'photo','replace_id','user_id'})
     try:
@@ -63,6 +63,9 @@ def face_transaction(request,actor_id,owner,replace_id,uploaded,key):
     with request.app.state.sessions() as session:
         try:
             scope='faces:'+str(actor_id)
+            actor=session.get(User,actor_id)
+            if not actor or actor.status!='ACTIVE':raise AppError('UNAUTHENTICATED','请重新登录',401)
+            check_owner(actor,owner)
             digest=request_digest(settings.app_secret,{'owner':owner,'replace_id':replace_id,'photo':uploaded.digest})
             user=session.get(User,owner)
             if not user or user.status!='ACTIVE': raise AppError('NOT_FOUND','人员不存在或未激活',404)

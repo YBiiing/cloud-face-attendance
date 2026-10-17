@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy import select, func
+from sqlalchemy.exc import IntegrityError
+from app.errors import AppError
 from app.models import ClassRoom, User
 from app.security import db_session, admin_user
 from app.schemas.accounts import ClassInput, user_data
@@ -17,7 +19,16 @@ def classes(page: int=Query(1,ge=1), page_size: int=Query(20,ge=1,le=100), sessi
 
 @router.post('/classes',status_code=201)
 def create_class(data: ClassInput, admin=Depends(admin_user), session=Depends(db_session)):
-    row=ClassRoom(name=data.name); session.add(row); session.commit()
+    if session.scalar(select(ClassRoom.id).where(ClassRoom.name==data.name)) is not None:
+        raise AppError('CLASS_NAME_EXISTS','班级名称已存在，请使用不同名称',409)
+    row=ClassRoom(name=data.name); session.add(row)
+    try:
+        session.commit()
+    except IntegrityError as error:
+        session.rollback()
+        if 'uq_classes_name' in str(error.orig):
+            raise AppError('CLASS_NAME_EXISTS','班级名称已存在，请使用不同名称',409) from None
+        raise
     return {'id':row.id,'name':row.name,'status':row.status}
 
 

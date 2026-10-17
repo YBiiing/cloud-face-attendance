@@ -54,12 +54,16 @@ def check_origin(request: Request):
         raise AppError('FORBIDDEN', '请求来源不允许', 403)
 
 
-def current_user(request: Request, session=Depends(db_session)) -> User:
+def current_user(request: Request) -> User:
     raw = request.cookies.get(COOKIE)
     if not raw: raise AppError('UNAUTHENTICATED', '请先登录', 401)
-    login = session.scalar(select(LoginSession).where(LoginSession.token_hash == token_hash(raw), LoginSession.expires_at > clock.utc_now()))
-    user = session.get(User, login.user_id) if login else None
-    if not user or user.status != 'ACTIVE': raise AppError('UNAUTHENTICATED', '请重新登录', 401)
+    # Authentication ends before uploads or business transactions start. Returning
+    # a detached snapshot keeps the ORM interface without holding a pool slot.
+    with request.app.state.sessions() as session:
+        login = session.scalar(select(LoginSession).where(LoginSession.token_hash == token_hash(raw), LoginSession.expires_at > clock.utc_now()))
+        user = session.get(User, login.user_id) if login else None
+        if not user or user.status != 'ACTIVE': raise AppError('UNAUTHENTICATED', '请重新登录', 401)
+        session.expunge(user)
     if request.method not in {'GET', 'HEAD', 'OPTIONS'}:
         check_origin(request)
         if not hmac.compare_digest(request.headers.get('x-csrf-token', ''), csrf_token(request)):
@@ -72,12 +76,12 @@ def admin_user(user=Depends(current_user)):
     return user
 
 
-def rate_limit(request: Request, action: str, limit: int = 20, seconds: int = 60):
+def rate_limit(request: Request, action: str, limit: int = 20, seconds: int = 60, scope: str | None = None):
     ip = request.client.host if request.client else 'unknown'
-    key = f'rate:{action}:{token_hash(ip)}'
-    script = "local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],ARGV[1]) end; return n"
+    key = f'rate:{action}:{token_hash(scope or ip)}'
+    script = "local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],ARGV[1]) end; return {n,redis.call('TTL',KEYS[1])}"
     try:
-        count = request.app.state.redis.eval(script, 1, key, seconds)
+        count, ttl = request.app.state.redis.eval(script, 1, key, seconds)
     except Exception:
         raise AppError('SERVICE_UNAVAILABLE', '服务暂时不可用', 503) from None
-    if count > limit: raise AppError('RATE_LIMITED', '操作过于频繁，请稍后再试', 429)
+    if count > limit: raise AppError('RATE_LIMITED', '操作过于频繁，请稍后再试', 429, retry_after=max(1,ttl))

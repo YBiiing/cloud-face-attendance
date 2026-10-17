@@ -1,9 +1,10 @@
 from fastapi import APIRouter,Request
 from starlette.concurrency import run_in_threadpool
-from sqlalchemy import select
+from sqlalchemy import select,func
 from sqlalchemy.exc import IntegrityError
 from app import clock
 from app.models.attendance_sessions import AttendanceSession
+from app.models import SessionMember
 from app.security import check_origin,rate_limit
 from app.errors import AppError
 from app.services.forms import photo_form
@@ -18,7 +19,7 @@ router=APIRouter(prefix='/api/checkins',tags=['checkins'])
 @router.post('',status_code=202)
 async def submit(request:Request):
     check_origin(request)
-    await run_in_threadpool(rate_limit,request,'checkin',30)
+    await run_in_threadpool(rate_limit,request,'checkin',request.app.state.settings.checkin_ip_rate_limit)
     key=validate_key(request.headers.get('idempotency-key'))
     form=await photo_form(request,{'session_code','photo'})
     try:
@@ -44,6 +45,8 @@ def submit_transaction(request,code,uploaded,key,received_at):
             if not eligible_time(row,received_at):
                 future=session_status(row,received_at)=='SCHEDULED'
                 raise AppError('SESSION_NOT_STARTED' if future else 'SESSION_ENDED','签到尚未开始' if future else '本场次已结束',409)
+            roster_size=session.scalar(select(func.count()).select_from(SessionMember).where(SessionMember.session_id==row.id))
+            rate_limit(request,'checkin-session',max(60,roster_size*settings.checkin_attempts_per_student),60,'session:'+str(row.id))
             task=new_task(settings.app_secret,'checkin',key,digest,'CHECKIN',image_path=uploaded.path,received_at=received_at)
             task.session_id=row.id
             reserve(request.app.state.redis,task.id,task.expires_at);reservation=task.id

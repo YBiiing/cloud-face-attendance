@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import ForeignKey, String, Enum
+from sqlalchemy import ForeignKey, String, Enum, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base, UTCDateTime
@@ -9,7 +9,10 @@ from app.clock import utc_now
 
 class ClassRoom(Base):
     __tablename__ = "classes"
-    __table_args__ = {"mysql_engine": "InnoDB", "mysql_charset": "utf8mb4"}
+    __table_args__ = (
+        UniqueConstraint('name', name='uq_classes_name'),
+        {"mysql_engine": "InnoDB", "mysql_charset": "utf8mb4"},
+    )
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100))
     status: Mapped[str] = mapped_column(Enum("ACTIVE", "DISABLED"), default="ACTIVE")

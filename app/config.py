@@ -20,6 +20,8 @@ class Settings:
     cookie_secure: bool
     match_threshold: float = 0.5
     match_margin: float = 0.05
+    checkin_ip_rate_limit: int = 600
+    checkin_attempts_per_student: int = 3
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -50,8 +52,14 @@ class Settings:
                 raise ValueError
         except ValueError:
             raise RuntimeError('Invalid matching thresholds') from None
+        try:
+            ip_limit=int(os.getenv('CHECKIN_IP_RATE_LIMIT','600'))
+            attempts=int(os.getenv('CHECKIN_ATTEMPTS_PER_STUDENT','3'))
+            if not 1<=ip_limit<=100000 or not 1<=attempts<=20:raise ValueError
+        except ValueError:
+            raise RuntimeError('Invalid checkin rate limits') from None
         return cls(environment, os.environ["MYSQL_HOST"], port,
                    os.environ["MYSQL_DATABASE"], os.environ["MYSQL_USER"],
                    os.environ["MYSQL_PASSWORD"], os.environ["APP_SECRET"],
                    os.environ["REDIS_URL"], Path(os.getenv("STORAGE_DIR", "storage")),
-                   Path(os.getenv("MODEL_DIR", "models")), secure == "true", threshold, margin)
+                   Path(os.getenv("MODEL_DIR", "models")), secure == "true", threshold, margin, ip_limit, attempts)
