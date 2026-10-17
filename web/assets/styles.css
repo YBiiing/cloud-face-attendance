@@ -48,6 +48,16 @@ button:disabled { opacity:.55; cursor:not-allowed; }
 .photo-choice:has(input:disabled) { opacity:.55; cursor:not-allowed; }
 .visually-hidden { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
 .preview { width:100%; max-height: min(36vh,280px); object-fit:contain; border-radius:8px; }
+.camera-dialog { width:min(640px,calc(100vw - 32px)); max-height:calc(100dvh - 32px); overflow:auto; border:1px solid #acbcc7; border-radius:16px; padding:24px; color:#172c3b; }
+.camera-dialog::backdrop { background:#172c3baa; }
+.camera-dialog video,.camera-dialog img { display:block; width:100%; max-height:45vh; object-fit:contain; background:#172c3b; border-radius:8px; }
+.camera-dialog video { transform:scaleX(-1); }
+.camera-actions { display:flex; gap:12px; flex-wrap:wrap; }
+.camera-actions button { flex:1 1 auto; }
+.confirm-dialog { width:min(460px,calc(100vw - 32px)); max-height:calc(100dvh - 32px); overflow:auto; border:1px solid #acbcc7; border-radius:16px; padding:24px; color:#172c3b; }
+.confirm-dialog::backdrop { background:#172c3baa; }
+.confirm-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:24px; }
+.danger { background:#9b2525; border-color:#9b2525; }
 details { margin-top:20px; } summary { cursor:pointer; min-height:48px; padding:12px 0; color:#166661; }
 #message:not(:empty) { background:#eaf5f1; padding:12px 16px; border-radius:10px; }
 .error { color:#9b2525; } #message.error { background:#fff1f0; }

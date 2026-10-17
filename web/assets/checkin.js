@@ -1,4 +1,4 @@
-import {api,showMessage,requestKey,previewPhoto} from './api.js';
+import {api,showMessage,showFeedback,requestKey,previewPhoto} from './api.js';
 import {pollTask,resultMessages} from './tasks.js';
 
 const code=new URLSearchParams(location.search).get('session_code');
@@ -6,7 +6,7 @@ const form=document.querySelector('#checkin-form'),message=document.querySelecto
 const controller=new AbortController(),storageKey='checkin-task:'+code;
 let row=null,key=requestKey(),busy=false,pending=null,offset=0;
 previewPhoto(form.elements.photo,document.querySelector('#preview'));
-form.addEventListener('input',()=>{key=requestKey();if(!pending)sessionStorage.removeItem(storageKey);});
+form.addEventListener('input',event=>{key=requestKey();if(!pending){sessionStorage.removeItem(storageKey);if(event.target.name==='photo'&&!busy)showMessage(message,'照片已更换，请提交');}});
 function update(){
   const now=Date.now()+offset;
   const open=row && row.status!=='CLOSED' && now>=Date.parse(row.starts_at) && now<Date.parse(row.effective_end);
@@ -14,18 +14,29 @@ function update(){
   for(const field of form.elements)field.disabled=busy||!!pending||!open;
   resume.disabled=busy;document.querySelector('#refresh').disabled=busy;
   if(row){
+    const status=row.status==='CLOSED'||now>=Date.parse(row.effective_end)?'已结束':open?'进行中':'未开始';
+    document.querySelector('#details').textContent=`${row.class_name} · ${status} · ${new Date(row.starts_at).toLocaleString('zh-CN')} 至 ${new Date(row.effective_end).toLocaleString('zh-CN')}`;
     const seconds=Math.max(0,Math.ceil((Date.parse(row.effective_end)-now)/1000));
     document.querySelector('#countdown').textContent=open?`预计剩余 ${Math.floor(seconds/60)} 分 ${seconds%60} 秒（以服务器接收时间为准）`:
       (now<Date.parse(row.starts_at)&&row.status!=='CLOSED'?'签到尚未开始，可稍后刷新':'本场次已结束，已上传任务仍可查询结果');
   }
 }
 async function load(){
-  if(!code)throw new Error('请使用老师提供的课程签到链接');
-  row=await api('/sessions/'+encodeURIComponent(code),{signal:controller.signal});
-  offset=Date.parse(row.server_time)-Date.now();
-  document.querySelector('#title').textContent=row.title;
-  document.querySelector('#details').textContent=`${row.class_name} · ${{SCHEDULED:'未开始',OPEN:'进行中',CLOSED:'已结束'}[row.status]} · ${new Date(row.starts_at).toLocaleString('zh-CN')} 至 ${new Date(row.effective_end).toLocaleString('zh-CN')}`;
-  update();
+  try{
+    if(!code)throw new Error('请从“我的签到”选择课程，或使用有效的课程签到链接');
+    row=await api('/sessions/'+encodeURIComponent(code),{signal:controller.signal});
+    offset=Date.parse(row.server_time)-Date.now();
+    document.querySelector('#title').textContent=row.title;
+    update();
+  }catch(error){
+    if(!row||error.status===404){
+      row=null;document.querySelector('#title').textContent='课程签到';
+      document.querySelector('#details').textContent=code?'场次信息暂不可用':'尚未选择签到场次';
+      document.querySelector('#countdown').textContent='';
+      update();
+    }
+    throw error;
+  }
 }
 async function follow(task){
   pending=task;sessionStorage.setItem(storageKey,JSON.stringify(task));resume.hidden=false;update();
@@ -40,12 +51,12 @@ async function follow(task){
     throw error;
   }
   pending=null;resume.hidden=true;
-  showMessage(message,resultMessages[result.result_code]||'处理未完成，请稍后重试',result.status!=='SUCCEEDED');
+  showFeedback(message,resultMessages[result.result_code]||'处理未完成，请稍后重试',result.status!=='SUCCEEDED');
   key=requestKey();update();
 }
 async function run(action){
   if(busy)return;busy=true;update();
-  try{await action();}catch(error){if(!controller.signal.aborted)showMessage(message,error.message||'网络异常，请保留页面后重试',true);}
+  try{await action();}catch(error){if(!controller.signal.aborted)showFeedback(message,error.message||'网络异常，请保留页面后重试',true);}
   finally{busy=false;update();}
 }
 document.querySelector('#refresh').onclick=()=>run(load);

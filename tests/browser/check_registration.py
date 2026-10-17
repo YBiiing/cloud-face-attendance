@@ -36,7 +36,9 @@ def main():
             def api(route):
                 path = route.request.url.split('/api', 1)[1]
                 status = 200
-                if path.startswith('/classes'):
+                if path == '/me':
+                    status, result = 401, {'error': {'message': '请先登录'}}
+                elif path.startswith('/classes'):
                     result = {'items': [{'id': 1, 'name': '测试班级'}], 'total': 1}
                 elif path == '/auth/register':
                     state['posts'] += 1

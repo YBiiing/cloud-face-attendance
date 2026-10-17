@@ -1,6 +1,7 @@
 import {workspace} from './workspace.js';
-import {api,session,protectedWrite,showMessage,requestKey,previewPhoto} from './api.js';
+import {api,session,protectedWrite,showMessage,showFeedback,requestKey,previewPhoto} from './api.js';
 import {pollTask,resultMessages} from './tasks.js';
+import {confirmAction} from './confirm.js';
 const message=document.querySelector('#message'),form=document.querySelector('#face-form'),list=document.querySelector('#photo-list'),people=document.querySelector('#people');
 const controller=new AbortController();window.addEventListener('pagehide',()=>controller.abort());
 window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
@@ -26,7 +27,7 @@ async function follow(task){
   pending=null;resume.hidden=true;sessionStorage.removeItem(storageKey);
   // Only a known terminal result allows a new processing attempt.
   key=requestKey();
-  showMessage(message,resultMessages[result.result_code]||'操作未完成',result.status!=='SUCCEEDED');
+  showFeedback(message,resultMessages[result.result_code]||'操作未完成',result.status!=='SUCCEEDED');
   if(result.status==='SUCCEEDED'){form.reset();document.querySelector('#preview').hidden=true;cancelReplace();await load();}
 }
 resume.onclick=async()=>{
@@ -34,15 +35,23 @@ resume.onclick=async()=>{
   try{await follow(pending);}catch(error){if(!controller.signal.aborted)showMessage(message,error.message,true);}finally{lock(false);}
 };
 previewPhoto(form.elements.photo,document.querySelector('#preview'));
-form.addEventListener('input',()=>key=requestKey());
+form.addEventListener('input',event=>{key=requestKey();if(event.target.name==='photo'&&!busy&&!pending)showMessage(message,'照片已更换，请提交');});
 function cancelReplace(){replaceId=null;key=requestKey();document.querySelector('#upload-title').textContent='新增标准照';document.querySelector('#cancel-replace').hidden=true;}
 document.querySelector('#cancel-replace').onclick=()=>{if(!busy&&!pending)cancelReplace();};
 async function load(){
-  const data=await api(`/faces?user_id=${owner}&page=${page}&page_size=10`);total=data.total;list.replaceChildren();
+  const data=await api(`/faces?user_id=${owner}&page=${page}&page_size=10`);total=data.total;
+  const lastPage=Math.max(1,Math.ceil(total/10));if(page>lastPage){page=lastPage;return load();}
+  list.replaceChildren();
   for(const face of data.items){
     const card=document.createElement('section'),image=document.createElement('img');image.className='preview';image.alt='已录入标准照';image.src=face.image_url;card.append(image);
     const replace=document.createElement('button');replace.type='button';replace.textContent='替换';replace.onclick=()=>{if(busy||pending)return;replaceId=face.id;key=requestKey();document.querySelector('#upload-title').textContent='替换标准照';document.querySelector('#cancel-replace').hidden=false;form.scrollIntoView({behavior:'smooth'});};
-    const remove=document.createElement('button');remove.type='button';remove.textContent='删除';remove.onclick=async()=>{if(busy||pending||!confirm('删除这张标准照？历史签到记录会保留。'))return;try{await protectedWrite(`/faces/${face.id}`,{method:'DELETE'});cancelReplace();await load();}catch(error){showMessage(message,error.message,true);}};
+    const remove=document.createElement('button');remove.type='button';remove.textContent='删除';remove.onclick=async()=>{
+      if(busy||pending)return;
+      if(!await confirmAction({title:'删除标准照',message:'确定删除这张标准照？历史签到记录会保留。删除最后一张标准照后，将无法人脸签到。',confirmText:'确认删除'}))return;
+      if(busy||pending)return;lock(true);
+      try{await protectedWrite(`/faces/${face.id}`,{method:'DELETE'});cancelReplace();await load();showFeedback(message,'标准照已删除，历史签到记录已保留。');}
+      catch(error){showMessage(message,error.message,true);}finally{lock(false);}
+    };
     card.append(replace,remove);list.append(card);
   }
   if(!data.items.length){const empty=document.createElement('p');empty.textContent='暂无有效标准照';list.append(empty);}

@@ -21,13 +21,14 @@ def main():
             page = browser.new_page(viewport={'width': 390, 'height': 844})
             page.add_init_script("const originalTimeout=window.setTimeout;window.setTimeout=(fn,ms,...args)=>originalTimeout(fn,ms>=1000&&ms<=8000?20:ms,...args);")
             errors = []; page.on('pageerror', lambda error: errors.append(str(error)))
-            state = {'posts': [], 'tasks': {}, 'keys': {}, 'mode': 'failed', 'drop': False, 'unavailable': False, 'missing_polls': 0}
+            state = {'role': None, 'posts': [], 'tasks': {}, 'keys': {}, 'mode': 'failed', 'drop': False, 'unavailable': False, 'missing_polls': 0}
             now = datetime.now(timezone.utc)
 
             def api(route):
                 path = urlsplit(route.request.url).path; method = route.request.method; status = 200
                 if path == '/api/me':
-                    result = {'user': {'id': 1, 'role': 'STUDENT'}, 'csrf_token': 'fixture-csrf'}
+                    if state['role']: result = {'user': {'id': 1, 'role': state['role']}, 'csrf_token': 'fixture-csrf'}
+                    else: status, result = 401, {'error': {'message': '请先登录'}}
                 elif path == '/api/classes': result = {'items': [{'id': 1, 'name': '测试班'}], 'total': 1}
                 elif path.startswith('/api/sessions/'):
                     result = {'title': '测试课程', 'class_name': '测试班', 'status': 'OPEN', 'server_time': now.isoformat(),
@@ -75,6 +76,7 @@ def main():
             assert state['missing_polls'] == missing
 
             # Restored photo page can submit; a confirmed failure gets a new key.
+            state['role'] = 'STUDENT'
             page.goto(base+'/faces.html'); expect(page.locator('#page-info')).to_contain_text('第 1 页'); restore_event()
             expect(page.locator('#page-info')).to_contain_text('第 1 页'); photo()
             button = page.get_by_role('button', name='上传照片', exact=True)

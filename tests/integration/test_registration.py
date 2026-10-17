@@ -55,6 +55,12 @@ def test_registration_unknown_photo_retry_and_idempotency(client,settings):
             if owner: s.execute(delete(User).where(User.id==owner))
             s.execute(delete(ClassRoom).where(ClassRoom.id==class_id))
         engine.dispose()
+        from redis import Redis
+        from app.services.capacity import release
+        redis=Redis.from_url(settings.redis_url)
+        try:
+            for task_id in task_ids:release(redis,task_id)
+        finally:redis.close()
 
 
 def test_atomic_enrollment_and_stale_attempt(settings):

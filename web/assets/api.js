@@ -1,3 +1,4 @@
+import {isMobileDevice,takeDesktopPhoto} from './camera.js';
 export class ApiError extends Error {
   constructor(message, status, code) { super(message); this.status=status; this.code=code; }
 }
@@ -11,11 +12,18 @@ export async function api(path, options={}) {
   try {
     const response=await fetch('/api'+path,{...options,headers,credentials:'same-origin',signal:controller.signal});
     const data=response.status===204 ? null : await response.json().catch(()=>null);
-    if (!response.ok) throw new ApiError(data?.error?.message || '服务暂时不可用，请稍后重试',response.status,data?.error?.code);
+    if (!response.ok) {
+      if(response.status===401&&path!=='/auth/login')window.dispatchEvent(new Event('session-expired'));
+      const error=new ApiError(data?.error?.message || '服务暂时不可用，请稍后重试',response.status,data?.error?.code);
+      const retryAfter=Number(response.headers.get('Retry-After'));
+      if(response.status===429&&retryAfter>0)error.message=`操作过于频繁，请 ${Math.ceil(retryAfter)} 秒后重试`;
+      throw error;
+    }
     if(response.status!==204 && data===null)throw new ApiError('服务器返回格式异常，请重试',response.status);
     return data;
   }catch(error){
     if(error.name==='AbortError'&&!options.signal?.aborted)throw new ApiError('请求超时，请保留页面后重试',0,'NETWORK_TIMEOUT');
+    if(error instanceof TypeError)throw new ApiError('网络连接失败，请检查网络后重试',0,'NETWORK_ERROR');
     throw error;
   }finally{clearTimeout(timer);options.signal?.removeEventListener('abort',abort);}
 }
@@ -25,6 +33,10 @@ export async function protectedWrite(path,options={}) {
   return api(path,{...options,headers:{...options.headers,'X-CSRF-Token':me.csrf_token}});
 }
 export function showMessage(node,message,isError=false) { node.textContent=message; node.classList.toggle('error',isError); }
+export function showFeedback(node,message,isError=false) {
+  showMessage(node,message,isError);
+  requestAnimationFrame(()=>{if(node.isConnected&&node.textContent)node.scrollIntoView({block:'center',behavior:'auto'});});
+}
 export function requestKey() {
   if (crypto.randomUUID) return crypto.randomUUID();
   const bytes=crypto.getRandomValues(new Uint8Array(16));bytes[6]=(bytes[6]&15)|64;bytes[8]=(bytes[8]&63)|128;
@@ -35,8 +47,15 @@ export function previewPhoto(input,image) {
   let previous=null;
   const picker=input.closest('.photo-picker'),camera=picker?.querySelector('[data-camera-input]');
   if(camera){
-    picker.querySelector('[data-camera]').onclick=()=>{camera.value='';camera.click();};
-    camera.onchange=()=>{if(!camera.files.length)return;const transfer=new DataTransfer();transfer.items.add(camera.files[0]);input.files=transfer.files;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));};
+    const mobile=isMobileDevice(),button=picker.querySelector('[data-camera]');
+    if(!mobile)picker.querySelector('.photo-choice').firstChild.textContent='选择照片文件';
+    function select(file){const transfer=new DataTransfer();transfer.items.add(file);input.files=transfer.files;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));}
+    button.onclick=async()=>{
+      if(mobile){camera.value='';camera.click();return;}
+      button.disabled=true;
+      try{const file=await takeDesktopPhoto();if(file)select(file);}finally{button.disabled=input.disabled;}
+    };
+    camera.onchange=()=>{if(camera.files.length)select(camera.files[0]);};
   }
   input.addEventListener('change',()=>{
     if(previous) URL.revokeObjectURL(previous);

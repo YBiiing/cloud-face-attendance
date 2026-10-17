@@ -18,7 +18,7 @@ def main(width=390,height=844,output_dir=None):
     try:
         with sync_playwright() as p:
             browser=p.chromium.launch(channel='msedge',headless=True)
-            page=browser.new_page(viewport={'width':width,'height':height},is_mobile=True,has_touch=True,device_scale_factor=1);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+            page=browser.new_page(viewport={'width':width,'height':height},is_mobile=width<768,has_touch=width<768,device_scale_factor=1,**({'user_agent':'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36'} if width<768 else {}));errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
             now=datetime.now(timezone.utc);state={'role':None,'attended':False,'created':False,'posts':0}
             rows=[{'id':1,'title':'自动化测试 · 云计算','class_name':'测试班级','status':'OPEN','attendance_status':'PENDING',
                    'starts_at':(now-timedelta(minutes=1)).isoformat(),'ends_at':(now+timedelta(minutes=10)).isoformat(),
@@ -73,7 +73,9 @@ def main(width=390,height=844,output_dir=None):
             assert page.locator('[name=photo]').get_attribute('capture') is None
             expect(page.locator('[data-camera-input]')).to_have_attribute('capture','user')
             screenshot('photo-options.png')
-            with page.expect_file_chooser() as chooser:page.get_by_role('button',name='拍照',exact=True).click()
+            with page.expect_file_chooser() as chooser:
+                if width<768:page.get_by_role('button',name='拍照',exact=True).click()
+                else:page.locator('.photo-choice').click()
             chooser.value.set_files({'name':'camera-fixture.png','mimeType':'image/png','buffer':b'fixture'})
             expect(page.locator('[data-photo-name]')).to_contain_text('camera-fixture.png')
             assert page.locator('[name=photo]').evaluate('(input)=>input.files.length')==1

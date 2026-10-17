@@ -1,8 +1,24 @@
 import {session,protectedWrite,showMessage} from './api.js';
+const logoutKey='attendance-logout';
+let currentUser=null,leaving=false;
+function leaveWorkspace(){
+  if(leaving)return;
+  leaving=true;currentUser=null;
+  const main=document.querySelector('main');if(main)main.hidden=true;
+  location.replace('/login.html');
+}
+window.addEventListener('session-expired',()=>{if(currentUser)leaveWorkspace();});
+window.addEventListener('storage',event=>{if(event.key===logoutKey&&currentUser)leaveWorkspace();});
+document.addEventListener('visibilitychange',async()=>{
+  if(document.visibilityState!=='visible'||!currentUser||leaving)return;
+  try{const me=await session();if(currentUser&&(me.user.id!==currentUser.id||me.user.role!==currentUser.role))leaveWorkspace();}
+  catch(error){if(error.status===401)leaveWorkspace();}
+});
 export async function workspace(role){
   let me;
-  try{me=await session();}catch(error){if(error.status===401){location.replace('/login.html');return null;}throw error;}
+  try{me=await session();}catch(error){if(error.status===401){leaveWorkspace();return null;}throw error;}
   if(role&&me.user.role!==role){location.replace('/dashboard.html');return null;}
+  currentUser=me.user;
   const nav=document.querySelector('[data-workspace-nav]');
   if(nav){
     nav.replaceChildren();
@@ -16,7 +32,7 @@ export async function workspace(role){
     const links=me.user.role==='ADMIN'?[['工作台','/dashboard.html'],['已创建签到','/sessions.html'],['创建签到','/session-create.html'],['签到记录','/records.html']]:[['我的签到','/dashboard.html'],['签到记录','/records.html'],['我的照片','/faces.html']];
     for(const [label,url] of links){const a=document.createElement('a');a.textContent=label;a.href=url;if(location.pathname===url)a.setAttribute('aria-current','page');nav.append(a);}
     const button=document.createElement('button');button.type='button';button.className='quiet';button.textContent='退出登录';
-    button.onclick=async()=>{button.disabled=true;try{await protectedWrite('/auth/logout',{method:'POST'});for(const key of Object.keys(sessionStorage)){if(key.startsWith('face-task:'))sessionStorage.removeItem(key);}location.replace('/login.html');}catch(error){const node=document.querySelector('#message');if(node)showMessage(node,error.message,true);button.disabled=false;}};
+    button.onclick=async()=>{button.disabled=true;try{await protectedWrite('/auth/logout',{method:'POST'});for(const key of Object.keys(sessionStorage)){if(key.startsWith('face-task:'))sessionStorage.removeItem(key);}try{localStorage.setItem(logoutKey,Date.now()+':'+Math.random());}catch{}leaveWorkspace();}catch(error){const node=document.querySelector('#message');if(node)showMessage(node,error.message,true);button.disabled=false;}};
     header.append(button);
   }
   return me;

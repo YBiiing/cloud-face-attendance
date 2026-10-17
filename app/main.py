@@ -3,9 +3,10 @@
 from pathlib import Path
 from contextlib import asynccontextmanager
 import logging
+import hashlib
 
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi.responses import HTMLResponse
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
@@ -23,6 +24,19 @@ WEB_DIR = Path(__file__).resolve().parent.parent / "web"
 
 def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
+    # Version the whole module tree so relative imports share the new URL prefix.
+    digest=hashlib.sha256()
+    for asset in sorted((WEB_DIR/'assets').rglob('*')):
+        if asset.is_file():
+            digest.update(asset.relative_to(WEB_DIR).as_posix().encode())
+            digest.update(b'\0');digest.update(asset.read_bytes());digest.update(b'\0')
+    asset_version=digest.hexdigest()[:12]
+
+    def public_page(name):
+        html=(WEB_DIR/name).read_text(encoding='utf-8')
+        html=html.replace('"/assets/',f'"/assets/{asset_version}/')
+        return HTMLResponse(html,headers={'Cache-Control':'no-cache'})
+
     @asynccontextmanager
     async def lifespan(app):
         app.state.engine = make_engine(settings)
@@ -83,16 +97,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return LiveResponse()
 
     @app.get("/", include_in_schema=False)
-    def index() -> FileResponse:
-        return FileResponse(WEB_DIR / "index.html")
+    def index() -> HTMLResponse:
+        return public_page('index.html')
 
     @app.get('/{page}.html', include_in_schema=False)
     def page(page: str):
         from fastapi import HTTPException
         if page not in {'register', 'login', 'faces', 'sessions', 'session-create', 'dashboard', 'checkin', 'records'}:
             raise HTTPException(status_code=404)
-        return FileResponse(WEB_DIR / (page + '.html'))
+        return public_page(page+'.html')
 
     # Only public assets are mounted; photos and configuration must stay private.
+    app.mount(f'/assets/{asset_version}', StaticFiles(directory=WEB_DIR / 'assets'), name='versioned-assets')
     app.mount("/assets", StaticFiles(directory=WEB_DIR / "assets"), name="assets")
     return app

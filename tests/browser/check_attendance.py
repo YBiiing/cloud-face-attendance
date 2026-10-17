@@ -77,9 +77,9 @@ def main():
             assert page.locator('#record-list img').count() == 0
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
             state['logged_in'] = False; page.locator('#refresh').click()
-            expect(page.locator('#message')).to_have_text('请先登录后查看签到记录')
-            expect(page.locator('#summary')).to_be_hidden()
-            assert page.locator('#record-list').inner_text() == ''
+            expect(page).to_have_url(base+'/login.html')
+            expect(page.locator('#login-form')).to_be_visible()
+            assert page.locator('#record-list, #summary, [data-workspace-nav]').count() == 0
             assert not errors, errors
             browser.close()
         print('PASS: anonymous UI, reload, unknown person, interrupted query, closed session, session isolation, records, logout; fixture API only')

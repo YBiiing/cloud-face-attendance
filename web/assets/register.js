@@ -1,6 +1,9 @@
-import {api,showMessage,requestKey,previewPhoto} from './api.js';
+import {api,session,showMessage,showFeedback,requestKey,previewPhoto} from './api.js';
 import {pollTask,resultMessages} from './tasks.js';
+async function initialize(){
+try{await session();location.replace('/dashboard.html');return;}catch(error){if(error.status!==401)showFeedback(document.querySelector('#message'),error.message,true);}
 const form=document.querySelector('#register-form'),message=document.querySelector('#message'),button=document.querySelector('#submit');
+form.hidden=false;
 const controller=new AbortController();window.addEventListener('pagehide',()=>controller.abort());
 window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
 let key=requestKey(),retryTask=null,pendingTask=null,busy=false;
@@ -10,16 +13,16 @@ function lock(value){
   for(const field of form.elements)field.disabled=value || (!!retryTask && ['name','student_no','class_id','password'].includes(field.name));
   resume.disabled=value;
 }
-form.addEventListener('input',()=>{key=requestKey();});
+form.addEventListener('input',event=>{key=requestKey();if(event.target.name==='photo'&&!busy)showMessage(message,'照片已更换，请提交');});
 previewPhoto(form.elements.photo,document.querySelector('#preview'));
 function handleError(error){
   if(controller.signal.aborted)return;
   if(error.status===404){
     pendingTask=null;retryTask=null;resume.hidden=true;key=requestKey();
     sessionStorage.removeItem('registration-task');button.textContent='注册并录入';
-    showMessage(message,'保存的注册任务已失效，请重新填写；若学号已注册，请尝试登录或联系老师处理录入。',true);
+    showFeedback(message,'保存的注册任务已失效，请重新填写；若学号已注册，请尝试登录或联系老师处理录入。',true);
   }else{
-    showMessage(message,error.code==='ACCOUNT_EXISTS'?'该学号已注册，请尝试登录；尚未完成录入且凭证丢失时，请联系老师。':error.message||'网络异常，请保留页面并重试',true);
+    showFeedback(message,error.code==='ACCOUNT_EXISTS'?'该学号已注册，请尝试登录；尚未完成录入且凭证丢失时，请联系老师。':error.message||'网络异常，请保留页面并重试',true);
   }
 }
 async function loadClasses(){
@@ -35,7 +38,7 @@ async function follow(task){
   sessionStorage.setItem('registration-task',JSON.stringify(task));
   const result=await pollTask(task,r=>showMessage(message,r.status==='PENDING'?'已接收，正在排队……':'正在处理照片……'),controller.signal);
   pendingTask=null;resume.hidden=true;
-  showMessage(message,resultMessages[result.result_code] || '处理未完成，请稍后重试',result.status!=='SUCCEEDED');
+  showFeedback(message,resultMessages[result.result_code] || '处理未完成，请稍后重试',result.status!=='SUCCEEDED');
   if(result.status==='SUCCEEDED'){sessionStorage.removeItem('registration-task');form.hidden=true;}
   else {retryTask=task;for(const name of ['name','student_no','class_id','password'])form.elements[name].disabled=true;button.textContent='重新上传照片';}
 }
@@ -56,3 +59,6 @@ form.addEventListener('submit',async event=>{
   }catch(error){handleError(error);}
   finally {lock(false);if(pendingTask)for(const field of form.elements)field.disabled=true;}
 });
+
+}
+initialize();
