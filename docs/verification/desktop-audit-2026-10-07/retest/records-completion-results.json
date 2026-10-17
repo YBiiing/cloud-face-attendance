@@ -1,0 +1,37 @@
+{
+  "marker": "DSG8e526e8df4ae",
+  "note": "本次只补测23条直接DB成功记录显示夹具，未创建图库，不涉及真人识别或模型成功签到。",
+  "results": [
+    {
+      "name": "23条成功记录夹具第一页20条",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "成功记录夹具第二页3条",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "第二页切换场次重置第一页且统计一致",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生成功记录仅本人1条",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "记录下拉键盘选择",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "图库与成功记录夹具精确清理",
+      "passed": true,
+      "detail": "{\"cleanup\": \"complete\", \"users\": 24, \"faces\": 0, \"tasks\": 23, \"records\": 23}"
+    }
+  ],
+  "issues": []
+}

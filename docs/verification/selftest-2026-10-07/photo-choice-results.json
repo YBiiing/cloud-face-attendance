@@ -1,0 +1,35 @@
+[
+  {
+    "engine": "chromium",
+    "gallery_to_camera_transfer": true,
+    "camera_cancel_preserves_previous_selection": true,
+    "camera_to_gallery_switch": true,
+    "reset_clears_photo_and_preview": true,
+    "created_blobs": 3,
+    "revoked_blobs": 3,
+    "unexpected_posts": 0,
+    "scope": "Browser file chooser and DataTransfer event handling with real static app; not native iOS/Android camera"
+  },
+  {
+    "engine": "webkit",
+    "gallery_to_camera_transfer": true,
+    "camera_cancel_preserves_previous_selection": true,
+    "camera_to_gallery_switch": true,
+    "reset_clears_photo_and_preview": true,
+    "created_blobs": 3,
+    "revoked_blobs": 3,
+    "unexpected_posts": 0,
+    "scope": "Browser file chooser and DataTransfer event handling with real static app; not native iOS/Android camera"
+  },
+  {
+    "engine": "firefox",
+    "gallery_to_camera_transfer": true,
+    "camera_cancel_preserves_previous_selection": true,
+    "camera_to_gallery_switch": true,
+    "reset_clears_photo_and_preview": true,
+    "created_blobs": 3,
+    "revoked_blobs": 3,
+    "unexpected_posts": 0,
+    "scope": "Browser file chooser and DataTransfer event handling with real static app; not native iOS/Android camera"
+  }
+]

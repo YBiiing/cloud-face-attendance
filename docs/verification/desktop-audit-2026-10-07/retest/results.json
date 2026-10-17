@@ -1,0 +1,768 @@
+{
+  "marker": "DSK589d15b4651b",
+  "backend": "真实隔离HTTP/MySQL/Redis/Celery/ONNX；ACTIVE账号无标准照，不代表真人已录入",
+  "results": [
+    {
+      "name": "未登录首页有登录/注册入口",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "未登录记录页转登录",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "未登录权限页面 dashboard.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "未登录权限页面 faces.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "未登录权限页面 sessions.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "未登录权限页面 session-create.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "错误密码中文反馈",
+      "passed": true,
+      "detail": "账号或密码错误，或尚未完成注册"
+    },
+    {
+      "name": "密码显示切换",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "5 位密码浏览器拒绝提交",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "登录断网反馈",
+      "passed": true,
+      "detail": "网络连接失败，请检查网络后重试"
+    },
+    {
+      "name": "登录断网反馈中文精确核对",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生工作台真实班级场次发现",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生场次下一页",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生全部/待签到标签切换",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "工作台直达公开签到无需再登录",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "签到桌面布局",
+      "passed": true,
+      "detail": "{\"viewport\": 1366, \"scroll\": 1351, \"focus\": \"<body class=\\\"checkin-page\\\"><main><nav><a href=\\\"/\\\">首页</a><a href=\\\"/records.html\\\">我的签到记录</a></nav>\\n<h1 id=\\\"title\\\">桌面夹具课程 DSK589d15b4651b 10</h1><section><p id=\\\"details\\\">Desktop audit DSK589d15b4651b · 进行中 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><p id=\\\"countdown\\\" class=\\\"hint\\\">预计剩余 59 分 50 秒（以服务器接收时间为准）</p><button id=\\\"refresh\\\" type=\\\"button\\\">刷新场次状态</button></section>\\n<p>无需登录。请拍摄本人清晰正面照，服务器会识别身份并核对本场次名单。</p>\\n<form id=\\\"checkin-form\\\"><div class=\\\"photo-picker\\\"><label class=\\\"photo-choice\\\">选择照片文件<input class=\\\"visually-hidden\\\" name=\\\"photo\\\" type=\\\"file\\\" accept=\\\"image/jpeg,image/png\\\" required=\\\"\\\"></label><button type=\\\"button\\\" class=\\\"secondary\\\" data-camera=\\\"\\\">拍照</button><input type=\\\"file\\\" accept=\\\"image/jpeg,image/png\\\" capture=\\\"user\\\" data-camera-input=\\\"\\\" hidden=\\\"\\\"><p class=\\\"hint\\\" data-photo-name=\\\"\\\">尚未选择照片</p></div><p class=\\\"hint\\\">仅支持 JPEG/PNG，最大 8 MiB。照片中只能有一人。</p><img id=\\\"preview\\\" class=\\\"preview\\\" alt=\\\"签到照片预览\\\" hidden=\\\"\\\"><button id=\\\"submit\\\">上传并签到</button></form>\\n<p id=\\\"message\\\" role=\\\"status\\\"></p><button id=\\\"resume\\\" type=\\\"button\\\" hidden=\\\"\\\">继续查询签到结果</button>\\n</main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "学生不能访问老师列表",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生不能访问创建签到",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "已登录访问 / 进入工作台",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "已登录访问 /login.html 进入工作台",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生访问注册页回工作台且不初始化注册任务",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "照片库真实上传→Celery→ONNX无脸拒绝",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "照片库失败重载无虚假照片",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "老师工作台角色导航无照片入口",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "老师访问注册页回工作台且不初始化注册任务",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "老师直接照片页转工作台",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "时间反向提交中文反馈且无发布",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "老师真实创建班级并自动选中",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "空班级发布被拒绝",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "真实发布→列表且名单23人",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "老师场次列表分页",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "老师打开签到页新标签正确场次",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "真实复制链接反馈",
+      "passed": true,
+      "detail": "签到链接已复制，可发给未登录的人员。"
+    },
+    {
+      "name": "老师真实完整23人名单+统计",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "老师名单分页23=20+3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "全部成功记录过滤不混入未签到名单",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生记录页不泄露其他学生名单",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "取消关闭不改变进行中状态",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "确认关闭后状态和按钮更新",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "列表窗口 1920x1080",
+      "passed": true,
+      "detail": "{\"viewport\": 1920, \"scroll\": 1905, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\" aria-current=\\\"page\\\">已创建签到</a><a href=\\\"/session-create.html\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 课程管理</p><h1>已创建签到</h1><p>查看场次状态与出勤记录。创建新场次请使用独立的创建页面。</p><p id=\\\"message\\\" role=\\\"status\\\">本场签到已结束</p><div id=\\\"admin-area\\\"><div class=\\\"toolbar\\\"><a class=\\\"button-link\\\" href=\\\"/session-create.html\\\">＋ 创建签到</a><button id=\\\"refresh\\\" class=\\\"quiet\\\">刷新列表</button></div><div id=\\\"session-list\\\"><section class=\\\"session-card\\\"><span class=\\\"badge\\\">已结束</span><h2>桌面真实创建 DSK589d15b4651b</h2><p>应到 23 人 · 2026/10/7 21:44:00 至 2026/10/7 22:14:00</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=316\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=nJ1ygbuBjVusbG_nd4dA5Cv2xRXKV6SX\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\" disabled=\\\"\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 10</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=315\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=8B_Yw-VVh_QI-9rtQL8NQxgiTzPFfadA\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">未开始</span><h2>桌面夹具课程 DSK589d15b4651b 9</h2><p>应到 23 人 · 2026/10/7 22:03:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=314\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=rXH7p5AhT1nDTL1Yp78KSDnv2pOJSigS\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 8</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=313\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=UZaW0B4xkadVsXEA1jO4IklZkipwM2fp\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 7</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=312\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=aCWuhRcO1d0osp_0knwIz-jExVYvqEfn\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 6</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=311\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=H1FSiY86sW44HD_DG1fkpkW6dhsX7LWy\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 5</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=310\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=YqyBbO0o3XaogCwYHI9sqLpZxUGxV8-K\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 4</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=309\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=OoZABitENjrklpQMFrolDnawgWIixmal\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 3</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=308\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=1ocLnK78I2P2ATeGMNVYpHvdGsXv6Bbk\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 2</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=307\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=-U6zvGx_svX9FN0wKO62BKEpGBOLPgpt\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\" style=\\\"\\\"></label></section></div><nav class=\\\"pager\\\" aria-label=\\\"分页\\\"><button id=\\\"previous\\\" disabled=\\\"\\\">上一页</button><span id=\\\"page-info\\\">第 1 页，共 13 场</span><button id=\\\"next\\\">下一页</button></nav></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "创建窗口 1920x1080",
+      "passed": true,
+      "detail": "{\"viewport\": 1920, \"scroll\": 1920, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\">已创建签到</a><a href=\\\"/session-create.html\\\" aria-current=\\\"page\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 发布课程签到</p><h1>创建签到</h1><p>选择班级与时间，发布后学生即可在自己的待签到列表中查看。</p><p id=\\\"message\\\" role=\\\"status\\\"></p><div id=\\\"admin-area\\\"><form id=\\\"session-form\\\"><label>课程名称<input name=\\\"title\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：云计算 · 第三次课\\\"></label><label>签到班级<select name=\\\"class_id\\\" required=\\\"\\\"><option value=\\\"\\\">请选择班级</option><option value=\\\"91\\\">自动化演示临时班级 E2E2cfed7b864e24510</option><option value=\\\"498\\\">Desktop audit DSK589d15b4651b</option><option value=\\\"499\\\">Desktop empty DSK589d15b4651b</option></select></label><div class=\\\"field-grid\\\"><label>开始时间<input name=\\\"starts_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label><label>结束时间<input name=\\\"ends_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label></div><p class=\\\"hint\\\">使用本机时间。名单为创建时本班已完成录入的学生；请先确认学生已注册。发布后可提前结束，不能修改名单或时间。</p><div class=\\\"toolbar\\\"><button type=\\\"submit\\\">发布签到</button><a href=\\\"/sessions.html\\\">取消，返回场次列表</a></div></form><details><summary>还没有班级？创建班级</summary><form id=\\\"class-form\\\"><label>班级名称<input name=\\\"name\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：计算机 2401 班\\\"></label><button>创建班级</button><p class=\\\"hint\\\">创建班级后，学生需选择该班级并完成注册录入，才能发布签到。</p></form></details></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "列表窗口 1366x768",
+      "passed": true,
+      "detail": "{\"viewport\": 1366, \"scroll\": 1351, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\" aria-current=\\\"page\\\">已创建签到</a><a href=\\\"/session-create.html\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 课程管理</p><h1>已创建签到</h1><p>查看场次状态与出勤记录。创建新场次请使用独立的创建页面。</p><p id=\\\"message\\\" role=\\\"status\\\"></p><div id=\\\"admin-area\\\"><div class=\\\"toolbar\\\"><a class=\\\"button-link\\\" href=\\\"/session-create.html\\\">＋ 创建签到</a><button id=\\\"refresh\\\" class=\\\"quiet\\\">刷新列表</button></div><div id=\\\"session-list\\\"><section class=\\\"session-card\\\"><span class=\\\"badge\\\">已结束</span><h2>桌面真实创建 DSK589d15b4651b</h2><p>应到 23 人 · 2026/10/7 21:44:00 至 2026/10/7 22:14:00</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=316\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=nJ1ygbuBjVusbG_nd4dA5Cv2xRXKV6SX\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\" disabled=\\\"\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 10</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=315\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=8B_Yw-VVh_QI-9rtQL8NQxgiTzPFfadA\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">未开始</span><h2>桌面夹具课程 DSK589d15b4651b 9</h2><p>应到 23 人 · 2026/10/7 22:03:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=314\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=rXH7p5AhT1nDTL1Yp78KSDnv2pOJSigS\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 8</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=313\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=UZaW0B4xkadVsXEA1jO4IklZkipwM2fp\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 7</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=312\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=aCWuhRcO1d0osp_0knwIz-jExVYvqEfn\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 6</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=311\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=H1FSiY86sW44HD_DG1fkpkW6dhsX7LWy\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 5</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=310\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=YqyBbO0o3XaogCwYHI9sqLpZxUGxV8-K\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 4</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=309\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=OoZABitENjrklpQMFrolDnawgWIixmal\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 3</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=308\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=1ocLnK78I2P2ATeGMNVYpHvdGsXv6Bbk\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 2</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=307\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=-U6zvGx_svX9FN0wKO62BKEpGBOLPgpt\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section></div><nav class=\\\"pager\\\" aria-label=\\\"分页\\\"><button id=\\\"previous\\\" disabled=\\\"\\\">上一页</button><span id=\\\"page-info\\\">第 1 页，共 13 场</span><button id=\\\"next\\\">下一页</button></nav></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "创建窗口 1366x768",
+      "passed": true,
+      "detail": "{\"viewport\": 1366, \"scroll\": 1351, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\">已创建签到</a><a href=\\\"/session-create.html\\\" aria-current=\\\"page\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 发布课程签到</p><h1>创建签到</h1><p>选择班级与时间，发布后学生即可在自己的待签到列表中查看。</p><p id=\\\"message\\\" role=\\\"status\\\"></p><div id=\\\"admin-area\\\"><form id=\\\"session-form\\\"><label>课程名称<input name=\\\"title\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：云计算 · 第三次课\\\"></label><label>签到班级<select name=\\\"class_id\\\" required=\\\"\\\"><option value=\\\"\\\">请选择班级</option><option value=\\\"91\\\">自动化演示临时班级 E2E2cfed7b864e24510</option><option value=\\\"498\\\">Desktop audit DSK589d15b4651b</option><option value=\\\"499\\\">Desktop empty DSK589d15b4651b</option></select></label><div class=\\\"field-grid\\\"><label>开始时间<input name=\\\"starts_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label><label>结束时间<input name=\\\"ends_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label></div><p class=\\\"hint\\\">使用本机时间。名单为创建时本班已完成录入的学生；请先确认学生已注册。发布后可提前结束，不能修改名单或时间。</p><div class=\\\"toolbar\\\"><button type=\\\"submit\\\">发布签到</button><a href=\\\"/sessions.html\\\">取消，返回场次列表</a></div></form><details><summary>还没有班级？创建班级</summary><form id=\\\"class-form\\\"><label>班级名称<input name=\\\"name\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：计算机 2401 班\\\"></label><button>创建班级</button><p class=\\\"hint\\\">创建班级后，学生需选择该班级并完成注册录入，才能发布签到。</p></form></details></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "列表窗口 1024x768",
+      "passed": true,
+      "detail": "{\"viewport\": 1024, \"scroll\": 1009, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\" aria-current=\\\"page\\\">已创建签到</a><a href=\\\"/session-create.html\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 课程管理</p><h1>已创建签到</h1><p>查看场次状态与出勤记录。创建新场次请使用独立的创建页面。</p><p id=\\\"message\\\" role=\\\"status\\\"></p><div id=\\\"admin-area\\\"><div class=\\\"toolbar\\\"><a class=\\\"button-link\\\" href=\\\"/session-create.html\\\">＋ 创建签到</a><button id=\\\"refresh\\\" class=\\\"quiet\\\">刷新列表</button></div><div id=\\\"session-list\\\"><section class=\\\"session-card\\\"><span class=\\\"badge\\\">已结束</span><h2>桌面真实创建 DSK589d15b4651b</h2><p>应到 23 人 · 2026/10/7 21:44:00 至 2026/10/7 22:14:00</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=316\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=nJ1ygbuBjVusbG_nd4dA5Cv2xRXKV6SX\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\" disabled=\\\"\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 10</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=315\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=8B_Yw-VVh_QI-9rtQL8NQxgiTzPFfadA\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">未开始</span><h2>桌面夹具课程 DSK589d15b4651b 9</h2><p>应到 23 人 · 2026/10/7 22:03:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=314\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=rXH7p5AhT1nDTL1Yp78KSDnv2pOJSigS\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 8</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=313\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=UZaW0B4xkadVsXEA1jO4IklZkipwM2fp\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 7</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=312\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=aCWuhRcO1d0osp_0knwIz-jExVYvqEfn\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 6</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=311\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=H1FSiY86sW44HD_DG1fkpkW6dhsX7LWy\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 5</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=310\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=YqyBbO0o3XaogCwYHI9sqLpZxUGxV8-K\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 4</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=309\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=OoZABitENjrklpQMFrolDnawgWIixmal\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 3</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=308\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=1ocLnK78I2P2ATeGMNVYpHvdGsXv6Bbk\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 2</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=307\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=-U6zvGx_svX9FN0wKO62BKEpGBOLPgpt\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section></div><nav class=\\\"pager\\\" aria-label=\\\"分页\\\"><button id=\\\"previous\\\" disabled=\\\"\\\">上一页</button><span id=\\\"page-info\\\">第 1 页，共 13 场</span><button id=\\\"next\\\">下一页</button></nav></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "创建窗口 1024x768",
+      "passed": true,
+      "detail": "{\"viewport\": 1024, \"scroll\": 1009, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\">已创建签到</a><a href=\\\"/session-create.html\\\" aria-current=\\\"page\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 发布课程签到</p><h1>创建签到</h1><p>选择班级与时间，发布后学生即可在自己的待签到列表中查看。</p><p id=\\\"message\\\" role=\\\"status\\\"></p><div id=\\\"admin-area\\\"><form id=\\\"session-form\\\"><label>课程名称<input name=\\\"title\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：云计算 · 第三次课\\\"></label><label>签到班级<select name=\\\"class_id\\\" required=\\\"\\\"><option value=\\\"\\\">请选择班级</option><option value=\\\"91\\\">自动化演示临时班级 E2E2cfed7b864e24510</option><option value=\\\"498\\\">Desktop audit DSK589d15b4651b</option><option value=\\\"499\\\">Desktop empty DSK589d15b4651b</option></select></label><div class=\\\"field-grid\\\"><label>开始时间<input name=\\\"starts_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label><label>结束时间<input name=\\\"ends_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label></div><p class=\\\"hint\\\">使用本机时间。名单为创建时本班已完成录入的学生；请先确认学生已注册。发布后可提前结束，不能修改名单或时间。</p><div class=\\\"toolbar\\\"><button type=\\\"submit\\\">发布签到</button><a href=\\\"/sessions.html\\\">取消，返回场次列表</a></div></form><details><summary>还没有班级？创建班级</summary><form id=\\\"class-form\\\"><label>班级名称<input name=\\\"name\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：计算机 2401 班\\\"></label><button>创建班级</button><p class=\\\"hint\\\">创建班级后，学生需选择该班级并完成注册录入，才能发布签到。</p></form></details></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "列表窗口 800x600",
+      "passed": true,
+      "detail": "{\"viewport\": 800, \"scroll\": 785, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\" aria-current=\\\"page\\\">已创建签到</a><a href=\\\"/session-create.html\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 课程管理</p><h1>已创建签到</h1><p>查看场次状态与出勤记录。创建新场次请使用独立的创建页面。</p><p id=\\\"message\\\" role=\\\"status\\\"></p><div id=\\\"admin-area\\\"><div class=\\\"toolbar\\\"><a class=\\\"button-link\\\" href=\\\"/session-create.html\\\">＋ 创建签到</a><button id=\\\"refresh\\\" class=\\\"quiet\\\">刷新列表</button></div><div id=\\\"session-list\\\"><section class=\\\"session-card\\\"><span class=\\\"badge\\\">已结束</span><h2>桌面真实创建 DSK589d15b4651b</h2><p>应到 23 人 · 2026/10/7 21:44:00 至 2026/10/7 22:14:00</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=316\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=nJ1ygbuBjVusbG_nd4dA5Cv2xRXKV6SX\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\" disabled=\\\"\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 10</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=315\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=8B_Yw-VVh_QI-9rtQL8NQxgiTzPFfadA\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">未开始</span><h2>桌面夹具课程 DSK589d15b4651b 9</h2><p>应到 23 人 · 2026/10/7 22:03:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=314\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=rXH7p5AhT1nDTL1Yp78KSDnv2pOJSigS\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 8</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=313\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=UZaW0B4xkadVsXEA1jO4IklZkipwM2fp\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 7</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=312\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=aCWuhRcO1d0osp_0knwIz-jExVYvqEfn\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 6</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=311\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=H1FSiY86sW44HD_DG1fkpkW6dhsX7LWy\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 5</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=310\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=YqyBbO0o3XaogCwYHI9sqLpZxUGxV8-K\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 4</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=309\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=OoZABitENjrklpQMFrolDnawgWIixmal\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 3</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=308\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=1ocLnK78I2P2ATeGMNVYpHvdGsXv6Bbk\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 2</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=307\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=-U6zvGx_svX9FN0wKO62BKEpGBOLPgpt\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section></div><nav class=\\\"pager\\\" aria-label=\\\"分页\\\"><button id=\\\"previous\\\" disabled=\\\"\\\">上一页</button><span id=\\\"page-info\\\">第 1 页，共 13 场</span><button id=\\\"next\\\">下一页</button></nav></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "创建窗口 800x600",
+      "passed": true,
+      "detail": "{\"viewport\": 800, \"scroll\": 785, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\">已创建签到</a><a href=\\\"/session-create.html\\\" aria-current=\\\"page\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 发布课程签到</p><h1>创建签到</h1><p>选择班级与时间，发布后学生即可在自己的待签到列表中查看。</p><p id=\\\"message\\\" role=\\\"status\\\"></p><div id=\\\"admin-area\\\"><form id=\\\"session-form\\\"><label>课程名称<input name=\\\"title\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：云计算 · 第三次课\\\"></label><label>签到班级<select name=\\\"class_id\\\" required=\\\"\\\"><option value=\\\"\\\">请选择班级</option><option value=\\\"91\\\">自动化演示临时班级 E2E2cfed7b864e24510</option><option value=\\\"498\\\">Desktop audit DSK589d15b4651b</option><option value=\\\"499\\\">Desktop empty DSK589d15b4651b</option></select></label><div class=\\\"field-grid\\\"><label>开始时间<input name=\\\"starts_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label><label>结束时间<input name=\\\"ends_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label></div><p class=\\\"hint\\\">使用本机时间。名单为创建时本班已完成录入的学生；请先确认学生已注册。发布后可提前结束，不能修改名单或时间。</p><div class=\\\"toolbar\\\"><button type=\\\"submit\\\">发布签到</button><a href=\\\"/sessions.html\\\">取消，返回场次列表</a></div></form><details><summary>还没有班级？创建班级</summary><form id=\\\"class-form\\\"><label>班级名称<input name=\\\"name\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：计算机 2401 班\\\"></label><button>创建班级</button><p class=\\\"hint\\\">创建班级后，学生需选择该班级并完成注册录入，才能发布签到。</p></form></details></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "列表窗口 640x600",
+      "passed": true,
+      "detail": "{\"viewport\": 640, \"scroll\": 625, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\" aria-current=\\\"page\\\">已创建签到</a><a href=\\\"/session-create.html\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 课程管理</p><h1>已创建签到</h1><p>查看场次状态与出勤记录。创建新场次请使用独立的创建页面。</p><p id=\\\"message\\\" role=\\\"status\\\"></p><div id=\\\"admin-area\\\"><div class=\\\"toolbar\\\"><a class=\\\"button-link\\\" href=\\\"/session-create.html\\\">＋ 创建签到</a><button id=\\\"refresh\\\" class=\\\"quiet\\\">刷新列表</button></div><div id=\\\"session-list\\\"><section class=\\\"session-card\\\"><span class=\\\"badge\\\">已结束</span><h2>桌面真实创建 DSK589d15b4651b</h2><p>应到 23 人 · 2026/10/7 21:44:00 至 2026/10/7 22:14:00</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=316\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=nJ1ygbuBjVusbG_nd4dA5Cv2xRXKV6SX\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\" disabled=\\\"\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 10</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=315\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=8B_Yw-VVh_QI-9rtQL8NQxgiTzPFfadA\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">未开始</span><h2>桌面夹具课程 DSK589d15b4651b 9</h2><p>应到 23 人 · 2026/10/7 22:03:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=314\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=rXH7p5AhT1nDTL1Yp78KSDnv2pOJSigS\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 8</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=313\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=UZaW0B4xkadVsXEA1jO4IklZkipwM2fp\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 7</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=312\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=aCWuhRcO1d0osp_0knwIz-jExVYvqEfn\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 6</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=311\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=H1FSiY86sW44HD_DG1fkpkW6dhsX7LWy\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 5</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=310\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=YqyBbO0o3XaogCwYHI9sqLpZxUGxV8-K\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 4</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=309\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=OoZABitENjrklpQMFrolDnawgWIixmal\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 3</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=308\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=1ocLnK78I2P2ATeGMNVYpHvdGsXv6Bbk\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section><section class=\\\"session-card\\\"><span class=\\\"badge\\\">进行中</span><h2>桌面夹具课程 DSK589d15b4651b 2</h2><p>应到 23 人 · 2026/10/7 21:41:57 至 2026/10/7 22:43:57</p><div class=\\\"toolbar\\\"><a href=\\\"/records.html?session_id=307\\\" class=\\\"button-link\\\">查看出勤名单</a><a href=\\\"http://127.0.0.1:8001/checkin.html?session_code=-U6zvGx_svX9FN0wKO62BKEpGBOLPgpt\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\" class=\\\"button-link secondary\\\">打开签到页面</a><button type=\\\"button\\\" class=\\\"secondary\\\">复制签到链接</button><button class=\\\"quiet\\\">提前结束</button></div><label hidden=\\\"\\\">本场签到链接<input readonly=\\\"\\\"></label></section></div><nav class=\\\"pager\\\" aria-label=\\\"分页\\\"><button id=\\\"previous\\\" disabled=\\\"\\\">上一页</button><span id=\\\"page-info\\\">第 1 页，共 13 场</span><button id=\\\"next\\\">下一页</button></nav></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "创建窗口 640x600",
+      "passed": true,
+      "detail": "{\"viewport\": 640, \"scroll\": 625, \"focus\": \"<body class=\\\"has-workspace\\\"><main><header class=\\\"workspace-header\\\"><a href=\\\"/dashboard.html\\\" class=\\\"brand\\\">课程签到</a><span class=\\\"role-label\\\">老师</span><button type=\\\"button\\\" class=\\\"quiet\\\">退出登录</button></header><nav data-workspace-nav=\\\"\\\" aria-label=\\\"主要导航\\\" style=\\\"--nav-items: 4;\\\"><a href=\\\"/dashboard.html\\\">工作台</a><a href=\\\"/sessions.html\\\">已创建签到</a><a href=\\\"/session-create.html\\\" aria-current=\\\"page\\\">创建签到</a><a href=\\\"/records.html\\\">签到记录</a></nav><p class=\\\"eyebrow\\\">老师 · 发布课程签到</p><h1>创建签到</h1><p>选择班级与时间，发布后学生即可在自己的待签到列表中查看。</p><p id=\\\"message\\\" role=\\\"status\\\"></p><div id=\\\"admin-area\\\"><form id=\\\"session-form\\\"><label>课程名称<input name=\\\"title\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：云计算 · 第三次课\\\"></label><label>签到班级<select name=\\\"class_id\\\" required=\\\"\\\"><option value=\\\"\\\">请选择班级</option><option value=\\\"91\\\">自动化演示临时班级 E2E2cfed7b864e24510</option><option value=\\\"498\\\">Desktop audit DSK589d15b4651b</option><option value=\\\"499\\\">Desktop empty DSK589d15b4651b</option></select></label><div class=\\\"field-grid\\\"><label>开始时间<input name=\\\"starts_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label><label>结束时间<input name=\\\"ends_at\\\" type=\\\"datetime-local\\\" required=\\\"\\\"></label></div><p class=\\\"hint\\\">使用本机时间。名单为创建时本班已完成录入的学生；请先确认学生已注册。发布后可提前结束，不能修改名单或时间。</p><div class=\\\"toolbar\\\"><button type=\\\"submit\\\">发布签到</button><a href=\\\"/sessions.html\\\">取消，返回场次列表</a></div></form><details><summary>还没有班级？创建班级</summary><form id=\\\"class-form\\\"><label>班级名称<input name=\\\"name\\\" required=\\\"\\\" maxlength=\\\"100\\\" placeholder=\\\"例如：计算机 2401 班\\\"></label><button>创建班级</button><p class=\\\"hint\\\">创建班级后，学生需选择该班级并完成注册录入，才能发布签到。</p></form></details></div></main>\\n</body>\", \"links\": []}"
+    },
+    {
+      "name": "创建页键盘Tab顺序可达日期/发布/返回/创建班级",
+      "passed": true,
+      "detail": "[{\"tag\": \"INPUT\", \"name\": \"title\", \"text\": \"\"}, {\"tag\": \"SELECT\", \"name\": \"class_id\", \"text\": \"请选择班级自动化演示临时班级 E2E2cfed7b864e24510Desktop audit DSK589d15b4651bDesktop empty DSK\"}, {\"tag\": \"INPUT\", \"name\": \"starts_at\", \"text\": \"\"}, {\"tag\": \"INPUT\", \"name\": \"starts_at\", \"text\": \"\"}, {\"tag\": \"INPUT\", \"name\": \"ends_at\", \"text\": \"\"}, {\"tag\": \"INPUT\", \"name\": \"ends_at\", \"text\": \"\"}, {\"tag\": \"BUTTON\", \"name\": \"\", \"text\": \"发布签到\"}, {\"tag\": \"A\", \"name\": \"\", \"text\": \"取消，返回场次列表\"}, {\"tag\": \"SUMMARY\", \"name\": null, \"text\": \"还没有班级？创建班级\"}, {\"tag\": \"BODY\", \"name\": null, \"text\": \"课程签到老师退出登录工作台已创建签到创建签到签到记录老师 · 发布课程签到创建签到选择班级与时间，发布后学生即可在自己的待签到列表中查看。课程名称签到班级请选择\"}]"
+    },
+    {
+      "name": "退出后后退不会保留工作台/照片页",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "错误签到码中文反馈无上传",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "未提供签到码友好反馈",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "真实注册无脸拒绝/固定身份可重传",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "注册页面刷新恢复真实拒绝结果",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "注册断网中文反馈且恢复上传按钮",
+      "passed": true,
+      "detail": "网络连接失败，请检查网络后重试"
+    },
+    {
+      "name": "浏览器无未捕获JS异常",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "独立随机夹具精确清理",
+      "passed": true,
+      "detail": "{\"cleanup\": \"complete\", \"users\": 25, \"classes\": 2, \"sessions\": 12, \"tasks\": 2}"
+    }
+  ],
+  "issues": [],
+  "page_errors": [],
+  "api_responses": [
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/auth/login",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=pending&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=pending&page=2&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=pending&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=all&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/8B_Yw-VVh_QI-9rtQL8NQxgiTzPFfadA",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=pending&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=pending&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=pending&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=pending&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=pending&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/faces?user_id=1062&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/faces",
+      "status": 202
+    },
+    {
+      "path": "/api/tasks/13ac14e7-9765-44b7-aa32-5c7069225c5d",
+      "status": 200
+    },
+    {
+      "path": "/api/tasks/13ac14e7-9765-44b7-aa32-5c7069225c5d",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/faces?user_id=1062&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/classes",
+      "status": 201
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions",
+      "status": 409
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions",
+      "status": 201
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=2&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/records/sessions?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/records?page=1&page_size=20&session_id=316",
+      "status": 200
+    },
+    {
+      "path": "/api/records?page=2&page_size=20&session_id=316",
+      "status": 200
+    },
+    {
+      "path": "/api/records?page=1&page_size=20",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/records/sessions?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/records?page=1&page_size=20",
+      "status": 200
+    },
+    {
+      "path": "/api/records?page=1&page_size=20&session_id=315",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/316/close",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions?page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/sessions/mine?view=pending&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/faces?user_id=1062&page=1&page_size=10",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/logout",
+      "status": 204
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/sessions/does-not-exist",
+      "status": 404
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/register",
+      "status": 202
+    },
+    {
+      "path": "/api/tasks/712b1e4f-0601-442f-8169-de2dc0914d6c",
+      "status": 200
+    },
+    {
+      "path": "/api/tasks/712b1e4f-0601-442f-8169-de2dc0914d6c",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/classes?page=1&page_size=100",
+      "status": 200
+    },
+    {
+      "path": "/api/tasks/712b1e4f-0601-442f-8169-de2dc0914d6c",
+      "status": 200
+    }
+  ]
+}

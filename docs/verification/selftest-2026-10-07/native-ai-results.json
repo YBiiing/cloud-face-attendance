@@ -1,0 +1,14 @@
+{
+  "scope": "Native Android Chrome and system photo picker; AI fictional portraits; real model; not human acceptance",
+  "account_status": "ACTIVE",
+  "feature_dimension": 512,
+  "feature_norm": 1.0,
+  "task_codes": [
+    "CHECKED_IN",
+    "ENROLLED",
+    "UNKNOWN_PERSON"
+  ],
+  "records": 1,
+  "record_identity_correct": true,
+  "checkin_tasks_have_no_owner_identity": true
+}

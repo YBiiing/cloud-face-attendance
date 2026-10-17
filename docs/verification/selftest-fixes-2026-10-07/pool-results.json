@@ -1,0 +1,22 @@
+{
+  "scope": "Actual FastAPI/MySQL/Redis, in-process TestClient; scheduling barrier only; blank PNG; no model or rate-limit mocks",
+  "http_counts": {
+    "202": 10
+  },
+  "exceptions": [],
+  "pool_checkedout_peak": 3,
+  "pool_size": 5,
+  "max_overflow": 5,
+  "pool_timeout_seconds": 1,
+  "health_during_pool_contention": {
+    "live": {
+      "status": 200,
+      "duration_ms": 36.0
+    },
+    "ready": {
+      "status": 200,
+      "duration_ms": 54.2
+    }
+  },
+  "cleanup": "complete"
+}

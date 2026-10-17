@@ -1,0 +1,25 @@
+{
+  "session_found": true,
+  "session_id": 231,
+  "title": "AndroidTest Course",
+  "status": "OPEN",
+  "expected": 1,
+  "attended": 0,
+  "absent": 1,
+  "pending_tasks": 0,
+  "finalized": false,
+  "task_counts": {
+    "REJECTED": 1
+  },
+  "record_limit": 100,
+  "recent_task_limit": 20,
+  "records": [],
+  "recent_tasks": [
+    {
+      "task_id": "67856cdd-8f56-4519-a400-88f7b3ab40c9",
+      "status": "REJECTED",
+      "result_code": "NO_FACE",
+      "received_at": "2026-10-06T17:12:34.395071+00:00"
+    }
+  ]
+}

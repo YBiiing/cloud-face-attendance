@@ -1,0 +1,35 @@
+{
+  "sessions": {
+    "325": {
+      "records": 1,
+      "tasks": [
+        {
+          "status": "SUCCEEDED",
+          "result_code": "ALREADY_CHECKED_IN"
+        },
+        {
+          "status": "SUCCEEDED",
+          "result_code": "CHECKED_IN"
+        },
+        {
+          "status": "REJECTED",
+          "result_code": "UNKNOWN_PERSON"
+        },
+        {
+          "status": "REJECTED",
+          "result_code": "NOT_IN_ROSTER"
+        }
+      ]
+    },
+    "335": {
+      "records": 1,
+      "tasks": [
+        {
+          "status": "SUCCEEDED",
+          "result_code": "CHECKED_IN"
+        }
+      ]
+    }
+  },
+  "short_password_account_created": false
+}

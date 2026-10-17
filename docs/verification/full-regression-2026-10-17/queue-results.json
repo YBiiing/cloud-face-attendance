@@ -1,0 +1,23 @@
+{
+  "scope": "Real loopback HTTP, MySQL, Redis and ONNX; worker paused to hold backlog, then resumed; limits unchanged; not successful-human throughput",
+  "requests": 60,
+  "concurrent_clients": 10,
+  "http_counts": {
+    "202": 50,
+    "503": 10
+  },
+  "rejection_codes": {
+    "QUEUE_FULL": 10
+  },
+  "accepted_tasks": 50,
+  "terminal_codes": {
+    "NO_FACE": 50
+  },
+  "capacity_before_drain": 50,
+  "capacity_after_drain": 0,
+  "drain_seconds": 9.85,
+  "cleanup": {
+    "tasks_removed": 50,
+    "cleanup": "complete"
+  }
+}

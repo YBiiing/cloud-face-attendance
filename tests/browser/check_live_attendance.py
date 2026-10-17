@@ -6,13 +6,17 @@ Only the blank-image rejection is biometric evidence; no positive face fixture.
 import base64
 import html
 import json
+import os
 from pathlib import Path
 import subprocess
 from uuid import uuid4
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[2]
-COMPOSE = ['docker', 'compose', '-p', 'face-attendance-test', '-f', 'compose.yaml', '-f', 'compose.test.yaml', '-f', 'compose.e2e.yaml']
+PROJECT = os.getenv('ATTENDANCE_TEST_PROJECT', 'face-attendance-test')
+if PROJECT != 'face-attendance-test' and not PROJECT.startswith('face-attendance-test-'):
+    raise RuntimeError('Only an explicitly isolated test project is allowed')
+COMPOSE = ['docker', 'compose', '-p', PROJECT, '-f', 'compose.yaml', '-f', 'compose.test.yaml', '-f', 'compose.e2e.yaml']
 
 
 def server_python(code):
@@ -57,7 +61,8 @@ buffer=BytesIO();Image.new('RGB',(640,640),'white').save(buffer,format='PNG')
 result['blank_png']=base64.b64encode(buffer.getvalue()).decode()
 engine.dispose();print(json.dumps(result))
 ''')
-    output = ROOT/'docs'/'verification'
+    output = Path(os.getenv('ATTENDANCE_TEST_OUTPUT', str(ROOT/'docs'/'verification')))
+    output.mkdir(parents=True,exist_ok=True)
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(channel='msedge', headless=True)

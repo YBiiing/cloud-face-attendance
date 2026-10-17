@@ -1,0 +1,11 @@
+{
+  "redis_down": {
+    "liveness": 200,
+    "readiness": 503,
+    "checkin": 503,
+    "code": "SERVICE_UNAVAILABLE",
+    "readiness_seconds": 8.011,
+    "upload_seconds": 3.557
+  },
+  "restored_readiness": 200
+}

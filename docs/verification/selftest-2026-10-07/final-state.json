@@ -1,0 +1,43 @@
+{
+  "database": {
+    "owned_fixture_classes_checked": 7,
+    "remaining_owned_classes": 0,
+    "remaining_owned_class_users": 0,
+    "remaining_owned_sessions": 0,
+    "active_tasks": 0,
+    "active_faces": 0,
+    "reservations": 0
+  },
+  "evidence_integrity": {
+    "json_files": 26,
+    "png_files": 29,
+    "python_scripts": 2,
+    "report_links_valid": true
+  },
+  "health_before_test_stack_stop": {
+    "development": {
+      "url": "http://192.168.31.29:8000",
+      "http_status": 200,
+      "body": {
+        "status": "ready",
+        "checks": {
+          "mysql": "ok",
+          "redis": "ok",
+          "model_worker": "ok"
+        }
+      }
+    },
+    "test": {
+      "url": "http://127.0.0.1:8001",
+      "http_status": 200,
+      "body": {
+        "status": "ready",
+        "checks": {
+          "mysql": "ok",
+          "redis": "ok",
+          "model_worker": "ok"
+        }
+      }
+    }
+  }
+}

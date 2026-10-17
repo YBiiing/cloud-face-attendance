@@ -1,0 +1,7 @@
+{
+  "worker_down_task": "PENDING",
+  "worker_down_readiness": 503,
+  "heartbeat_detection_seconds": 15.036,
+  "restored_task_status": "REJECTED",
+  "restored_result_code": "NO_FACE"
+}

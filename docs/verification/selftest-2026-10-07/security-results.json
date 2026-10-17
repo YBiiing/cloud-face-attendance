@@ -1,0 +1,104 @@
+[
+  {
+    "name": "anonymous /api/records",
+    "status": 401,
+    "code": "UNAUTHENTICATED",
+    "message": "请先登录"
+  },
+  {
+    "name": "anonymous /api/faces",
+    "status": 401,
+    "code": "UNAUTHENTICATED",
+    "message": "请先登录"
+  },
+  {
+    "name": "anonymous /api/sessions/mine",
+    "status": 401,
+    "code": "UNAUTHENTICATED",
+    "message": "请先登录"
+  },
+  {
+    "name": "developer docs /docs",
+    "status": 404,
+    "code": "NOT_FOUND",
+    "message": "资源不存在"
+  },
+  {
+    "name": "developer docs /openapi.json",
+    "status": 404,
+    "code": "NOT_FOUND",
+    "message": "资源不存在"
+  },
+  {
+    "name": "cross-site origin",
+    "status": 403,
+    "code": "FORBIDDEN",
+    "message": "请求来源不允许"
+  },
+  {
+    "name": "client identity injection",
+    "status": 422,
+    "code": "INVALID_REQUEST",
+    "message": "上传字段不合法"
+  },
+  {
+    "name": "invalid image",
+    "status": 422,
+    "code": "INVALID_IMAGE",
+    "message": "图片损坏或无法读取"
+  },
+  {
+    "name": "oversize image",
+    "status": 413,
+    "code": "IMAGE_TOO_LARGE",
+    "message": "照片超过大小限制"
+  },
+  {
+    "name": "two photo files",
+    "status": 400,
+    "code": "REQUEST_FAILED",
+    "message": "请求未完成"
+  },
+  {
+    "name": "duplicate session field",
+    "status": 422,
+    "code": "INVALID_REQUEST",
+    "message": "上传字段不合法"
+  },
+  {
+    "name": "missing idempotency key",
+    "status": 422,
+    "code": "INVALID_REQUEST",
+    "message": "请提供有效的随机请求键"
+  },
+  {
+    "name": "student login",
+    "status": 200,
+    "code": null,
+    "message": null
+  },
+  {
+    "name": "missing csrf",
+    "status": 403,
+    "code": "FORBIDDEN",
+    "message": "页面已过期，请刷新后重试"
+  },
+  {
+    "name": "student creates course",
+    "status": 403,
+    "code": "FORBIDDEN",
+    "message": "仅老师可操作"
+  },
+  {
+    "name": "logout",
+    "status": 204,
+    "code": null,
+    "message": null
+  },
+  {
+    "name": "session revoked",
+    "status": 401,
+    "code": "UNAUTHENTICATED",
+    "message": "请先登录"
+  }
+]

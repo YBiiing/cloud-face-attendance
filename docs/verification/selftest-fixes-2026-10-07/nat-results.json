@@ -1,0 +1,17 @@
+{
+  "scope": "Shared-IP 31 requests accepted, then 29 accepted; 61st exceeds the one-person session floor of 60; concurrency 10; blank PNG; actual model rejection",
+  "http_counts": {
+    "202": 60
+  },
+  "terminal_codes": {
+    "NO_FACE": 60
+  },
+  "session_budget_rejection": {
+    "status": 429,
+    "code": "RATE_LIMITED",
+    "retry_after": "54",
+    "ms": 15.0
+  },
+  "limiter_disabled": false,
+  "proxy_headers_spoofed": false
+}

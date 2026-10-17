@@ -1,0 +1,22 @@
+[
+  {
+    "case": "chromium-320-root-16",
+    "status": "PASS",
+    "scope": "Fixture API role flows; root text size stress, not native browser zoom"
+  },
+  {
+    "case": "chromium-320-root-32",
+    "status": "PASS",
+    "scope": "Fixture API role flows; root text size stress, not native browser zoom"
+  },
+  {
+    "case": "webkit-320-root-16",
+    "status": "PASS",
+    "scope": "Fixture API role flows; root text size stress, not native browser zoom"
+  },
+  {
+    "case": "webkit-320-root-32",
+    "status": "PASS",
+    "scope": "Fixture API role flows; root text size stress, not native browser zoom"
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "scope": "Real ONNX synthetic identity, no model mocks",
+  "events": [
+    {
+      "operation": "previous verified phase",
+      "result_code": "ENROLLED"
+    },
+    {
+      "operation": "previous verified phase",
+      "result_code": "AMBIGUOUS_PERSON"
+    },
+    {
+      "operation": "previous verified phase",
+      "result_code": "ALREADY_CHECKED_IN"
+    },
+    {
+      "operation": "previous verified phase",
+      "result_code": "FACE_SAVED"
+    },
+    {
+      "operation": "/api/checkins",
+      "result_code": "UNKNOWN_PERSON"
+    },
+    {
+      "operation": "http://127.0.0.1:8001/api/faces",
+      "result_code": "FACE_SAVED"
+    },
+    {
+      "operation": "/api/checkins",
+      "result_code": "CHECKED_IN"
+    }
+  ],
+  "old_image_status": 404,
+  "active_samples_after_replace": 1,
+  "active_samples_after_delete": 0,
+  "historical_records_retained": 1,
+  "total_records": 2,
+  "ambiguity_refuses_attendance": true,
+  "registration_allows_same_face_for_two_accounts": true,
+  "continuation_note": "Test harness relative polling URL corrected; original session expired naturally; resumed with new session"
+}

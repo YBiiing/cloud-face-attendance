@@ -1,0 +1,63 @@
+{
+  "scope": "Actual FastAPI/MySQL/Redis, in-process TestClient; scheduling barrier only; blank PNG; no model or rate-limit mocks",
+  "http_counts": {
+    "500": 10
+  },
+  "exceptions": [
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    },
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    },
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    },
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    },
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    },
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    },
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    },
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    },
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    },
+    {
+      "exception_type": "TimeoutError",
+      "is_queue_pool_timeout": true
+    }
+  ],
+  "pool_checkedout_peak": 10,
+  "pool_size": 5,
+  "max_overflow": 5,
+  "pool_timeout_seconds": 5,
+  "health_during_pool_contention": {
+    "live": {
+      "status": 200,
+      "duration_ms": 9.0
+    },
+    "ready": {
+      "status": 200,
+      "duration_ms": 5019.5
+    }
+  },
+  "cleanup": "complete"
+}

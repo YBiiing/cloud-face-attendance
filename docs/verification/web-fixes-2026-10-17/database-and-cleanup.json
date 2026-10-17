@@ -1,0 +1,16 @@
+{
+  "migration": "0008",
+  "class_name_unique_index": true,
+  "duplicate_ui_class_count": 1,
+  "new_face_disabled": true,
+  "original_active_faces": 10,
+  "original_attendance_records": 1,
+  "closed_at_written": true,
+  "cleanup": {
+    "new_faces_removed": 1,
+    "new_tasks_removed": 1,
+    "new_sessions_removed": 2,
+    "new_empty_classes_removed": 1,
+    "test_session_expiry_restored": 1
+  }
+}

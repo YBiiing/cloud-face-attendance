@@ -1,0 +1,71 @@
+{
+  "scope": "AI fictional faces only; not human acceptance",
+  "model_mocked": false,
+  "match_threshold_changed": false,
+  "results": [
+    "ENROLLED",
+    "CHECKED_IN",
+    "ALREADY_CHECKED_IN",
+    "UNKNOWN_PERSON",
+    "ENROLLED",
+    "NOT_IN_ROSTER",
+    "CHECKED_IN",
+    "CHECKED_IN",
+    "CHECKED_IN",
+    "ALREADY_CHECKED_IN",
+    "ALREADY_CHECKED_IN",
+    "ALREADY_CHECKED_IN",
+    "ALREADY_CHECKED_IN",
+    "ALREADY_CHECKED_IN",
+    "ALREADY_CHECKED_IN",
+    "ALREADY_CHECKED_IN",
+    "ALREADY_CHECKED_IN",
+    "ALREADY_CHECKED_IN"
+  ],
+  "synthetic_same_identity_burst": {
+    "concurrency": 10,
+    "requests": 10,
+    "gallery_identities": 2,
+    "image_bytes": 1929888,
+    "codes": {
+      "CHECKED_IN": 1,
+      "ALREADY_CHECKED_IN": 9
+    },
+    "accept_p95_ms": 1397.2,
+    "end_to_end_p95_ms": 3534.5,
+    "scope": "same AI fictional identity duplicate burst; not distinct human throughput"
+  },
+  "database": {
+    "account_status": "ACTIVE",
+    "face_samples": 1,
+    "feature_dimension": 512,
+    "feature_norm": 1.0,
+    "model_version": "buffalo_l:6c8808d2fac7336c:align-v1",
+    "records": 4,
+    "person_a_records": 3,
+    "first_roster": 1,
+    "second_roster": 2,
+    "task_codes": [
+      "ALREADY_CHECKED_IN",
+      "ALREADY_CHECKED_IN",
+      "ALREADY_CHECKED_IN",
+      "ALREADY_CHECKED_IN",
+      "ALREADY_CHECKED_IN",
+      "ALREADY_CHECKED_IN",
+      "ALREADY_CHECKED_IN",
+      "ALREADY_CHECKED_IN",
+      "ALREADY_CHECKED_IN",
+      "ALREADY_CHECKED_IN",
+      "CHECKED_IN",
+      "CHECKED_IN",
+      "CHECKED_IN",
+      "CHECKED_IN",
+      "ENROLLED",
+      "ENROLLED",
+      "NOT_IN_ROSTER",
+      "UNKNOWN_PERSON"
+    ]
+  },
+  "threshold": 0.5,
+  "margin": 0.05
+}

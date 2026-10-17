@@ -1,0 +1,18 @@
+{
+  "scope": "31 requests from one source IP in same rate window; concurrency 10; blank PNG; real model rejection",
+  "http_counts": {
+    "202": 30,
+    "429": 1
+  },
+  "terminal_codes": {
+    "NO_FACE": 30
+  },
+  "rejection_codes": {
+    "RATE_LIMITED": 1
+  },
+  "retry_after_headers": [
+    null
+  ],
+  "limiter_disabled": false,
+  "proxy_headers_spoofed": false
+}

@@ -1,0 +1,17 @@
+{
+  "scope": "Real ONNX fictional face positive path",
+  "same_request_same_task_and_token": true,
+  "changed_photo_same_key": 409,
+  "no_token": 404,
+  "wrong_token": 404,
+  "matched_student_cookie_without_task_token": 404,
+  "teacher_cookie_without_task_token": 200,
+  "anonymous_cookies": 0,
+  "task_json_contains_no_identity_or_embedding": true,
+  "replay_after_close_recovers_existing_task": true,
+  "new_key_after_close": 409,
+  "database": {
+    "checkin_tasks": 1,
+    "records": 1
+  }
+}

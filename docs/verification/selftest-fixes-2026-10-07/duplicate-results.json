@@ -1,0 +1,14 @@
+{
+  "scope": "Actual HTTP/Celery/ONNX; AI fictional portraits only",
+  "codes": [
+    "ENROLLED",
+    "FACE_ALREADY_ENROLLED",
+    "FACE_SAVED",
+    "ENROLLED",
+    "FACE_ALREADY_ENROLLED"
+  ],
+  "duplicate_account_login": 401,
+  "same_owner_second_photo_accepted": true,
+  "other_owner_replacement_retains_original": true,
+  "threshold_unchanged": true
+}

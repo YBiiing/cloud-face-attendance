@@ -1,0 +1,88 @@
+{
+  "marker": "DSG7326db12f84d",
+  "note": "11纯色图库及23成功记录为直接DB显示夹具，未运行真人识别；替换无脸拒绝为真实ONNX。",
+  "results": [
+    {
+      "name": "纯色库夹具第一页10张",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "纯色库夹具第二页1张",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "取消删除原照片保留",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "删除最后页1张后页面信息",
+      "passed": true,
+      "detail": "第 2 页，共 10 张"
+    },
+    {
+      "name": "手动上一页可找回10张，图片接口真实640宽",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "替换选中状态/取消按钮",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "实际点击选择文件入口→浏览器文件选择事件→文件名及预览",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "真实无脸替换失败保留原有照片",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "取消替换回新增",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "23条成功记录夹具第一页20条",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "成功记录夹具第二页3条",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "第二页切换场次重置第一页且统计一致",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生成功记录仅本人1条",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "记录下拉键盘选择",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "图库与成功记录夹具精确清理",
+      "passed": true,
+      "detail": "{\"cleanup\": \"complete\", \"users\": 24, \"faces\": 11, \"tasks\": 24, \"records\": 23}"
+    }
+  ],
+  "issues": [
+    {
+      "title": "删除第二页最后一张后显示空库",
+      "detail": "删除第 11 张成功，但页码仍为第 2 页，共 10 张，正文误导性显示暂无有效标准照；剩余10张实际在第一页。需要将页码退回有效页并重新加载。",
+      "screenshot": "gallery-delete-last-page.png"
+    }
+  ]
+}

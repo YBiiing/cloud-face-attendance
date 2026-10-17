@@ -1,0 +1,121 @@
+{
+  "scope": "Headed Edge; real HTTP/Celery/ONNX; native virtual media only; no physical webcam or human photos",
+  "results": [
+    {
+      "name": "取消释放摄像头且不选择文件、不上传",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Escape关闭释放摄像头",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "重拍重新取景、清除上次快照、取消释放新轨道",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "注册页取景→拍摄停止轨道→确认JPEG，无文件选择或自动上传",
+      "passed": true,
+      "detail": "{\"name\": \"camera-1791380913310.jpg\", \"type\": \"image/jpeg\", \"size\": 13160}"
+    },
+    {
+      "name": "摄像头JPEG实际注册→Celery→ONNX拒绝无脸，不误报成功",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "注册失败刷新后拍照取消仍可重试",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "照片库取景→拍摄停止轨道→确认JPEG，无文件选择或自动上传",
+      "passed": true,
+      "detail": "{\"name\": \"camera-1791380916062.jpg\", \"type\": \"image/jpeg\", \"size\": 11121}"
+    },
+    {
+      "name": "照片库摄像头JPEG真实无脸拒绝，不产生标准照",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "签到页取景→拍摄停止轨道→确认JPEG，无文件选择或自动上传",
+      "passed": true,
+      "detail": "{\"name\": \"camera-1791380917940.jpg\", \"type\": \"image/jpeg\", \"size\": 11121}"
+    },
+    {
+      "name": "签到页摄像头JPEG真实无脸拒绝，不产生签到记录",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "快照预览取消不修改表单",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "桌面摄像头弹窗适配 1920x1080",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "桌面摄像头弹窗适配 1366x768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "桌面摄像头弹窗适配 1024x768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "桌面摄像头弹窗适配 640x600",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "桌面摄像头弹窗适配 390x600",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "离开页面释放摄像头轨道",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "整个桌面拍照流程没有触发文件选择器",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "临时浏览器拒绝摄像头权限时中文原因、重试和取消",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "临时权限从拒绝恢复后可重试取景",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "只有独立选择照片文件入口触发文件选择",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "实际浏览器无未捕获JS异常",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "随机测试数据、图片、登录会话、任务容量精确清理",
+      "passed": true,
+      "detail": "{\"users\": 3, \"tasks\": 3, \"cleanup\": \"complete\"}"
+    }
+  ],
+  "errors": []
+}

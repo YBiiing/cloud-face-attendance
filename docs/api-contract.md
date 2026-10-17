@@ -99,7 +99,19 @@ user 字段为 id/name/student_no/class_id/role/status，不返回 password_hash
 | REJECTED | 业务拒绝 | 停止，显示重拍/无法签到原因 |
 | FAILED | 系统失败或任务超时 | 停止，提示稍后重试 |
 
-成功码：ENROLLED、FACE_SAVED、CHECKED_IN、ALREADY_CHECKED_IN。拒绝码：NO_FACE、MULTIPLE_FACES、LOW_QUALITY、UNKNOWN_PERSON、AMBIGUOUS_PERSON、NOT_IN_ROSTER。失败码：MODEL_UNAVAILABLE、TASK_TIMEOUT、PROCESSING_FAILED。接收阶段的时间错误 SESSION_NOT_STARTED/SESSION_ENDED 直接以 409 返回，不创建可成功任务。
+成功码：ENROLLED、FACE_SAVED、CHECKED_IN、ALREADY_CHECKED_IN。拒绝码：NO_FACE、MULTIPLE_FACES、LOW_QUALITY、UNKNOWN_PERSON、AMBIGUOUS_PERSON、NOT_IN_ROSTER、FACE_ALREADY_ENROLLED。失败码：MODEL_UNAVAILABLE、TASK_TIMEOUT、PROCESSING_FAILED。接收阶段的时间错误 SESSION_NOT_STARTED/SESSION_ENDED 直接以 409 返回，不创建可成功任务。
+
+## 2026-10-07 自测修复补充
+
+- 老师的场次列表提供“打开签到页面”和“复制签到链接”；HTTP 环境不能使用自动复制时，显示可选中的完整链接供手动复制。学生仍从自己的工作台发现场次，匿名签到仍不依赖登录或客户端身份。
+- 上传终态结果显示后滚动到反馈；相册或相机选换照片后显示“照片已更换，请提交”，旧结果不继续对应新照片。
+- 鉴权使用独立短事务并在返回前释放连接；照片写事务重新读取操作人员并校验有效状态和所有权。连接池大小仍为 5+5，未以扩大池大小解决并发相互等待。
+- 前台 Redis 连接/读写超时为 1 秒且不自动重试；业务 MySQL 连接超时及连接池等待为 1 秒，读写超时为 2 秒。就绪检查使用独立小连接池与 1 秒读写超时。Celery 的后台重投递策略保持独立。
+- Docker 服务退出后 DNS 可能等待数秒，单设 socket 超时不足以控制响应。前台依赖共用有界解析器：每个配置的主机名最多一个解析任务，最多两个解析线程，单次前台等待 250 ms，短暂复用上次地址并每秒更新，避免为每个请求创建新线程。地址重新可解析后刷新缓存；TLS 仍使用原主机名进行证书校验。
+- 可识别的数据库连接异常及连接池等待超时返回 SERVICE_UNAVAILABLE/503；SQL 语法等程序错误仍为 INTERNAL_ERROR/500。错误正文与日志不包含 SQL、参数或凭据。
+- 匿名签到来源 IP 的默认预算为每 60 秒 600 次，可由 CHECKIN_IP_RATE_LIMIT 调整；每场次在所有来源间共享 max(60, 冻结名单人数 × CHECKIN_ATTEMPTS_PER_STUDENT) 次预算，默认每人系数为 3。重复幂等键恢复已有任务时不消耗新的场次预算；新请求仍经过来源 IP 防护。系统总在途任务上限仍为 50，超限返回 QUEUE_FULL/503。
+- 429 响应附带 Retry-After 剩余秒数；页面显示相应等待时间。照片库上传预算按已鉴权账号计算，避免不同学生共用网络出口时争抢同一预算。登录和注册的现有限流仍保留。
+- 录入与替换在图库锁内检查其他有效账号的同模型人脸特征，达到既有匹配阈值时拒绝为 FACE_ALREADY_ENROLLED。注册账号保持 PENDING；替换失败保留原图。本人增加/替换本人其他照片可以正常完成，不返回其他账号身份信息。
 
 Idempotency-Key 使用客户端生成的 UUID v4，同一次重试复用，重新拍照使用新键。服务端绑定操作、已登录所有者（如有）、场次和规范化请求内容；同键同内容返回原任务及可用凭证，同键不同内容返回 409。请求指纹不得保存明文密码；凭证重放实现见 P3-02。
 

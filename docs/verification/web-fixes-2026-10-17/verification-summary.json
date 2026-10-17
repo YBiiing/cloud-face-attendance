@@ -1,0 +1,31 @@
+{
+  "backend_checks": {
+    "passed": 15,
+    "failed": 0,
+    "scope": [
+      "class name conflicts and concurrent inserts",
+      "authentication",
+      "roster snapshots",
+      "public sessions and close",
+      "student sessions",
+      "foundation and versioned assets"
+    ]
+  },
+  "browser_checks": {
+    "passed": 18,
+    "failed": 0,
+    "excluded_old_cached_page_checks": 1
+  },
+  "migration_duplicate_preflight": "verified refusal before schema modification; removed only empty test class 509 after ownership and reference checks",
+  "health": {
+    "status": "ready",
+    "checks": {
+      "mysql": "ok",
+      "redis": "ok",
+      "model_worker": "ok"
+    }
+  },
+  "database_and_cleanup": "database-and-cleanup.json",
+  "changes_committed": false,
+  "old_tabs": "Cancel pre-existing native dialogs and refresh to load versioned assets."
+}

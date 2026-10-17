@@ -1,0 +1,18 @@
+{
+  "sessions": 2,
+  "tasks": 27,
+  "terminal_tasks": 27,
+  "no_face_tasks": 27,
+  "records": 0,
+  "face_samples": 0,
+  "pending_registered_accounts": 2,
+  "native_registration": [
+    {
+      "status": "PENDING",
+      "task_count": 1,
+      "codes": [
+        "NO_FACE"
+      ]
+    }
+  ]
+}

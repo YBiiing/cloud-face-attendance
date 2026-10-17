@@ -1,0 +1,209 @@
+{
+  "cases": [
+    {
+      "id": "D01",
+      "name": "短密码收到字段校验拒绝",
+      "passed": true,
+      "detail": "输入由浏览器控制接口填充，未把 validity 属性当成原生键盘验收证据"
+    },
+    {
+      "id": "D04",
+      "name": "老师登录工作台且无照片入口",
+      "passed": true
+    },
+    {
+      "id": "D05",
+      "name": "空班级发布被拒绝且按钮恢复",
+      "passed": true
+    },
+    {
+      "name": "真实模型标准照注册成功",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "错误时间中文校验",
+      "passed": true,
+      "detail": "结束时间必须晚于开始时间"
+    },
+    {
+      "name": "学生登录后可查看已录入标准照",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "取消替换恢复新增照片表单",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "课程发布与创建/列表页面分离",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "复制链接有成功反馈",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "访客访问记录页需要登录",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "未登录使用另一张同人照片签到成功",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "重复签到返回已签到",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "更换照片清除旧成功提示",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "未录入人员被真实模型拒绝",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生记录只显示本人一条成功记录",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "照片库超大文件中文拒绝",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "不支持文件被后端拒绝",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "老师统计应到/已到一致",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生照片页真实尺寸 320×568",
+      "passed": false,
+      "detail": "{\"nav\":true,\"navPosition\":\"fixed\",\"scrollWidth\":613,\"width\":628}; 控制工具未将目标页面调整到指定宽度，不能计为适配通过",
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "name": "学生照片页真实尺寸 360×800",
+      "passed": false,
+      "detail": "{\"nav\":true,\"navPosition\":\"fixed\",\"scrollWidth\":613,\"width\":628}; 控制工具未将目标页面调整到指定宽度，不能计为适配通过",
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "name": "学生照片页真实尺寸 390×844",
+      "passed": false,
+      "detail": "{\"nav\":true,\"navPosition\":\"fixed\",\"scrollWidth\":613,\"width\":628}; 控制工具未将目标页面调整到指定宽度，不能计为适配通过",
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "name": "学生照片页真实尺寸 412×915",
+      "passed": false,
+      "detail": "{\"nav\":true,\"navPosition\":\"fixed\",\"scrollWidth\":613,\"width\":628}; 控制工具未将目标页面调整到指定宽度，不能计为适配通过",
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "name": "学生照片页真实尺寸 430×932",
+      "passed": false,
+      "detail": "{\"nav\":true,\"navPosition\":\"fixed\",\"scrollWidth\":613,\"width\":628}; 控制工具未将目标页面调整到指定宽度，不能计为适配通过",
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "name": "学生照片页真实尺寸 844×390",
+      "passed": false,
+      "detail": "{\"nav\":true,\"navPosition\":\"fixed\",\"scrollWidth\":613,\"width\":628}; 控制工具未将目标页面调整到指定宽度，不能计为适配通过",
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "name": "有效尺寸检查 照片页 320×568",
+      "passed": true,
+      "detail": "{\"height\":568,\"navPosition\":\"fixed\",\"scrollWidth\":305,\"width\":320}"
+    },
+    {
+      "name": "有效尺寸检查 照片页 360×800",
+      "passed": true,
+      "detail": "{\"height\":800,\"navPosition\":\"fixed\",\"scrollWidth\":345,\"width\":360}"
+    },
+    {
+      "name": "有效尺寸检查 照片页 390×844",
+      "passed": true,
+      "detail": "{\"height\":844,\"navPosition\":\"fixed\",\"scrollWidth\":375,\"width\":390}"
+    },
+    {
+      "name": "有效尺寸检查 照片页 412×915",
+      "passed": true,
+      "detail": "{\"height\":915,\"navPosition\":\"fixed\",\"scrollWidth\":397,\"width\":412}"
+    },
+    {
+      "name": "有效尺寸检查 照片页 430×932",
+      "passed": true,
+      "detail": "{\"height\":932,\"navPosition\":\"fixed\",\"scrollWidth\":415,\"width\":430}"
+    },
+    {
+      "name": "有效尺寸检查 照片页 844×390",
+      "passed": true,
+      "detail": "{\"height\":390,\"navPosition\":\"static\",\"scrollWidth\":829,\"width\":844}"
+    },
+    {
+      "name": "完成签到后待签到列表移除该场次",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "注册后外班人员被名单拒绝",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "多人照片替换被拒绝",
+      "passed": false,
+      "detail": "实际显示“照片中有多张人脸，请只拍本人”，首次检查“多人”字样不匹配，保留原始检查结果",
+      "status": "ASSERTION_TEXT_MISMATCH"
+    },
+    {
+      "name": "替换失败保留原标准照",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "真实模型新增本人另一张标准照",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "多人照片替换按实际文案明确拒绝",
+      "passed": true,
+      "detail": "观察到“照片中有多张人脸，请只拍本人”且有效照片数保持1"
+    },
+    {
+      "name": "照片库真实上传后11张按10+1分页",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "照片库第二页只有一张",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "issues": [
+    {
+      "name": "同名班级可重复创建",
+      "detail": "连续两次以相同名称创建均成功，学生/老师下拉出现两个完全同名选项，无法区分班级",
+      "priority": "P2"
+    }
+  ]
+}

@@ -4,16 +4,20 @@ Preserves rate limits. This measures blank-image rejection, not successful human
 recognition throughput. It never targets the development or a public endpoint.
 """
 import base64
+import argparse
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 import json
 import math
 from pathlib import Path
 import time
-from urllib.request import Request,urlopen
+from urllib.request import Request,build_opener,ProxyHandler
 from urllib.error import HTTPError
 from uuid import uuid4
 from scripts.test_redis_recovery import execute
+
+# Requests are restricted below to the isolated loopback endpoint, never a proxy.
+local_open=build_opener(ProxyHandler({})).open
 
 
 def percentile(values,q):
@@ -21,7 +25,7 @@ def percentile(values,q):
     values=sorted(values);return round(values[min(len(values)-1,max(0,math.ceil(len(values)*q)-1))],2)
 
 
-def main():
+def main(output=None):
     cooldown=execute('''
 from redis import Redis
 redis=Redis.from_url(settings.redis_url)
@@ -62,13 +66,13 @@ engine.dispose();print(json.dumps(result))
         start=time.perf_counter()
         req=Request('http://127.0.0.1:8001/api/checkins',data=body,headers={'Content-Type':'multipart/form-data; boundary='+boundary,'Idempotency-Key':str(uuid4())})
         try:
-            with urlopen(req,timeout=15) as response:task=json.load(response)
+            with local_open(req,timeout=15) as response:task=json.load(response)
         except HTTPError as error:
             return {'http':error.code,'accept_ms':(time.perf_counter()-start)*1000}
         accepted=time.perf_counter();deadline=time.monotonic()+30
         while time.monotonic()<deadline:
             poll=Request('http://127.0.0.1:8001'+task['poll_url'],headers={'X-Task-Token':task['task_token']})
-            with urlopen(poll,timeout=5) as response:result=json.load(response)
+            with local_open(poll,timeout=5) as response:result=json.load(response)
             if result['status'] in {'SUCCEEDED','REJECTED','FAILED'}:
                 return {'http':202,'result':result['result_code'],'accept_ms':(accepted-start)*1000,'end_ms':(time.perf_counter()-start)*1000}
             time.sleep(.1)
@@ -101,7 +105,8 @@ engine.dispose();print(json.dumps(result))
                 'worker_processes':1,'inference_threads':1,'model':'buffalo_l CPU','logical_cpus':fixture['logical_cpus'],
                 'python':fixture['python'],'percentile_method':'nearest rank','valid_face_gallery_size':fixture['gallery_size'],'rate_limits_enabled':True,
                 'rounds':rounds,'queue_p95_ms':percentile(timings['queued_ms'],.95),'processing_p95_ms':percentile(timings['processing_ms'],.95)}
-        output=Path(__file__).resolve().parents[1]/'docs/verification/local-load.json'
+        output=Path(output) if output else Path(__file__).resolve().parents[1]/'docs/verification/local-load.json'
+        output.parent.mkdir(parents=True,exist_ok=True)
         output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         print(json.dumps(report,ensure_ascii=False,indent=2))
     finally:
@@ -133,4 +138,7 @@ redis.close();engine.dispose();print(json.dumps(True))
 ''')
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--output',type=Path)
+    main(parser.parse_args().output)

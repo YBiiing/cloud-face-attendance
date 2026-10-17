@@ -1,0 +1,13 @@
+{
+  "face_samples": 0,
+  "tasks": [
+    "NO_FACE",
+    "NO_FACE"
+  ],
+  "feedback_visibility": {
+    "result_top": 81.2,
+    "result_bottom": 131.6,
+    "viewport_height": 844,
+    "result_fully_in_viewport": true
+  }
+}

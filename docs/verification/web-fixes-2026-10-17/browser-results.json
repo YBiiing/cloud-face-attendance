@@ -1,0 +1,98 @@
+[
+  {
+    "name": "正常班级创建成功",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "同名班级含首尾空格被拒绝且按钮恢复",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "浏览器加载内容版本目录",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "取消提前结束保留进行中场次且恢复焦点",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "Esc关闭结束确认框",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "确认提前结束后列表状态与按钮更新",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "无效链接清除加载提示且隐藏表单",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "跨标签退出主动转到登录页并移除老师导航",
+    "passed": false,
+    "detail": "该标签实际加载 /assets/records.js 旧缓存，未加载内容版本路径；本次结果不作为新版本验收。",
+    "status": "STALE_ASSETS"
+  },
+  {
+    "name": "真实模型新增标准照形成11张分页",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "取消删除保留照片和第二页状态",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "Esc取消删除保留照片",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "删除末页唯一照片后自动回第一页10张",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "自然到期同步详情倒计时和禁用上传",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "多标签验收前双方均加载新版脚本",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "新版跨标签退出后立即转登录页并清除老师导航",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "删除标准照后历史签到记录保留",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "提前结束后匿名签到页同步结束且禁用提交",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "会话过期时刷新记录跳转登录并清除旧角色",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "缺少场次参数不再保留加载提示",
+    "passed": true,
+    "detail": ""
+  }
+]

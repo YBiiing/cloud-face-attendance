@@ -1,0 +1,40 @@
+{
+  "tasks": 50,
+  "task_types": {
+    "ENROLL": 10,
+    "CHECKIN": 28,
+    "FACE": 12
+  },
+  "terminal_codes": {
+    "NO_FACE": 50
+  },
+  "records": 0,
+  "new_photo_files": 50,
+  "rejected_requests_no_orphan_files": true,
+  "reservations_after": 0,
+  "face_500_log_samples": [
+    "INFO attendance.requests request_id=2344b929736240b9a7c0a84238c73660 route=add_face method=POST status=500 duration_ms=5055.35",
+    "INFO attendance.requests request_id=ac1ac9c954bf49a7ad07324074495082 route=add_face method=POST status=500 duration_ms=5060.23",
+    "INFO attendance.requests request_id=3e5a07d1ce5248c9a15946d48c7d5c80 route=add_face method=POST status=500 duration_ms=5061.84",
+    "INFO attendance.requests request_id=48c45b86900a42e2b572c87291bb7940 route=add_face method=POST status=500 duration_ms=5070.10",
+    "INFO attendance.requests request_id=9fab5355366c41dbb2d70f9444cc0f37 route=add_face method=POST status=500 duration_ms=5047.02",
+    "INFO attendance.requests request_id=c35f1fc0cf5a4e8c918efd63853d554b route=add_face method=POST status=500 duration_ms=5052.56",
+    "INFO attendance.requests request_id=09f98c8a4a7347fd837b60e5c801eda9 route=add_face method=POST status=500 duration_ms=5078.40",
+    "INFO attendance.requests request_id=060b485d5b584c8baf96fbe1f7e22a4d route=add_face method=POST status=500 duration_ms=5070.03"
+  ],
+  "http_counts_observed": {
+    "register": {
+      "202": 10,
+      "429": 10
+    },
+    "face": {
+      "202": 12,
+      "500": 8
+    },
+    "checkin": {
+      "202": 28,
+      "503": 2
+    }
+  },
+  "scope": "Worker paused; real ingress batch concurrency 10; all 50 accepted tasks drained after restart. Overload test failed due to 8 authenticated face upload errors. Queue full returned on two checkins."
+}

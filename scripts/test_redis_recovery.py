@@ -1,11 +1,15 @@
 """Host-side fault probe: only the isolated face-attendance-test Compose project."""
 import json
+import os
 from pathlib import Path
 import subprocess
 import time
 
 ROOT=Path(__file__).resolve().parents[1]
-COMPOSE=['docker','compose','-p','face-attendance-test','-f','compose.yaml','-f','compose.test.yaml']
+PROJECT=os.getenv('ATTENDANCE_TEST_PROJECT','face-attendance-test')
+if PROJECT!='face-attendance-test' and not PROJECT.startswith('face-attendance-test-'):
+    raise RuntimeError('Only an explicitly isolated test project is allowed')
+COMPOSE=['docker','compose','-p',PROJECT,'-f','compose.yaml','-f','compose.test.yaml']
 GUARD='''
 import json
 from app.config import Settings

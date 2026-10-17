@@ -1,0 +1,58 @@
+[
+  {
+    "width": 320,
+    "height": 568,
+    "passed": true,
+    "seconds": 6.44,
+    "scope": "real Edge renderer with API fixtures"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "passed": true,
+    "seconds": 2.66,
+    "scope": "real Edge renderer with API fixtures"
+  },
+  {
+    "width": 412,
+    "height": 915,
+    "passed": true,
+    "seconds": 2.72,
+    "scope": "real Edge renderer with API fixtures"
+  },
+  {
+    "width": 430,
+    "height": 932,
+    "passed": true,
+    "seconds": 2.78,
+    "scope": "real Edge renderer with API fixtures"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "passed": true,
+    "seconds": 2.73,
+    "scope": "real Edge renderer with API fixtures"
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "passed": true,
+    "seconds": 2.67,
+    "scope": "real Edge renderer with API fixtures"
+  },
+  {
+    "width": 1920,
+    "height": 1080,
+    "passed": true,
+    "seconds": 3.1,
+    "scope": "real Edge renderer with API fixtures"
+  },
+  {
+    "width": 844,
+    "height": 390,
+    "passed": true,
+    "seconds": 2.98,
+    "scope": "real Edge renderer with API fixtures"
+  }
+]

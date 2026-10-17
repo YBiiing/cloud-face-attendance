@@ -1,0 +1,70 @@
+{
+  "redis": {
+    "live": {
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "cloud-face-attendance"
+      },
+      "ms": 62.1
+    },
+    "ready": {
+      "status": 503,
+      "body": {
+        "status": "not_ready",
+        "checks": {
+          "mysql": "ok",
+          "redis": "unavailable",
+          "model_worker": "unavailable"
+        }
+      },
+      "ms": 281.8
+    },
+    "business": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "SERVICE_UNAVAILABLE",
+          "message": "服务暂时不可用",
+          "request_id": "c13d96097f724c70be02c03bf553a26e"
+        }
+      },
+      "ms": 255.5
+    },
+    "recovered": 200
+  },
+  "mysql": {
+    "live": {
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "cloud-face-attendance"
+      },
+      "ms": 22.4
+    },
+    "ready": {
+      "status": 503,
+      "body": {
+        "status": "not_ready",
+        "checks": {
+          "mysql": "unavailable",
+          "redis": "ok",
+          "model_worker": "ok"
+        }
+      },
+      "ms": 4.7
+    },
+    "business": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "SERVICE_UNAVAILABLE",
+          "message": "服务暂时不可用，请稍后重试",
+          "request_id": "272914813fa74a2c84e07b1faa848fa6"
+        }
+      },
+      "ms": 1264.5
+    },
+    "recovered": 200
+  }
+}

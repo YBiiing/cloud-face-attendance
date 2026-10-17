@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-17",
+  "pytest": {
+    "passed": 75,
+    "failed": 0,
+    "warnings": 2,
+    "seconds": 25.16
+  },
+  "fixture_browser_runs": {
+    "total": 16,
+    "edge_registration_recovery": 1,
+    "edge_review_recovery": 1,
+    "edge_attendance": 1,
+    "edge_hci_viewports": [
+      [
+        1366,
+        768
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        320,
+        568
+      ],
+      [
+        360,
+        800
+      ],
+      [
+        412,
+        915
+      ],
+      [
+        430,
+        932
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        1024,
+        768
+      ],
+      [
+        1920,
+        1080
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "feedback_engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "api_responses_mocked": true
+  },
+  "real_backend_camera_cases": 23,
+  "camera_all_passed": true,
+  "real_backend_camera_environment_cases": 4,
+  "real_model": "fictional AI images, real ONNX; no human accuracy claim",
+  "manual_edge_checks": [
+    "invalid code shows no loading/form",
+    "anonymous records redirects login",
+    "320px login failure feedback and no horizontal overflow"
+  ],
+  "manual_screenshot": "tool timed out, no screenshot claimed",
+  "syntax": {
+    "python_files": 119,
+    "javascript_files": 14
+  },
+  "alembic": "no drift, migration 0008, original test and development databases",
+  "docker_recovery": {
+    "engine": "29.2.1",
+    "repair_script_real_execution": "passed, start and docker info both exited 0",
+    "whatif": "passed",
+    "data_volumes_reset": false,
+    "permanent_upstream_fix": false
+  },
+  "prior_attempts": [
+    {
+      "kind": "pytest on existing acceptance gallery",
+      "passed": 70,
+      "failed": 5,
+      "reason": "nonempty gallery and whole-library backup fixture conflict; original data preserved"
+    },
+    {
+      "kind": "pytest with external scheduler",
+      "passed": 74,
+      "failed": 1,
+      "reason": "external scheduler claimed subprocess crash-test task before injected child; stopped scheduler for isolated regression"
+    },
+    {
+      "kind": "biometric concurrency",
+      "result": "422 INVALID_REQUEST before direct loopback opener",
+      "reason": "Windows system proxy intercepted urllib multipart; direct loopback retest passed"
+    }
+  ],
+  "pending": [
+    "consented human sample accuracy and threshold calibration",
+    "physical phone/camera and real iPhone Safari",
+    "cloud deployment and sustained multi-user throughput"
+  ],
+  "android": "excluded by user instruction",
+  "commits_already_created": [
+    "87db87e",
+    "1e95e2e"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "scope": "synthetic features and generated colored images; no biometric acceptance",
+  "results": [
+    {
+      "engine": "chromium",
+      "formats": [
+        "PNG",
+        "JPEG"
+      ],
+      "decoded_width": 640,
+      "anonymous": 401,
+      "other_student": 404,
+      "owner": 200
+    },
+    {
+      "engine": "webkit",
+      "formats": [
+        "PNG",
+        "JPEG"
+      ],
+      "decoded_width": 640,
+      "anonymous": 401,
+      "other_student": 404,
+      "owner": 200
+    },
+    {
+      "engine": "firefox",
+      "formats": [
+        "PNG",
+        "JPEG"
+      ],
+      "decoded_width": 640,
+      "anonymous": 401,
+      "other_student": 404,
+      "owner": 200
+    }
+  ],
+  "delete_last_photo_ui_verified": true
+}

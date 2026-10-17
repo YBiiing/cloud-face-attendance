@@ -1,0 +1,436 @@
+{
+  "cases": [
+    {
+      "name": "删除确认和取消",
+      "passed": false,
+      "detail": "BLOCKED_TOOL: 新标签打开confirm后，getJsDialog超时；未能验证取消/确认，不作为功能失败"
+    },
+    {
+      "name": "老师退出后进入登录页",
+      "passed": true,
+      "detail": "实际登录表单出现"
+    },
+    {
+      "name": "退出后浏览器返回未恢复受保护记录",
+      "passed": true,
+      "detail": "登录使用replace跳转，返回about:blank"
+    },
+    {
+      "name": "退出后直接访问签到记录要求登录",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "后注册人员不改变既有场次名单",
+      "passed": true,
+      "detail": "新场次24人，原场次仍1人；隔离库辅助核验"
+    },
+    {
+      "name": "网页发布场次后显示24人名单",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "老师场次列表第一页10场",
+      "passed": true,
+      "detail": "第 1 页，共 14 场"
+    },
+    {
+      "name": "场次第二页4场且下一页禁用",
+      "passed": true,
+      "detail": "第 2 页，共 14 场"
+    },
+    {
+      "name": "出勤名单第一页20人且统计24人",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "出勤名单第二页4人且下一页禁用",
+      "passed": true,
+      "detail": "第 2 页，共 24 条"
+    },
+    {
+      "name": "老师记录页布局 320×568",
+      "passed": true,
+      "detail": "{\"height\":568,\"nav\":\"fixed\",\"scroll\":320,\"width\":320}"
+    },
+    {
+      "name": "老师记录页布局 360×800",
+      "passed": true,
+      "detail": "{\"height\":800,\"nav\":\"fixed\",\"scroll\":345,\"width\":360}"
+    },
+    {
+      "name": "老师记录页布局 390×844",
+      "passed": true,
+      "detail": "{\"height\":844,\"nav\":\"fixed\",\"scroll\":375,\"width\":390}"
+    },
+    {
+      "name": "老师记录页布局 412×915",
+      "passed": true,
+      "detail": "{\"height\":915,\"nav\":\"fixed\",\"scroll\":397,\"width\":412}"
+    },
+    {
+      "name": "老师记录页布局 430×932",
+      "passed": true,
+      "detail": "{\"height\":932,\"nav\":\"fixed\",\"scroll\":415,\"width\":430}"
+    },
+    {
+      "name": "老师记录页布局 844×390",
+      "passed": true,
+      "detail": "{\"height\":390,\"nav\":\"static\",\"scroll\":829,\"width\":844}"
+    },
+    {
+      "name": "创建签到页布局 320×568",
+      "passed": true,
+      "detail": "{\"h\":568,\"sw\":305,\"w\":320}"
+    },
+    {
+      "name": "创建签到页布局 390×844",
+      "passed": true,
+      "detail": "{\"h\":844,\"sw\":375,\"w\":390}"
+    },
+    {
+      "name": "创建签到页布局 430×932",
+      "passed": true,
+      "detail": "{\"h\":932,\"sw\":415,\"w\":430}"
+    },
+    {
+      "name": "创建签到页布局 844×390",
+      "passed": true,
+      "detail": "{\"h\":390,\"sw\":829,\"w\":844}"
+    },
+    {
+      "name": "创建已过期场次被后端拒绝且发布按钮恢复",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "未开始场次禁用选图拍照和提交",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "到期场次显示已结束且禁用提交",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "无效场次隐藏上传表单",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "缺少场次参数显示明确错误并隐藏表单",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "服务器不可达时上传显示中文网络错误并允许重试",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "上传失败保留原照片预览",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "服务器不可达时记录页清除旧记录并恢复刷新",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "服务恢复后记录刷新重新加载20人",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "服务恢复后同一照片重试签到成功",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "另一标签刷新后拒绝旧会话并清除记录",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生工作台布局 320×568",
+      "passed": true,
+      "detail": "{\"h\":568,\"sw\":305,\"w\":320}"
+    },
+    {
+      "name": "学生工作台布局 360×800",
+      "passed": true,
+      "detail": "{\"h\":800,\"sw\":345,\"w\":360}"
+    },
+    {
+      "name": "学生工作台布局 390×844",
+      "passed": true,
+      "detail": "{\"h\":844,\"sw\":375,\"w\":390}"
+    },
+    {
+      "name": "学生工作台布局 412×915",
+      "passed": true,
+      "detail": "{\"h\":915,\"sw\":397,\"w\":412}"
+    },
+    {
+      "name": "学生工作台布局 430×932",
+      "passed": true,
+      "detail": "{\"h\":932,\"sw\":415,\"w\":430}"
+    },
+    {
+      "name": "学生工作台布局 844×390",
+      "passed": true,
+      "detail": "{\"h\":390,\"sw\":829,\"w\":844}"
+    },
+    {
+      "name": "学生全部场次筛选显示13场并支持分页",
+      "passed": true,
+      "detail": "第 1 页，共 13 场"
+    },
+    {
+      "name": "学生全部场次末页3场并区分已签到与结束未签到",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生跨场次两条记录均为本人",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生记录页布局 320×568",
+      "passed": true,
+      "detail": "{\"h\":568,\"sw\":305,\"w\":320}"
+    },
+    {
+      "name": "学生记录页布局 390×844",
+      "passed": true,
+      "detail": "{\"h\":844,\"sw\":375,\"w\":390}"
+    },
+    {
+      "name": "学生记录页布局 430×932",
+      "passed": true,
+      "detail": "{\"h\":932,\"sw\":430,\"w\":430}"
+    },
+    {
+      "name": "学生记录页布局 844×390",
+      "passed": true,
+      "detail": "{\"h\":390,\"sw\":829,\"w\":844}"
+    },
+    {
+      "name": "真实倒计时结束后自动禁用上传",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生访问老师创建页被转回工作台",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "提前结束场次确认与取消",
+      "passed": false,
+      "detail": "BLOCKED_TOOL: 原生confirm控制超时，此项未验收"
+    },
+    {
+      "name": "注册页布局 320×568",
+      "passed": true,
+      "detail": "{\"h\":568,\"sw\":305,\"w\":320}"
+    },
+    {
+      "name": "注册页布局 390×844",
+      "passed": true,
+      "detail": "{\"h\":844,\"sw\":375,\"w\":390}"
+    },
+    {
+      "name": "注册页布局 430×932",
+      "passed": true,
+      "detail": "{\"h\":932,\"sw\":430,\"w\":430}"
+    },
+    {
+      "name": "注册页布局 844×390",
+      "passed": true,
+      "detail": "{\"h\":390,\"sw\":829,\"w\":844}"
+    },
+    {
+      "name": "登录页布局 320×568",
+      "passed": true,
+      "detail": "{\"h\":568,\"sw\":305,\"w\":320}"
+    },
+    {
+      "name": "登录页布局 390×844",
+      "passed": true,
+      "detail": "{\"h\":844,\"sw\":390,\"w\":390}"
+    },
+    {
+      "name": "登录页布局 430×932",
+      "passed": true,
+      "detail": "{\"h\":932,\"sw\":430,\"w\":430}"
+    },
+    {
+      "name": "登录页布局 844×390",
+      "passed": true,
+      "detail": "{\"h\":390,\"sw\":829,\"w\":844}"
+    },
+    {
+      "name": "未登录首页布局 320×568",
+      "passed": true,
+      "detail": "{\"h\":568,\"sw\":305,\"w\":320}"
+    },
+    {
+      "name": "未登录首页布局 390×844",
+      "passed": true,
+      "detail": "{\"h\":844,\"sw\":390,\"w\":390}"
+    },
+    {
+      "name": "未登录首页布局 430×932",
+      "passed": true,
+      "detail": "{\"h\":932,\"sw\":430,\"w\":430}"
+    },
+    {
+      "name": "未登录首页布局 844×390",
+      "passed": true,
+      "detail": "{\"h\":390,\"sw\":829,\"w\":844}"
+    },
+    {
+      "name": "真实键盘输入5位密码触发浏览器长度校验",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "匿名签到页布局 320×568",
+      "passed": true,
+      "detail": "{\"h\":568,\"sw\":305,\"w\":320}"
+    },
+    {
+      "name": "匿名签到页布局 390×844",
+      "passed": true,
+      "detail": "{\"h\":844,\"sw\":390,\"w\":390}"
+    },
+    {
+      "name": "匿名签到页布局 430×932",
+      "passed": true,
+      "detail": "{\"h\":932,\"sw\":430,\"w\":430}"
+    },
+    {
+      "name": "匿名签到页布局 844×390",
+      "passed": true,
+      "detail": "{\"h\":390,\"sw\":829,\"w\":844}"
+    },
+    {
+      "name": "老师工作台布局 320×568",
+      "passed": true,
+      "detail": "{\"h\":568,\"sw\":305,\"w\":320}"
+    },
+    {
+      "name": "老师工作台布局 390×844",
+      "passed": true,
+      "detail": "{\"h\":844,\"sw\":390,\"w\":390}"
+    },
+    {
+      "name": "老师工作台布局 430×932",
+      "passed": true,
+      "detail": "{\"h\":932,\"sw\":430,\"w\":430}"
+    },
+    {
+      "name": "老师工作台布局 844×390",
+      "passed": true,
+      "detail": "{\"h\":390,\"sw\":829,\"w\":844}"
+    },
+    {
+      "name": "老师场次列表布局 320×568",
+      "passed": true,
+      "detail": "{\"h\":568,\"sw\":305,\"w\":320}"
+    },
+    {
+      "name": "老师场次列表布局 390×844",
+      "passed": true,
+      "detail": "{\"h\":844,\"sw\":375,\"w\":390}"
+    },
+    {
+      "name": "老师场次列表布局 430×932",
+      "passed": true,
+      "detail": "{\"h\":932,\"sw\":415,\"w\":430}"
+    },
+    {
+      "name": "老师场次列表布局 844×390",
+      "passed": true,
+      "detail": "{\"h\":390,\"sw\":829,\"w\":844}"
+    },
+    {
+      "name": "到期后老师统计转为确定的24/1/23",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "已结束场次刷新后恢复既有签到任务结果",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生退出照片库后进入登录页",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "学生退出后返回未恢复私有照片",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "退出后原标准照地址返回未登录错误",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "中断重试及刷新后数据库仅一个签到任务和一条记录",
+      "passed": true,
+      "detail": "真实MySQL辅助核验，未创建重复任务"
+    },
+    {
+      "name": "5位密码校验未创建账号",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "issues": [
+    {
+      "priority": "P2",
+      "name": "同名班级可重复创建",
+      "detail": "前一轮实际创建两个同名班级，本轮注册/创建页面仍出现完全同名选项"
+    },
+    {
+      "priority": "P2",
+      "name": "无效签到链接保留加载提示",
+      "detail": "真实页面同时显示“正在读取场次……”和“签到场次不存在”；表单隐藏正常"
+    },
+    {
+      "priority": "P2",
+      "name": "跨标签退出后的记录页仍显示老师导航",
+      "detail": "另一标签刷新已清除记录并提示登录，但顶部仍显示“老师/退出登录”和老师导航，缺少直接登录入口；服务端权限拒绝正常"
+    },
+    {
+      "priority": "P3",
+      "name": "倒计时到期后详情仍显示进行中",
+      "detail": "实际倒计时结束并禁用控件，详情行仍显示进行中；截图web-countdown-ended.png"
+    }
+  ],
+  "environment": {
+    "browsers": [
+      "Edge",
+      "内置浏览器"
+    ],
+    "base": "http://127.0.0.1:8001",
+    "database": "face_attendance_test",
+    "scope": "网页实操；不含安卓、本机断网、真实弱网和并发性能；服务不可达通过停止隔离API测试"
+  },
+  "summary": {
+    "total": 79,
+    "passed": 77,
+    "blocked": 2,
+    "issues": 4
+  }
+}

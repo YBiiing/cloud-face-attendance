@@ -1,0 +1,28 @@
+{
+  "scope": "Actual HTTP 10 concurrent calls per ingress batch; stopped test worker then real ONNX blank-image drain; no rate limit or model bypass",
+  "batches": {
+    "register": {
+      "202": 10,
+      "429": 10
+    },
+    "face": {
+      "202": 20
+    },
+    "checkin": {
+      "202": 20,
+      "503": 10
+    }
+  },
+  "queued": {
+    "pending_tasks": 50,
+    "reservations": 50,
+    "new_photo_files": 50
+  },
+  "released": {
+    "reservations_after": 0
+  },
+  "terminal_codes": {
+    "NO_FACE": 50
+  },
+  "rejected_files_not_retained": true
+}

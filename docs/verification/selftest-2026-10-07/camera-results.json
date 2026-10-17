@@ -1,0 +1,17 @@
+{
+  "scope": "Android native virtual camera, fictional image source, no physical webcam; not human capture acceptance",
+  "camera_permission": "Only this time",
+  "emulator_memory_mib": 3072,
+  "prior_2048_mib_attempt": "Chrome returned low-memory message, photo not returned",
+  "returned_photo": {
+    "format": "JPEG",
+    "width": 960,
+    "height": 1280,
+    "exif_orientation": 1
+  },
+  "task_status": "REJECTED",
+  "result_code": "NO_FACE",
+  "records": 0,
+  "note": "Imagefile camera framing cropped the fictional face; verifies native capture JPEG return, actual upload and rejection, not positive camera recognition",
+  "cleanup": "complete"
+}

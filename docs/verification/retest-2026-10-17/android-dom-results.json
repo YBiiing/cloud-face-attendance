@@ -1,0 +1,47 @@
+[
+  {
+    "name": "安卓真实Chrome错误密码中文反馈",
+    "passed": true
+  },
+  {
+    "name": "安卓表单注册的B账号可正常登录学生工作台",
+    "passed": true
+  },
+  {
+    "name": "外班学生不出现A班场次",
+    "passed": true
+  },
+  {
+    "name": "安卓学生B不显示学生A成功记录",
+    "passed": true
+  },
+  {
+    "name": "安卓照片库显示注册产生的标准照",
+    "passed": true
+  },
+  {
+    "name": "安卓学生直接访问老师创建页被转工作台",
+    "passed": true
+  },
+  {
+    "name": "安卓已登录访问注册页转工作台",
+    "passed": true
+  },
+  {
+    "name": "安卓拒绝相机权限后不上传、不产生照片且页面仍可用",
+    "passed": true
+  },
+  {
+    "name": "安卓原生相机拍摄、重拍、确认后生成实际JPEG",
+    "passed": true,
+    "file": {
+      "name": "17922021494598545597735807815686.jpg",
+      "type": "image/jpeg",
+      "size": 33423
+    }
+  },
+  {
+    "name": "安卓虚拟相机照片上传真实模型NO_FACE，保留原标准照",
+    "passed": true
+  }
+]

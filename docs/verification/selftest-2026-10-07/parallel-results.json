@@ -1,0 +1,13 @@
+{
+  "requests": 20,
+  "concurrency": 10,
+  "accepted": 20,
+  "rejected_no_face": 20,
+  "submit_batch_seconds": 0.926,
+  "submit_p50_ms": 402.0,
+  "submit_p95_ms": 846.6,
+  "total_seconds": 2.624,
+  "health_probes": 12,
+  "health_max_ms": 32.8,
+  "scope": "blank PNG NO_FACE only; no real-face throughput claim"
+}

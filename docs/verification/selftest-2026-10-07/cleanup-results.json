@@ -1,0 +1,20 @@
+{
+  "cleanup": "complete",
+  "scope": "Exact random marker and owned test fixture only",
+  "task_codes": [
+    "ALREADY_CHECKED_IN",
+    "AMBIGUOUS_PERSON",
+    "CHECKED_IN",
+    "CHECKED_IN",
+    "ENROLLED",
+    "ENROLLED",
+    "FACE_SAVED",
+    "FACE_SAVED",
+    "UNKNOWN_PERSON",
+    "UNKNOWN_PERSON"
+  ],
+  "records": 2,
+  "sessions": 2,
+  "users": 3,
+  "face_rows": 4
+}

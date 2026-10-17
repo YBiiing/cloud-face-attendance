@@ -1,0 +1,63 @@
+{
+  "down": [
+    {
+      "path": "/api/health/live",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "cloud-face-attendance"
+      },
+      "seconds": 0.074
+    },
+    {
+      "path": "/api/health/ready",
+      "status": 503,
+      "body": {
+        "status": "not_ready",
+        "checks": {
+          "mysql": "unavailable",
+          "redis": "ok",
+          "model_worker": "ok"
+        }
+      },
+      "seconds": 8.019
+    },
+    {
+      "path": "/api/classes",
+      "status": 500,
+      "body": {
+        "error": {
+          "code": "INTERNAL_ERROR",
+          "message": "服务暂时不可用",
+          "request_id": "af58b6c89dc74207b0d2b0da1458a750"
+        }
+      },
+      "seconds": 3.59
+    },
+    {
+      "path": "/api/records",
+      "status": 401,
+      "body": {
+        "error": {
+          "code": "UNAUTHENTICATED",
+          "message": "请先登录",
+          "request_id": "49bf1f0128a145aa857112a9e16d72e5"
+        }
+      },
+      "seconds": 0.003
+    }
+  ],
+  "restored": {
+    "path": "/api/health/ready",
+    "status": 200,
+    "body": {
+      "status": "ready",
+      "checks": {
+        "mysql": "ok",
+        "redis": "ok",
+        "model_worker": "ok"
+      }
+    },
+    "seconds": 0.02
+  }
+}

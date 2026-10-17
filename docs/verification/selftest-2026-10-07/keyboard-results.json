@@ -1,0 +1,36 @@
+[
+  {
+    "engine": "chromium",
+    "viewport": "320x568",
+    "login_keyboard_submit": 401,
+    "password_space_toggle": true,
+    "register_tab_order": [
+      "[name=student_no]",
+      "[name=class_id]",
+      "[name=password]",
+      "[name=photo]",
+      "[data-camera]",
+      "#submit"
+    ],
+    "file_choice_parent_focus_outline": true,
+    "labels_present": true,
+    "scope": "Actual anonymous API and keyboard navigation; no successful account fixture or native screen reader"
+  },
+  {
+    "engine": "webkit",
+    "viewport": "320x568",
+    "login_keyboard_submit": 401,
+    "password_space_toggle": true,
+    "register_tab_order": [
+      "[name=student_no]",
+      "[name=class_id]",
+      "[name=password]",
+      "[name=photo]",
+      "[data-camera]",
+      "#submit"
+    ],
+    "file_choice_parent_focus_outline": true,
+    "labels_present": true,
+    "scope": "Actual anonymous API and keyboard navigation; no successful account fixture or native screen reader"
+  }
+]
